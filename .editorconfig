@@ -1,5 +1,4 @@
 # .editorconfig
-# NauStud.io Editor Config https://github.com/naustudio/dotfiles
 # More info: editorconfig.org
 
 root = true
@@ -17,6 +16,10 @@ trim_trailing_whitespace = true
 
 [*.md]
 trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+indent_style = 2
 
 [package.json]
 # package.json adhere to --save-dev manipulation styles
