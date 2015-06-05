@@ -1,0 +1,24 @@
+{
+  "name": "vaulted",
+  "version": "1.0.0",
+  "description": "A wrapper library for using HashiCorp's Vault",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vault",
+    "token",
+    "auth",
+    "secrets",
+    "hashicorp"
+  ],
+  "author": "Christopher 'Chief' Najewicz <chief@beefdisciple.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.27",
+    "convict": "^0.8.0",
+    "lodash": "^3.9.3",
+    "request": "^2.57.0"
+  }
+}

@@ -1,0 +1,24 @@
+# .editorconfig
+# NauStud.io Editor Config https://github.com/naustudio/dotfiles
+# More info: editorconfig.org
+
+root = true
+
+[*]
+
+# Change these settings to your own preference
+indent_style = space
+indent_size = 2
+
+# We recommend you to keep these unchanged
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[package.json]
+# package.json adhere to --save-dev manipulation styles
+indent_style = space
+indent_size = 2
