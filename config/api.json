@@ -1,0 +1,302 @@
+{
+    "v1": [
+        {
+            "name": "sys/init",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false
+                    }
+                },
+                {
+                    "PUT": {
+                        "id": false,
+                        "params": [
+                            {
+                                "name": "secret_shares",
+                                "required": true,
+                                "type": "number"
+                            },
+                            {
+                                "name": "secret_threshold",
+                                "required": true,
+                                "type": "number"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/seal-status",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/seal",
+            "verbs": [
+                {
+                    "PUT": {
+                        "id": false,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/unseal",
+            "verbs": [
+                {
+                    "PUT": {
+                        "id": false,
+                        "params": [
+                            {
+                                "name": "secret_shares",
+                                "required": true,
+                                "type": "number"
+                            },
+                            {
+                                "name": "key",
+                                "required": true,
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/mounts",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false
+                    }
+                },
+                {
+                    "POST": {
+                        "id": true,
+                        "params": [
+                            {
+                                "name": "type",
+                                "required": true,
+                                "type": "string"
+                            },
+                            {
+                                "name": "description",
+                                "required": false,
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "DELETE": {
+                        "id": true,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/remount",
+            "verbs": [
+                {
+                    "POST": {
+                        "id": false,
+                        "params": [
+                            {
+                                "name": "from",
+                                "required": true,
+                                "type": "string"
+                            },
+                            {
+                                "name": "to",
+                                "required": true,
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/auth",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false
+                    },
+                    "POST": {
+                        "id": true,
+                        "params": [
+                            {
+                                "name": "type",
+                                "required": true,
+                                "type": "string"
+                            },
+                            {
+                                "name": "description",
+                                "required": false,
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "DELETE": {
+                        "id": true,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/policy",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false
+                    },
+                    "PUT": {
+                        "id": true,
+                        "params": [
+                            {
+                                "name": "rules",
+                                "required": true,
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "DELETE": {
+                        "id": true,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/audit",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false
+                    },
+                    "PUT": {
+                        "id": true,
+                        "params": [
+                            {
+                                "name": "type",
+                                "required": true,
+                                "type": "string"
+                            },
+                            {
+                                "name": "description",
+                                "required": false,
+                                "type": "string"
+                            },
+                            {
+                                "name": "options",
+                                "required": false,
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "DELETE": {
+                        "id": true,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/renew",
+            "verbs": [
+                {
+                    "PUT": {
+                        "id": true,
+                        "params": [
+                            {
+                                "name": "increment",
+                                "required": false,
+                                "type": "number"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/revoke",
+            "verbs": [
+                {
+                    "PUT": {
+                        "id": true,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/revoke-prefix",
+            "verbs": [
+                {
+                    "PUT": {
+                        "id": true,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/leader",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/raw",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": true,
+                        "params": []
+                    },
+                    "PUT": {
+                        "id": true,
+                        "params": [
+                            {
+                                "name": "value",
+                                "type": "string",
+                                "required": true
+                            }
+                        ]
+                    },
+                    "DELETE": {
+                        "id": true,
+                        "params": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/health",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false,
+                        "params": []
+                    }
+                }
+            ]
+        }
+    ]
+}

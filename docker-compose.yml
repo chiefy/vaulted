@@ -1,0 +1,6 @@
+app:
+  build: .
+vault:
+  image: chiefy/docker-vault:0.1.2
+  ports:
+    - "8200:8200"
