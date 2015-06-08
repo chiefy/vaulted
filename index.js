@@ -1,5 +1,3 @@
-var
-  request = require('request'),
-  Promise = require('bluebird'),
-  config = require('./lib/config.js');
+
+var Vaulted = module.exports = require('./lib/vaulted.js');
 

@@ -2,15 +2,13 @@ FROM alpine:latest
 
 MAINTAINER Christopher "Chief" Najewicz <chief@beefdisciple.com>
 
-RUN mkdir -p /var/local/vaulted
+RUN apk update && apk add nodejs
 
-ADD . /var/local/vaulted
+RUN npm update -g npm \
+  && mkdir -p /var/local/vaulted
 
-RUN apk update && apk add nodejs  && npm update -g npm
+VOLUME /var/local/vaulted
 
-RUN npm rebuild --production
-
-WORKDIR /var/local/vaulted
+EXPOSE 3000
 
 CMD npm start
-
