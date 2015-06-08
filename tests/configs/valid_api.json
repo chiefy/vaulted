@@ -1,0 +1,50 @@
+{
+    "v1": [
+        {
+            "name": "punts",
+            "verbs": [
+                {
+                    "GET": {
+                        "id": false
+                    }
+                },
+                {
+                    "PUT": {
+                        "id": false,
+                        "params": [
+                            {
+                                "name": "distance",
+                                "required": true,
+                                "type": "number"
+                            },
+                            {
+                                "name": "hangtime",
+                                "required": true,
+                                "type": "number"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "DELETE": {
+                        "id": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "sys/bad_def",
+            "verbs": []
+        },
+        {
+            "name": "sys/no_get",
+            "verbse": [
+                {
+                    "PUT": {
+                        "id": true
+                    }
+                }
+            ]
+        }
+    ]
+}

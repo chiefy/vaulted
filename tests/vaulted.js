@@ -1,4 +1,4 @@
-var should = require('./helpers.js').should;
+require('./helpers.js').should;
 
 var Vault = require('../lib/vaulted.js');
 
@@ -57,3 +57,4 @@ describe('Vaulted', function() {
   });
 
 });
+
