@@ -1,6 +1,10 @@
 app:
   build: .
+  ports:
+    - "3000:3000"
+  volumes:
+    - ".:/var/local/vaulted"
 vault:
-  image: chiefy/docker-vault:0.1.2
+  image: chiefy/alpine-vault:latest
   ports:
     - "8200:8200"
