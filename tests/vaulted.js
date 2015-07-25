@@ -45,7 +45,7 @@ describe('Vaulted', function() {
       vault.config.get('addr').should.equal(options.addr);
     });
 
-    it('should throw an error when it can\'t fine an api definition', function() {
+    it('should throw an error when it can\'t find an api definition', function() {
       function shouldThrow() {
         return new Vault({
           'prefix': 'vdfsdf4'
@@ -57,4 +57,5 @@ describe('Vaulted', function() {
   });
 
 });
+
 

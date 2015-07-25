@@ -8,7 +8,7 @@ var
 
 describe('Endpoint', function() {
 
-  var api_def = JSON.parse(fs.readFileSync('tests/configs/valid_api.json')).v1;
+  var api_def = JSON.parse(fs.readFileSync('tests/configs/api_test.json')).v1;
 
   before(function() {});
 
@@ -16,7 +16,8 @@ describe('Endpoint', function() {
     var endpoint;
 
     beforeEach(function() {
-      endpoint = new Endpoint(api_def[0]);
+      var options = _.defaults(api_def[0],{ base_url: 'http://localhost:8200'});
+      endpoint = new Endpoint(options);
     });
 
     it('should have a name', function() {
@@ -35,13 +36,19 @@ describe('Endpoint', function() {
       }).should.throw(Error);
     });
 
+    it('should throw an exception when there is no base_url', function () {
+      (function() {
+        endpoint = new Endpoint(api_def[1]);
+      }).should.throw(Error);
+    });
+
   });
 
   describe('#getURI', function() {
     var endpoint, options;
 
     beforeEach(function() {
-      options = _.extend(api_def[0], { uri: 'https://localhost:8200' });
+      options = _.extend(api_def[0], { base_url: 'https://localhost:8200' });
       endpoint = new Endpoint(options);
     });
 
@@ -78,3 +85,4 @@ describe('Endpoint', function() {
   });
 
 });
+

@@ -4,7 +4,12 @@ app:
     - "3000:3000"
   volumes:
     - ".:/var/local/vaulted"
+  links:
+    - vault
 vault:
   image: chiefy/alpine-vault:latest
+  volumes:
+    - "config/dev.hcl:/etc/vault.hcl"
   ports:
     - "8200:8200"
+
