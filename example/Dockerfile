@@ -2,17 +2,20 @@ FROM alpine:latest
 
 MAINTAINER Christopher "Chief" Najewicz <chief@beefdisciple.com>
 
+ENV WORKDIR=/usr/local/vault
+
 RUN apk update && apk add nodejs
 
 RUN npm update -g npm \
-  && mkdir -p /var/local/vaulted
+  && mkdir -p $WORKDIR
 
-WORKDIR /var/local/vaulted
+WORKDIR $WORKDIR
 
-ADD . /var/local/vaulted
+ADD . .
+
 RUN npm prune && npm rebuild
 
-VOLUME /var/local/vaulted
+VOLUME $WORKDIR
 
 EXPOSE 3000
 
