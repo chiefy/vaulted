@@ -54,6 +54,27 @@ describe('Vaulted', function() {
       shouldThrow.should.throw(Error);
     });
 
+    it('should be in the sealed state by default', function () {
+      var vault = new Vault();
+      vault.sealed.should.be.true;
+    });
+
+  });
+
+  describe('#getAPI', function () {
+
+      it('should return an API definition when using a valid API name', function () {
+        var vault = new Vault();
+        vault.getAPI('sys').should.be.an.instanceof(Array);
+      });
+
+      it('should throw an exception when using an invalid API name', function () {
+        var vault = new Vault();
+        (function() {
+          vault.getAPI('poop');
+        }).should.throw(Error);
+      });
+
   });
 
 });
