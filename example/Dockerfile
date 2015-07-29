@@ -11,10 +11,6 @@ RUN npm update -g npm \
 
 WORKDIR $WORKDIR
 
-ADD . .
-
-RUN npm prune && npm rebuild
-
 VOLUME $WORKDIR
 
 EXPOSE 3000

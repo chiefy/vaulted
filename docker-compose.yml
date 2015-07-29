@@ -1,0 +1,17 @@
+app:
+  build: example/
+  ports:
+    - "3000:3000"
+  volumes:
+    - ".:/usr/local/vault/node_modules/vaulted"
+    - "./example:/usr/local/vault"
+  command: "npm start"
+  links:
+    - vault
+
+vault:
+  image: chiefy/alpine-vault:latest
+  volumes:
+    - "example/dev.hcl:/etc/vault.hcl"
+  ports:
+    - "8200:8200"

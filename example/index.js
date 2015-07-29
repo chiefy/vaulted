@@ -1,4 +1,4 @@
-var Vaulted = require('../'),
+var Vaulted = require('vaulted'),
     express = require('express'),
     vault = new Vaulted({
       vault_url: 'http://192.168.59.103:8200'
