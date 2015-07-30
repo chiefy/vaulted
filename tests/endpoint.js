@@ -1,10 +1,13 @@
 require('./helpers.js').should;
 
 var
+  chai = require('./helpers').chai,
   _ = require('lodash'),
   fs = require('fs'),
   Vault = require('../lib/vaulted.js'),
   Endpoint = require('../lib/endpoint.js');
+
+chai.use(require('./helpers').cap);
 
 describe('Endpoint', function() {
 
@@ -64,25 +67,46 @@ describe('Endpoint', function() {
 
   });
 
-  describe('#get', function() {
-    var endpoint;
+  describe('#_createRequest', function() {
+    var endpoint, options;
+
+    beforeEach(function() {
+      options = _.extend(api_def[0], { base_url: 'https://localhost:8200' });
+      endpoint = new Endpoint(options);
+    });
 
     it('should have a get method', function() {
-      endpoint = new Endpoint(api_def[0]);
       endpoint.get.should.exist;
       endpoint.get.should.be.an.instanceof(Function);
     });
 
-    it('should return false if the endpoint does not support it', function() {
-      endpoint = new Endpoint(api_def[0]);
-      endpoint.get().should.be.false;
+    it('should have a post method', function() {
+      endpoint.post.should.exist;
+      endpoint.post.should.be.an.instanceof(Function);
     });
 
-    it('should return a promise otherwise', function() {
+    it('should have a put method', function() {
+      endpoint.put.should.exist;
+      endpoint.put.should.be.an.instanceof(Function);
+    });
 
+    it('should have a delete method', function() {
+      endpoint.delete.should.exist;
+      endpoint.delete.should.be.an.instanceof(Function);
+    });
+
+    it('should reject the promise if the endpoint does not support the verb', function() {
+      endpoint = new Endpoint(_.extend(api_def[2], { base_url: 'https://localhost:8200' }));
+      endpoint.get().should.be.rejectedWith(Error);
+    });
+
+    it('should return a promise if the endpoint supports the verb', function() {
+      endpoint = new Endpoint(api_def[0]);
+      endpoint.get().should.be.fufilled;
     });
 
   });
 
 });
+
 

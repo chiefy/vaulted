@@ -38,7 +38,7 @@
         },
         {
             "name": "sys/no_get",
-            "verbse": [
+            "verbs": [
                 {
                     "PUT": {
                         "id": true
@@ -48,4 +48,5 @@
         }
     ]
 }
+
 

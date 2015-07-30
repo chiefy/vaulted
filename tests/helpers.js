@@ -1,4 +1,7 @@
 module.exports = {
-  should: require('chai').should()
+  chai: require('chai'),
+  should: require('chai').should(),
+  cap: require('chai-as-promised')
 };
+
 
