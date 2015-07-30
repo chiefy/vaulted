@@ -28,9 +28,9 @@ describe('Endpoint', function() {
       endpoint.name.should.equal('punts');
     });
 
-    it('should have an array of verbs', function() {
+    it('should have a hash of verbs', function() {
       endpoint.should.have.property('verbs');
-      endpoint.verbs.should.be.an.instanceof(Array);
+      endpoint.verbs.should.be.an.instanceof(Object);
     });
 
     it('should throw an exception when there are no verbs', function() {

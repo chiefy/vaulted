@@ -1,24 +1,16 @@
+VERSION := $(shell jq .version package.json)
 
-APP_NAME := "$(shell jq .name package.json)"
-APP_VERSION := $(shell jq .version package.json)
+.PHONY: clean build run-local
 
-DOCKER_USER = "chiefy"
-DOCKER_TAG := $(DOCKER_USER)/$(APP_NAME):$(APP_VERSION)
+node_modules:
+	@npm install
 
-.PHONY: clean build docker-build run-local
-
-test:
+test: node_modules
 	@mocha -R progress tests/**/*.js
 
-test-watch:
+test-watch: node_modules
 	@mocha -G -R spec -w tests/**/*.js
 
-clean:
-	@-docker rm vaulted
-
-docker-build: clean
-	@docker build -t $(DOCKER_TAG) .
-
-run-local: docker-build
-	@echo $(DOCKER_TAG)
-	@docker run -d -v "$(shell pwd):/var/local/vault" -p 80:3000 --name vaulted $(DOCKER_TAG)
+run-local: node_modules
+	@docker-compose rm -fv
+	@docker-compose up

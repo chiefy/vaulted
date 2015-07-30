@@ -1,17 +1,19 @@
-app:
-  build: example/
+webapp:
+  image: mhart/alpine-node
   ports:
     - "3000:3000"
   volumes:
     - ".:/usr/local/vault/node_modules/vaulted"
     - "./example:/usr/local/vault"
+  working_dir: "/usr/local/vault"
   command: "npm start"
+  environment:
+    VAULT_URL: "http://vault:8200"
   links:
     - vault
-
 vault:
   image: chiefy/alpine-vault:latest
   volumes:
-    - "example/dev.hcl:/etc/vault.hcl"
-  ports:
-    - "8200:8200"
+    - "config/dev.hcl:/etc/vault.hcl"
+  expose:
+    - "8200"
