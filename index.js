@@ -1,3 +1,1 @@
-
-var Vaulted = module.exports = require('./lib/vaulted.js');
-
+module.exports = require('./lib/vaulted.js');

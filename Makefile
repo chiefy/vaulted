@@ -12,5 +12,6 @@ test-watch: node_modules
 	@mocha -G -R spec -w tests/**/*.js
 
 run-local: node_modules
+	@pushd example && npm install && popd
 	@docker-compose rm -fv
 	@docker-compose up

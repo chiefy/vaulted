@@ -56,7 +56,7 @@ describe('Vaulted', function() {
 
     it('should be in the sealed state by default', function () {
       var vault = new Vault();
-      vault.sealed.should.be.true;
+      vault.status.sealed.should.be.true;
     });
 
   });

@@ -1,41 +1,33 @@
-var Vaulted = require('vaulted'),
+var
+  Vaulted = require('vaulted'),
   express = require('express'),
   app = express(),
+  router = express.Router(),
+  body_parser = require('body-parser').json(),
   server;
 
-app.get('/', function(req, res) {
-  res.send('hi');
-});
+app.use(body_parser);
+app.use(router);
 
-server = app.listen(3000, function() {
+// TODO: this seems hacky, i stink at express.
+require('./routes.js')(app, router);
+
+server = app.listen(process.env.PORT || 3000, function() {
   var
     host = server.address().address,
-    port = server.address().port,
-    vault;
+    port = server.address().port;
 
-  vault = new Vaulted();
-  vault
+  app.vault = new Vaulted();
+
+  app.vault
     .init()
-    .then(vault.getSealedStatus.bind(vault))
-    .then(vault.unSeal.bind(vault))
-    .then(function(vault) {
-      return vault.write({
-        id: 'poop',
-        body: {
-          'awesome': true,
-          'poopy': 'yes'
-        }
-      });
-    })
-    .then(function readSecret() {
-      return vault.read({
-        id: 'poop'
-      });
-    })
-    .then(function gotSecret(secret){
-      console.log('GOT SECRET!', secret);
+    .bind(app.vault)
+    .then(app.vault.unSeal)
+    .catch(function caughtError(err) {
+      console.error('Could not initialize or unseal vault.' + err.message);
+      process.exit(1);
     });
 
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Vaulted example server listening at http://%s:%s', host, port);
 
 });

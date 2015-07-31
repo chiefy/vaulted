@@ -1,7 +1,7 @@
 {
   "name": "vaulted-example",
   "version": "1.0.0",
-  "description": "An example project using vaulted to access a Vault server",
+  "description": "An example project using Vaulted to access a Vault server",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
@@ -10,7 +10,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.1"
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "lodash": "^3.10.0"
   }
 }
-
