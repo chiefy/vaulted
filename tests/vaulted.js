@@ -4,7 +4,7 @@ var Vault = require('../lib/vaulted.js');
 
 describe('Vaulted', function() {
 
-  describe('#init', function() {
+  describe('#constructor', function() {
 
     var old_VAULT_ADDR = null;
 
@@ -27,22 +27,20 @@ describe('Vaulted', function() {
     });
 
     it('should take an empty options hash', function() {
-      var
-        options = {},
-        vault = new Vault(options);
-
+      var vault = new Vault({});
       vault.should.be.an.instanceof(Vault);
     });
 
     it('should take an options hash, and override any default settings', function() {
       var
         options = {
-          'addr': 'https://some.other.host:1234',
-          'env': 'prod'
+          'vault_url': 'https://some.other.host:1234',
+          'env': 'test'
         },
-        vault = new Vault(options);
+        vault = new Vault(options),
+        env = vault.config.get('env');
 
-      vault.config.get('addr').should.equal(options.addr);
+      env.should.equal(options.env);
     });
 
     it('should throw an error when it can\'t find an api definition', function() {
@@ -61,22 +59,7 @@ describe('Vaulted', function() {
 
   });
 
-  describe('#getAPI', function () {
-
-      it('should return an API definition when using a valid API name', function () {
-        var vault = new Vault();
-        vault.getAPI('sys').should.be.an.instanceof(Array);
-      });
-
-      it('should throw an exception when using an invalid API name', function () {
-        var vault = new Vault();
-        (function() {
-          vault.getAPI('poop');
-        }).should.throw(Error);
-      });
-
-  });
-
 });
+
 
 

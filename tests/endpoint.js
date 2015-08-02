@@ -4,8 +4,7 @@ var
   chai = require('./helpers').chai,
   _ = require('lodash'),
   fs = require('fs'),
-  Vault = require('../lib/vaulted.js'),
-  Endpoint = require('../lib/endpoint.js');
+  Endpoint = require('../lib/endpoint.js')();
 
 chai.use(require('./helpers').cap);
 
@@ -57,7 +56,7 @@ describe('Endpoint', function() {
 
     it('should exist', function () {
       endpoint.getURI.should.exist;
-      endpoint.getURI.should.be.an.instanceof(Function);;
+      endpoint.getURI.should.be.an.instanceof(Function);
     });
 
     it('should append the endpoint to the base uri', function () {
@@ -108,5 +107,6 @@ describe('Endpoint', function() {
   });
 
 });
+
 
 
