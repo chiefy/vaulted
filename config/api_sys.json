@@ -71,7 +71,7 @@
             ]
         },
         {
-            "name": "sys/mounts",
+            "name": "sys/mounts/:id",
             "verbs": [
                 {
                     "GET": {
