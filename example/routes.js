@@ -20,6 +20,17 @@ module.exports = function createRouter(app, router) {
   });
 
   router
+    .route('/remount')
+    .post(function remount(req, res) {
+      app.vault.reMount(req.body)
+        .then(function remountSuccess(mounts) {
+          console.info('Remount successful!');
+          res.json(mounts);
+        })
+        .catch(_.partial(onError, res, 'There was an error remounting'));
+    });
+
+  router
     .route('/mounts')
     .get(function getMounts(req, res) {
       app.vault.getMounts()
@@ -39,11 +50,21 @@ module.exports = function createRouter(app, router) {
           body: req.body,
           id: req.id
         })
-        .then(function success(mount) {
+        .then(function success(mounts) {
           console.info('Created new mount!');
-          res.json(mount);
+          res.json(mounts);
         })
-        .catch(_.partial(onError, res, 'There was an error reading the secret'));
+        .catch(_.partial(onError, res, 'There was an error creating the mount'));
+    })
+    .delete(function deleteMount(req, res) {
+      app.vault.deleteMount({
+          id: req.id
+        })
+        .then(function success() {
+          console.info('Deleted mount!');
+          res.json({});
+        })
+        .catch(_.partial(onError, res, 'There was an error deleting the mount'));
     });
 
   router.route('/secret/:id')
