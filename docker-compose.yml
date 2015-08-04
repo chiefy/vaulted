@@ -12,7 +12,7 @@ webapp:
     VAULT_PORT: "8200"
     VAULT_HOST: "vault"
     VAULT_SSL: 0
-    VAULTED_DEBUG: 1
+    VAULTED_DEBUG: 0
   links:
     - vault
 vault:
@@ -21,4 +21,5 @@ vault:
     - "config/dev.hcl:/etc/vault.hcl"
   expose:
     - "8200"
+
 

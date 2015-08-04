@@ -84,8 +84,11 @@ Currently the supported API calls are:
   * sys/unseal
   * sys/seal-status
   * secret/*
+  * sys/mounts
+  * sys/remount
 
-I am hoping to add more as soon as possible.
+When I get time to work on this, I will be adding support for more. If you have a dire need for support of a particular part of the API, feel
+free to submit an issue. 
 
 # Development
 Use the `docker-compose.yml` to aid development. PRs are very, very welcome. Please add tests when including new functionality. 
