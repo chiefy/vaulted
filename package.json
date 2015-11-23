@@ -21,13 +21,13 @@
     "bluebird": "^2.9.34",
     "convict": "^0.8.0",
     "lodash": "^3.9.3",
-    "request-promise": "^0.4.3"
+    "request-promise": "^0.4.3",
+    "request-debug": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
-    "mocha": "^2.2.5",
-    "request-debug": "^0.2.0"
+    "mocha": "^2.2.5"
   },
   "repository": "https://github.com/chiefy/vaulted"
 }
