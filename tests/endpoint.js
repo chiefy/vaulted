@@ -35,13 +35,21 @@ describe('Endpoint', function() {
     it('should throw an exception when there are no verbs', function() {
       (function() {
         endpoint = new Endpoint(api_def[1]);
-      }).should.throw(Error);
+      }).should.throw(/has no verbs defined/);
     });
 
     it('should throw an exception when there is no base_url', function () {
-      (function() {
-        endpoint = new Endpoint(api_def[1]);
-      }).should.throw(Error);
+      function shouldThrow() {
+        endpoint = new Endpoint(api_def[2]);
+      }
+      shouldThrow.should.throw(/has no base URL defined/);
+    });
+
+    it('should throw an exception when no name', function () {
+      function shouldThrow() {
+        endpoint = new Endpoint();
+      }
+      shouldThrow.should.throw(/Endpoint has no name defined/);
     });
 
   });
@@ -64,6 +72,12 @@ describe('Endpoint', function() {
       endpoint_uri.should.equal('https://localhost:8200/punts');
     });
 
+    it('should replace :id with provided option id', function () {
+      options = _.extend(api_def[3], { base_url: 'https://localhost:8200' });
+      endpoint = new Endpoint(options);
+      var endpoint_uri = endpoint.getURI({id: 'test'});
+      endpoint_uri.should.equal('https://localhost:8200/sys/no_get/test');
+    });
   });
 
   describe('#_createRequest', function() {
@@ -102,6 +116,12 @@ describe('Endpoint', function() {
     it('should return a promise if the endpoint supports the verb', function() {
       endpoint = new Endpoint(api_def[0]);
       endpoint.get().should.be.fufilled;
+    });
+
+    it('should reject promise if endpoint requires id and one is not provided', function () {
+      options = _.extend(api_def[3], { base_url: 'https://localhost:8200' });
+      endpoint = new Endpoint(options);
+      endpoint.put().should.be.rejectedWith(Error);
     });
 
   });
