@@ -20,6 +20,26 @@ describe('API', function() {
   });
 
   describe('#getEndpoint', function() {
+    var myAPI = null;
+
+    before(function () {
+      myAPI = new API(config);
+    });
+
+    it('should throw error if no endpoint name provided', function () {
+      function shouldThrow() {
+        myAPI.getEndpoint();
+      }
+      shouldThrow.should.throw(/Can not get endpoint for non-string value/);
+    });
+
+    it('should throw error if endpoint name empty', function () {
+      function shouldThrow() {
+        myAPI.getEndpoint('');
+      }
+      shouldThrow.should.throw(/Can not get endpoint for non-string value/);
+    });
+
   });
 
   describe('#_loadAPIDefinitions', function() {

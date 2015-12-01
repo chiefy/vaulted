@@ -45,6 +45,16 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "sys/no_get/:id",
+            "verbs": [
+                {
+                    "PUT": {
+                        "id": true
+                    }
+                }
+            ]
         }
     ]
 }
