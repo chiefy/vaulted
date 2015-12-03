@@ -19,11 +19,12 @@
   "author": "Christopher 'Chief' Najewicz <chief@beefdisciple.com>",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^2.9.34",
-    "convict": "^0.8.0",
-    "lodash": "^3.9.3",
-    "request-promise": "^0.4.3",
-    "request-debug": "^0.2.0"
+    "bluebird": "^3.0.0",
+    "convict": "^1.0.1",
+    "lodash": "^3.10.0",
+    "request-promise": "^1.0.2",
+    "request-debug": "^0.2.0",
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
     "chai": "^3.0.0",
