@@ -126,12 +126,14 @@
             ]
         },
         {
-            "name": "sys/auth",
+            "name": "sys/auth/:id",
             "verbs": [
                 {
                     "GET": {
                         "id": false
-                    },
+                    }
+                },
+                {
                     "POST": {
                         "id": true,
                         "params": [
@@ -146,7 +148,9 @@
                                 "type": "string"
                             }
                         ]
-                    },
+                    }
+                },
+                {
                     "DELETE": {
                         "id": true,
                         "params": []
@@ -155,12 +159,14 @@
             ]
         },
         {
-            "name": "sys/policy",
+            "name": "sys/policy/:id",
             "verbs": [
                 {
                     "GET": {
                         "id": false
-                    },
+                    }
+                },
+                {
                     "PUT": {
                         "id": true,
                         "params": [
@@ -170,7 +176,9 @@
                                 "type": "string"
                             }
                         ]
-                    },
+                    }
+                },
+                {
                     "DELETE": {
                         "id": true,
                         "params": []

@@ -93,7 +93,7 @@ describe('API', function() {
     });
 
     it('should load a well formed JSON doc with the correct filename', function () {
-        var good_path = 'config/api_auth_token.json';
+        var good_path = 'config/api_auth.json';
         var result = API.prototype._readConfigFromPath.call(null, config, {}, good_path);
         result.should.exist;
         result.should.include.keys('auth');
