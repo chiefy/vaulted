@@ -14,7 +14,7 @@ describe('API', function() {
     it('should throw when no params are sent', function () {
       (function() {
         new API();
-      }).should.throw(Error);
+      }).should.throw(/API must be instantiated with a node-convict based object/);
     });
 
   });
@@ -30,14 +30,21 @@ describe('API', function() {
       function shouldThrow() {
         myAPI.getEndpoint();
       }
-      shouldThrow.should.throw(/Can not get endpoint for non-string value/);
+      shouldThrow.should.throw(/Endpoint not provided or has no length/);
     });
 
     it('should throw error if endpoint name empty', function () {
       function shouldThrow() {
         myAPI.getEndpoint('');
       }
-      shouldThrow.should.throw(/Can not get endpoint for non-string value/);
+      shouldThrow.should.throw(/Endpoint not provided or has no length/);
+    });
+
+    it('should throw error if endpoint unknown', function () {
+      function shouldThrow() {
+        myAPI.getEndpoint('sys/fake');
+      }
+      shouldThrow.should.throw(/Could not find endpoint/);
     });
 
   });
@@ -53,7 +60,7 @@ describe('API', function() {
       (function() {
         config.set('prefix', null);
         new API(config);
-      }).should.throw(Error);
+      }).should.throw(/Could not get API version to load defintion file/);
     });
 
     afterEach(function () {
@@ -75,14 +82,14 @@ describe('API', function() {
       (function() {
         var bad_path = 'config/asdfasdf.json';
         API.prototype._readConfigFromPath.call(null, config, {}, bad_path);
-      }).should.throw(Error);
+      }).should.throw(/Invalid file name at/);
     });
 
     it('should throw exception if the api definition file contains invalid JSON', function () {
       (function() {
         var bad_path = 'tests/configs/bad_json.json';
         API.prototype._readConfigFromPath.call(null, config, {}, bad_path);
-      }).should.throw('Could not read API definition file');
+      }).should.throw(/Could not read API definition file/);
     });
 
     it('should load a well formed JSON doc with the correct filename', function () {
@@ -96,7 +103,7 @@ describe('API', function() {
       (function() {
         config.set('prefix', 'someprefix');
         new API(config);
-      }).should.throw(Error);
+      }).should.throw(/Could not find API definition/);
     });
 
     afterEach(function () {

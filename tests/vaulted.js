@@ -1,8 +1,12 @@
 require('./helpers.js').should;
 
-var Vault = require('../lib/vaulted.js');
+var
+  helpers = require('./helpers'),
+  _ = require('lodash'),
+  Vault = require('../lib/vaulted.js');
 
-var VAULT_HOST = process.env.HOME === '/home/appy' ? 'vault' : '127.0.0.1';
+var VAULT_HOST = helpers.VAULT_HOST;
+var VAULT_PORT = helpers.VAULT_PORT;
 
 
 describe('Vaulted', function() {
@@ -68,7 +72,7 @@ describe('Vaulted', function() {
     before(function () {
       myVault = new Vault({
         vault_host: VAULT_HOST,
-        vault_port: 8200,
+        vault_port: VAULT_PORT,
         vault_ssl: 0
       });
     });
@@ -77,14 +81,14 @@ describe('Vaulted', function() {
       function shouldThrow() {
         myVault.setToken();
       }
-      shouldThrow.should.throw(Error);
+      shouldThrow.should.throw(/Vault token not provided/);
     });
 
     it('setToken empty String', function () {
       function shouldThrow() {
         myVault.setToken('');
       }
-      shouldThrow.should.throw(Error);
+      shouldThrow.should.throw(/Vault token not provided/);
     });
 
     it('setToken success', function () {
@@ -93,24 +97,41 @@ describe('Vaulted', function() {
       myVault.headers.should.contain.keys('X-Vault-Token');
     });
 
+    it('setKeys undefined', function () {
+      function shouldThrow() {
+        myVault.setKeys();
+      }
+      shouldThrow.should.throw(/Vault keys not provided/);
+    });
+
+    it('setKeys empty Array', function () {
+      function shouldThrow() {
+        myVault.setKeys([]);
+      }
+      shouldThrow.should.throw(/Vault keys not provided/);
+    });
+
+    it('setKeys success', function () {
+      myVault.initialized.should.be.false;
+      myVault.setKeys(['xyzabc', 'abcxyz']);
+      myVault.keys.should.contain('xyzabc');
+      myVault.keys.should.contain('abcxyz');
+      myVault.initialized.should.be.true;
+      myVault.initialized = false;
+    });
+
     it('setStatus null', function () {
-      var current = myVault.status;
+      var current = _.cloneDeep(myVault.status);
       myVault.setStatus();
-      myVault.status.should.be.empty;
-      // remove previous line and replace with the following
-      // lines after updated version merged.
-      // myVault.status.should.contain.keys('sealed');
-      // myVault.status.sealed.should.be.equal(current);
+      myVault.status.should.contain.keys('sealed');
+      myVault.status.sealed.should.be.equal(current.sealed);
     });
 
     it('setStatus empty', function () {
-      var current = myVault.status;
+      var current = _.cloneDeep(myVault.status);
       myVault.setStatus({});
-      myVault.status.should.be.empty;
-      // remove previous line and replace with the following
-      // lines after updated version merged.
-      // myVault.status.should.contain.keys('sealed');
-      // myVault.status.sealed.should.be.equal(current);
+      myVault.status.should.contain.keys('sealed');
+      myVault.status.sealed.should.be.equal(current.sealed);
     });
 
     it('setStatus success', function () {
@@ -119,6 +140,8 @@ describe('Vaulted', function() {
     });
 
     it('validateEndpoint - no input provided', function () {
+      myVault.initialized = true;
+      myVault.status.sealed = false;
       function shouldThrow() {
         myVault.validateEndpoint();
       }
@@ -130,6 +153,8 @@ describe('Vaulted', function() {
         myVault.validateEndpoint('');
       }
       shouldThrow.should.throw(/Endpoint not provided/);
+      myVault.initialized = false;
+      myVault.status.sealed = true;
     });
 
     it('validateEndpoint - not initialized', function () {

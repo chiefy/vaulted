@@ -1,12 +1,18 @@
 require('./helpers.js').should;
 
 var
-  chai = require('./helpers').chai,
+  debuglog = require('util').debuglog('vaulted-tests'),
+  helpers = require('./helpers'),
+  chai = helpers.chai,
   _ = require('lodash'),
   fs = require('fs'),
   Endpoint = require('../lib/endpoint.js')();
 
-chai.use(require('./helpers').cap);
+chai.use(helpers.cap);
+var VAULT_HOST = helpers.VAULT_HOST;
+var VAULT_PORT = helpers.VAULT_PORT;
+var BASE_URL = 'http://' + VAULT_HOST + ':' + VAULT_PORT;
+
 
 describe('Endpoint', function() {
 
@@ -18,7 +24,7 @@ describe('Endpoint', function() {
     var endpoint;
 
     beforeEach(function() {
-      var options = _.defaults(api_def[0],{ base_url: 'http://localhost:8200'});
+      var options = _.defaults(api_def[0],{ base_url: BASE_URL });
       endpoint = new Endpoint(options);
     });
 
@@ -58,7 +64,7 @@ describe('Endpoint', function() {
     var endpoint, options;
 
     beforeEach(function() {
-      options = _.extend(api_def[0], { base_url: 'https://localhost:8200' });
+      options = _.extend(api_def[0], { base_url: BASE_URL });
       endpoint = new Endpoint(options);
     });
 
@@ -69,14 +75,14 @@ describe('Endpoint', function() {
 
     it('should append the endpoint to the base uri', function () {
       var endpoint_uri = endpoint.getURI();
-      endpoint_uri.should.equal('https://localhost:8200/punts');
+      endpoint_uri.should.equal(BASE_URL + '/punts');
     });
 
     it('should replace :id with provided option id', function () {
-      options = _.extend(api_def[3], { base_url: 'https://localhost:8200' });
+      options = _.extend(api_def[3], { base_url: BASE_URL });
       endpoint = new Endpoint(options);
       var endpoint_uri = endpoint.getURI({id: 'test'});
-      endpoint_uri.should.equal('https://localhost:8200/sys/no_get/test');
+      endpoint_uri.should.equal(BASE_URL + '/sys/no_get/test');
     });
   });
 
@@ -84,7 +90,7 @@ describe('Endpoint', function() {
     var endpoint, options;
 
     beforeEach(function() {
-      options = _.extend(api_def[0], { base_url: 'https://localhost:8200' });
+      options = _.extend(api_def[0], { base_url: BASE_URL });
       endpoint = new Endpoint(options);
     });
 
@@ -109,19 +115,21 @@ describe('Endpoint', function() {
     });
 
     it('should reject the promise if the endpoint does not support the verb', function() {
-      endpoint = new Endpoint(_.extend(api_def[2], { base_url: 'https://localhost:8200' }));
-      endpoint.get().should.be.rejectedWith(Error);
+      endpoint = new Endpoint(_.extend(api_def[2], { base_url: BASE_URL }));
+      endpoint.get().should.be.rejectedWith(/Could not find method/);
     });
 
     it('should return a promise if the endpoint supports the verb', function() {
-      endpoint = new Endpoint(api_def[0]);
-      endpoint.get().should.be.fufilled;
+      debuglog('server_url: ', endpoint.server_url);
+      // promise is returned but it is rejected since the route does not actually
+      // exist within the vault server.
+      endpoint.get().should.be.rejectedWith(/404 page not found/);
     });
 
     it('should reject promise if endpoint requires id and one is not provided', function () {
-      options = _.extend(api_def[3], { base_url: 'https://localhost:8200' });
+      options = _.extend(api_def[3], { base_url: BASE_URL });
       endpoint = new Endpoint(options);
-      endpoint.put().should.be.rejectedWith(Error);
+      endpoint.put().should.be.rejectedWith(/requires an id, none was given/);
     });
 
   });
