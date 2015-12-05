@@ -1,0 +1,17 @@
+consul:
+  container_name: consul
+  image: kenjones/authstore-consul
+  command: "agent -config-file=/etc/consul.json"
+  ports:
+    - "8301"
+    - "8302"
+    - "8400"
+    - "8500"
+    - "8600"
+vault:
+  container_name: vault
+  image: kenjones/authstore-vault
+  cap_add:
+    - IPC_LOCK
+  ports:
+    - "8200"
