@@ -297,6 +297,77 @@
                     }
                 }
             ]
+        },
+        {
+          "name": "sys/key-status",
+          "verbs": [
+            {
+              "GET": {
+                "id": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "sys/rotate",
+          "verbs": [
+            {
+              "PUT": {
+                "id": false,
+                "params": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "sys/rekey/init",
+          "verbs": [
+            {
+              "GET": {
+                "id": false
+              }
+            },
+            {
+              "PUT": {
+                "id": false,
+                "params": [
+                  {
+                    "name": "secret_shares",
+                    "type": "number",
+                    "required": true
+                  },
+                  {
+                    "name": "secret_threshold",
+                    "type": "number",
+                    "required": true
+                  }
+                ]
+              }
+            },
+            {
+              "DELETE": {
+                "id": false,
+                "params": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "sys/rekey/update",
+          "verbs": [
+            {
+              "PUT": {
+                "id": false,
+                "params": [
+                  {
+                    "name": "key",
+                    "type": "string",
+                    "required": true
+                  }
+                ]
+              }
+            }
+          ]
         }
     ]
 }
