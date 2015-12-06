@@ -1,0 +1,73 @@
+{
+  "v1": [
+      {
+        "name": "consul/config/access",
+        "verbs": [
+            {
+              "POST": {
+                "id": false,
+                "params": [
+                      {
+                        "name": "address",
+                        "required": true,
+                        "type": "string"
+                      },
+                      {
+                        "name": "scheme",
+                        "required": false,
+                        "type": "string"
+                      },
+                      {
+                        "name": "token",
+                        "required": true,
+                        "type": "string"
+                      }
+                ]
+              }
+            }
+        ]
+      },
+      {
+        "name": "consul/roles/:id",
+        "verbs": [
+            {
+              "POST": {
+                "id": true,
+                "params": [
+                    {
+                      "name": "policy",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                      "name": "lease",
+                      "required": false,
+                      "type": "duration"
+                    }
+                ]
+              }
+            },
+            {
+              "GET": {
+                "id": true
+              }
+            },
+            {
+              "DELETE": {
+                "id": true
+              }
+            }
+        ]
+    },
+    {
+      "name": "consul/creds/:id",
+      "verbs": [
+          {
+            "GET": {
+              "id": true
+            }
+          }
+      ]
+    }
+  ]
+}
