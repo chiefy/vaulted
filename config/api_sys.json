@@ -187,12 +187,14 @@
             ]
         },
         {
-            "name": "sys/audit",
+            "name": "sys/audit/:id",
             "verbs": [
                 {
                     "GET": {
                         "id": false
-                    },
+                    }
+                },
+                {
                     "PUT": {
                         "id": true,
                         "params": [
@@ -212,7 +214,9 @@
                                 "type": "object"
                             }
                         ]
-                    },
+                    }
+                },
+                {
                     "DELETE": {
                         "id": true,
                         "params": []
