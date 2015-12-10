@@ -1,27 +1,20 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
   helpers = require('./helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
   chai = helpers.chai,
-  assert = helpers.assert,
-  Vault = require('../lib/vaulted.js');
+  Vault = require('../lib/vaulted');
 
 chai.use(helpers.cap);
 
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
 
 describe('init', function() {
-  var myVault = null;
+  var myVault;
 
   before(function() {
-    myVault = new Vault({
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
+    return helpers.getPreparedVault().then(function (vault) {
+      myVault = vault;
     });
-    return myVault.prepare();
   });
 
   it.skip('initialized false', function () {
@@ -36,9 +29,6 @@ describe('init', function() {
         self.initialized.should.be.true;
         self.token.should.not.be.null;
         self.keys.should.not.be.empty;
-    }).then(null, function (err) {
-      debuglog(err);
-      assert.notOk(err, 'no error should ever be returned');
     });
   });
 

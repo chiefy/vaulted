@@ -1,11 +1,15 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
-  chai = require('./helpers').chai,
-  config = require('../lib/config.js')(),
-  API = require('../lib/api.js');
+  path = require('path'),
+  helpers = require('./helpers'),
+  chai = helpers.chai,
+  config = require('../lib/config')(),
+  API = require('../lib/api');
 
-chai.use(require('./helpers').cap);
+chai.use(helpers.cap);
+var CONFIG_DIR = path.normalize(path.join(__dirname, 'configs'));
+
 
 describe('API', function() {
 
@@ -71,7 +75,7 @@ describe('API', function() {
 
   describe('#_readConfigFromPath', function() {
     var
-      config = require('../lib/config.js')(),
+      config = require('../lib/config')(),
       o_prefix;
 
     beforeEach(function () {
@@ -80,20 +84,20 @@ describe('API', function() {
 
     it('should throw exception if the api definition file is missing', function () {
       (function() {
-        var bad_path = 'config/asdfasdf.json';
+        var bad_path = path.join(CONFIG_DIR, 'asdfasdf.json');
         API.prototype._readConfigFromPath.call(null, config, {}, bad_path);
       }).should.throw(/Invalid file name at/);
     });
 
     it('should throw exception if the api definition file contains invalid JSON', function () {
       (function() {
-        var bad_path = 'tests/configs/bad_json.json';
+        var bad_path = path.join(CONFIG_DIR, 'bad_json.json');
         API.prototype._readConfigFromPath.call(null, config, {}, bad_path);
       }).should.throw(/Could not read API definition file/);
     });
 
     it('should load a well formed JSON doc with the correct filename', function () {
-        var good_path = 'config/api_auth.json';
+        var good_path = path.normalize(path.join(__dirname, '..', 'config', 'api_auth.json'));
         var result = API.prototype._readConfigFromPath.call(null, config, {}, good_path);
         result.should.exist;
         result.should.include.keys('auth');

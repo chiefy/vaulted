@@ -225,7 +225,7 @@
             ]
         },
         {
-            "name": "sys/renew",
+            "name": "sys/renew/:id",
             "verbs": [
                 {
                     "PUT": {
@@ -242,7 +242,7 @@
             ]
         },
         {
-            "name": "sys/revoke",
+            "name": "sys/revoke/:id",
             "verbs": [
                 {
                     "PUT": {
@@ -253,7 +253,7 @@
             ]
         },
         {
-            "name": "sys/revoke-prefix",
+            "name": "sys/revoke-prefix/:id",
             "verbs": [
                 {
                     "PUT": {

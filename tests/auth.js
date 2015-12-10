@@ -1,35 +1,21 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
   helpers = require('./helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
+  debuglog = helpers.debuglog,
   _ = require('lodash'),
-  chai = helpers.chai,
-  assert = helpers.assert,
-  Vault = require('../lib/vaulted');
+  chai = helpers.chai;
 
 chai.use(helpers.cap);
 
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
-
 
 describe('auths', function () {
+  var newVault = helpers.getEmptyVault();
   var myVault;
 
   before(function () {
-    myVault = new Vault({
-      // debug: 1,
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
-    });
-
-    return myVault.prepare().bind(myVault)
-    .then(myVault.init)
-    .then(myVault.unSeal)
-    .catch(function onError(err) {
-      debuglog('(before) vault setup failed: %s', err.message);
+    return helpers.getReadyVault().then(function (vault) {
+      myVault = vault;
     });
 
   });
@@ -37,13 +23,13 @@ describe('auths', function () {
   describe('#getAuthMounts', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.getAuthMounts().should.be.rejectedWith(/Vault has not been initialized/);
     });
 
     it('should update internal state with list of auth mounts', function () {
       var existingAuthMounts = _.cloneDeep(myVault.auths);
       return myVault.getAuthMounts().then(function (auths) {
+        debuglog(auths);
         existingAuthMounts.should.be.empty;
         existingAuthMounts.should.not.contain.keys('token/');
         auths.should.not.be.empty;
@@ -56,7 +42,6 @@ describe('auths', function () {
   describe('#createAuthMount', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.createAuthMount({
         id: 'other',
         body: {
@@ -66,55 +51,28 @@ describe('auths', function () {
     });
 
     it('should reject with an Error if no options provided', function () {
-      return myVault.createAuthMount().then(function (auths) {
-        debuglog('createAuthMount successful (should fail)', auths);
-        assert.notOk(auths, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide auth mount id.');
-      });
+      return myVault.createAuthMount()
+        .should.be.rejectedWith(/You must provide auth mount id/);
     });
 
     it('should reject with an Error if option id empty', function () {
       return myVault.createAuthMount({
         id: ''
-      }).then(function (auths) {
-        debuglog('createAuthMount successful (should fail)', auths);
-        assert.notOk(auths, 'no mount id successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide auth mount id.');
-      });
+      }).should.be.rejectedWith(/You must provide auth mount id/);
     });
 
     it('should reject with an Error if option body empty', function () {
       return myVault.createAuthMount({
         id: 'xzy',
         body: null
-      }).then(function (auths) {
-        debuglog('createAuthMount successful (should fail)', auths);
-        assert.notOk(auths, 'no mount body successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide auth mount details.');
-      });
+      }).should.be.rejectedWith(/You must provide auth mount details/);
     });
 
     it('should reject with an Error if option body without type', function () {
       return myVault.createAuthMount({
         id: 'xzy',
         body: {}
-      }).then(function (auths) {
-        debuglog('createAuthMount successful (should fail)', auths);
-        assert.notOk(auths, 'no mount body successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide auth mount type.');
-      });
+      }).should.be.rejectedWith(/You must provide auth mount type/);
     });
 
     it('should reject with an Error if option body with empty type', function () {
@@ -123,14 +81,7 @@ describe('auths', function () {
         body: {
           type: ''
         }
-      }).then(function (auths) {
-        debuglog('createAuthMount successful (should fail)', auths);
-        assert.notOk(auths, 'no mount body type successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide auth mount type.');
-      });
+      }).should.be.rejectedWith(/You must provide auth mount type/);
     });
 
     it('should resolve to updated list of auths', function () {
@@ -141,6 +92,7 @@ describe('auths', function () {
           type: 'app-id'
         }
       }).then(function (auths) {
+        debuglog(auths);
         existingAuthMounts.should.not.be.empty;
         existingAuthMounts.should.not.contain.keys('other/');
         auths.should.not.be.empty;
@@ -154,34 +106,20 @@ describe('auths', function () {
   describe('#deleteAuthMount', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.deleteAuthMount({
         id: 'sample'
       }).should.be.rejectedWith(/Vault has not been initialized/);
     });
 
     it('should reject if no options provided', function () {
-      return myVault.deleteAuthMount().then(function (self) {
-        debuglog('deleteAuthMount successful (should fail)', self);
-        assert.notOk(self, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide auth mount id.');
-      });
+      return myVault.deleteAuthMount()
+        .should.be.rejectedWith(/You must provide auth mount id/);
     });
 
     it('should reject if no option id provided', function () {
       return myVault.deleteAuthMount({
         id: ''
-      }).then(function (self) {
-        debuglog('deleteAuthMount successful (should fail)', self);
-        assert.notOk(self, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide auth mount id.');
-      });
+      }).should.be.rejectedWith(/You must provide auth mount id/);
     });
 
     it('should resolve to updated instance with mount removed', function () {
@@ -189,6 +127,7 @@ describe('auths', function () {
       return myVault.deleteAuthMount({
         id: 'other'
       }).then(function (auths) {
+        debuglog(auths);
         existingAuthMounts.should.not.be.empty;
         existingAuthMounts.should.contain.keys('other/');
         auths.should.not.be.empty;
@@ -201,12 +140,7 @@ describe('auths', function () {
 
   after(function () {
     if (!myVault.status.sealed) {
-      return myVault.seal().then(function () {
-        debuglog('vault sealed: %s', myVault.status.sealed);
-      }).then(null, function (err) {
-        debuglog(err);
-        debuglog('failed to seal vault: %s', err.message);
-      });
+      return helpers.resealVault(myVault);
     }
   });
 

@@ -1,44 +1,29 @@
-require('../helpers.js').should;
+require('../helpers').should;
 
 var
   helpers = require('../helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
+  debuglog = helpers.debuglog,
   _ = require('lodash'),
   chai = helpers.chai,
-  assert = helpers.assert,
-  expect = helpers.expect,
-  Vault = require('../../lib/vaulted');
+  expect = helpers.expect;
 
 chai.use(helpers.cap);
 
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
-
 
 describe('auth/tokens', function () {
+  var newVault = helpers.getEmptyVault();
   var myVault;
 
   before(function () {
-    myVault = new Vault({
-      // debug: 1,
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
+    return helpers.getReadyVault().then(function (vault) {
+      myVault = vault;
     });
-
-    return myVault.prepare().bind(myVault)
-      .then(myVault.init)
-      .then(myVault.unSeal)
-      .catch(function onError(err) {
-        debuglog('(before) vault setup failed: %s', err.message);
-      });
 
   });
 
   describe('#createToken', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.createToken().should.be.rejectedWith(/Vault has not been initialized/);
     });
 
@@ -93,7 +78,6 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.renewToken({
         id: 'abcxyz'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -174,7 +158,6 @@ describe('auth/tokens', function () {
   describe('#lookupToken', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.lookupToken({
         id: 'abcxyz'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -224,7 +207,6 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.revokeToken({
         id: 'abcxyz'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -276,7 +258,6 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.revokeTokenOrphan({
         id: 'abcxyz'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -338,7 +319,6 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.revokeTokenPrefix({
         id: 'abcxyz'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -390,7 +370,6 @@ describe('auth/tokens', function () {
   describe('#lookupTokenSelf', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.lookupTokenSelf().should.be.rejectedWith(/Vault has not been initialized/);
     });
 
@@ -426,7 +405,6 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.revokeTokenSelf().should.be.rejectedWith(/Vault has not been initialized/);
     });
 
@@ -450,12 +428,7 @@ describe('auth/tokens', function () {
 
   after(function () {
     if (!myVault.status.sealed) {
-      return myVault.seal().then(function () {
-        debuglog('vault sealed: %s', myVault.status.sealed);
-      }).then(null, function (err) {
-        debuglog(err);
-        debuglog('failed to seal vault: %s', err.message);
-      });
+      return helpers.resealVault(myVault);
     }
   });
 

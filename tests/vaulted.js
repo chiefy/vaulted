@@ -1,48 +1,46 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
   helpers = require('./helpers'),
   _ = require('lodash'),
-  Vault = require('../lib/vaulted.js');
-
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
+  Vault = require('../lib/vaulted');
 
 
-describe('Vaulted', function() {
+describe('Vaulted', function () {
 
-  describe('#constructor', function() {
+  describe('#constructor', function () {
 
     var old_VAULT_ADDR = null;
 
-    before(function() {
+    before(function () {
       if (process.env.VAULT_ADDR) {
         old_VAULT_ADDR = process.env.VAULT_ADDR;
         delete process.env.VAULT_ADDR;
       }
     });
 
-    after(function() {
+    after(function () {
       if (old_VAULT_ADDR) {
         process.env.VAULT_ADDR = old_VAULT_ADDR;
       }
     });
 
-    it('should create a new instance', function() {
+    it('should create a new instance', function () {
       var vault = new Vault();
       vault.should.be.instanceof(Vault);
     });
 
-    it('should take an empty options hash', function() {
+    it('should take an empty options hash', function () {
       var vault = new Vault({});
       vault.should.be.an.instanceof(Vault);
     });
 
-    it('should take an options hash, and override any default settings', function() {
+    it('should take an options hash, and override any default settings', function () {
       var
         options = {
-          'vault_url': 'https://some.other.host:1234',
-          'env': 'test'
+          debug: 1,
+          vault_url: 'https://some.other.host:1234',
+          env: 'test'
         },
         vault = new Vault(options),
         env = vault.config.get('env');
@@ -50,10 +48,10 @@ describe('Vaulted', function() {
       env.should.equal(options.env);
     });
 
-    it('should throw an error when it can\'t find an api definition', function() {
+    it('should throw an error when it can\'t find an api definition', function () {
       function shouldThrow() {
         return new Vault({
-          'prefix': 'vdfsdf4'
+          prefix: 'vdfsdf4'
         });
       }
       shouldThrow.should.throw(Error);
@@ -67,15 +65,7 @@ describe('Vaulted', function() {
   });
 
   describe('#methods', function () {
-    var myVault = null;
-
-    before(function () {
-      myVault = new Vault({
-        vault_host: VAULT_HOST,
-        vault_port: VAULT_PORT,
-        vault_ssl: 0
-      });
-    });
+    var myVault = helpers.getVault();
 
     it('setToken null', function () {
       function shouldThrow() {
@@ -135,13 +125,16 @@ describe('Vaulted', function() {
     });
 
     it('setStatus success', function () {
-      myVault.setStatus({sealed: false});
+      myVault.setStatus({
+        sealed: false
+      });
       myVault.status.sealed.should.be.false;
     });
 
     it('validateEndpoint - no input provided', function () {
       myVault.initialized = true;
       myVault.status.sealed = false;
+
       function shouldThrow() {
         myVault.validateEndpoint();
       }
