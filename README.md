@@ -88,12 +88,35 @@ Currently the supported API calls are:
   * secret/*
   * sys/mounts
   * sys/remount
+  * sys/auth
+  * sys/policy
+  * sys/audit
+  * sys/renew
+  * sys/revoke
+  * sys/revoke-prefix
+  * sys/leader
+  * sys/health
+  * sys/key-status
+  * sys/rotate
+  * sys/rekey/init
+  * sys/rekey/update
+  * auth/token/create
+  * auth/token/lookup-self
+  * auth/token/lookup
+  * auth/token/revoke-self
+  * auth/token/revoke
+  * auth/token/revoke-orphan
+  * auth/token/revoke-prefix
+  * auth/token/renew
+  * auth/app-id/map/app-id
+  * auth/app-id/map/user-id
+  * auth/app-id/login
 
 When I get time to work on this, I will be adding support for more. If you have a dire need for support of a particular part of the API, feel
-free to submit an issue. 
+free to submit an issue.
 
 # Development
-Use the `docker-compose.yml` to aid development. PRs are very, very welcome. Please add tests when including new functionality. 
+Use the `docker-compose.yml` to aid development. PRs are very, very welcome. Please add tests when including new functionality.
 
 ## Running Tests
 ```bash

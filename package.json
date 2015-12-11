@@ -17,6 +17,10 @@
     "hashicorp"
   ],
   "author": "Christopher 'Chief' Najewicz <chief@beefdisciple.com>",
+  "contributors": [{
+      "name": "Kenny Jones",
+      "email": "kenjones@cisco.com"
+    }],
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.0.0",
