@@ -1,17 +1,15 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
-  debuglog = require('util').debuglog('vaulted-tests'),
-  helpers = require('./helpers'),
-  chai = helpers.chai,
   _ = require('lodash'),
   fs = require('fs'),
-  Endpoint = require('../lib/endpoint.js')();
+  helpers = require('./helpers'),
+  debuglog = helpers.debuglog,
+  chai = helpers.chai,
+  Endpoint = require('../lib/endpoint')();
 
 chai.use(helpers.cap);
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
-var BASE_URL = 'http://' + VAULT_HOST + ':' + VAULT_PORT;
+var BASE_URL = 'http://' + helpers.VAULT_HOST + ':' + helpers.VAULT_PORT;
 
 
 describe('Endpoint', function() {

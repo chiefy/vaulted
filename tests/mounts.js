@@ -1,35 +1,21 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
   helpers = require('./helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
+  debuglog = helpers.debuglog,
   _ = require('lodash'),
-  chai = helpers.chai,
-  assert = helpers.assert,
-  Vault = require('../lib/vaulted');
+  chai = helpers.chai;
 
 chai.use(helpers.cap);
 
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
-
 
 describe('mounts', function () {
+  var newVault = helpers.getEmptyVault();
   var myVault;
 
   before(function () {
-    myVault = new Vault({
-      // debug: 1,
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
-    });
-
-    return myVault.prepare().bind(myVault)
-    .then(myVault.init)
-    .then(myVault.unSeal)
-    .catch(function onError(err) {
-      debuglog('(before) vault setup failed: %s', err.message);
+    return helpers.getReadyVault().then(function (vault) {
+      myVault = vault;
     });
 
   });
@@ -37,13 +23,13 @@ describe('mounts', function () {
   describe('#getMounts', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.getMounts().should.be.rejectedWith(/Vault has not been initialized/);
     });
 
     it('should update internal state with list of mounts', function () {
       var existingMounts = myVault.mounts;
       return myVault.getMounts().then(function (mounts) {
+        debuglog(mounts);
         existingMounts.should.be.empty;
         mounts.should.not.be.empty;
         existingMounts.should.not.contain.keys('sys/');
@@ -56,7 +42,6 @@ describe('mounts', function () {
   describe('#createMount', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.createMount({
         id: 'other',
         body: {
@@ -66,55 +51,28 @@ describe('mounts', function () {
     });
 
     it('should reject with an Error if no options provided', function () {
-      return myVault.createMount().then(function (mounts) {
-        debuglog('createMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide mount id.');
-      });
+      return myVault.createMount()
+        .should.be.rejectedWith(/You must provide mount id/);
     });
 
     it('should reject with an Error if option id empty', function () {
       return myVault.createMount({
         id: ''
-      }).then(function (mounts) {
-        debuglog('createMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount id successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide mount id.');
-      });
+      }).should.be.rejectedWith(/You must provide mount id/);
     });
 
     it('should reject with an Error if option body empty', function () {
       return myVault.createMount({
         id: 'xzy',
         body: null
-      }).then(function (mounts) {
-        debuglog('createMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount body successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide mount details.');
-      });
+      }).should.be.rejectedWith(/You must provide mount details/);
     });
 
     it('should reject with an Error if option body without type', function () {
       return myVault.createMount({
         id: 'xzy',
         body: {}
-      }).then(function (mounts) {
-        debuglog('createMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount body successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide mount type.');
-      });
+      }).should.be.rejectedWith(/You must provide mount type/);
     });
 
     it('should reject with an Error if option body with empty type', function () {
@@ -123,14 +81,7 @@ describe('mounts', function () {
         body: {
           type: ''
         }
-      }).then(function (mounts) {
-        debuglog('createMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount body type successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide mount type.');
-      });
+      }).should.be.rejectedWith(/You must provide mount type/);
     });
 
     it('should resolve to updated list of mounts', function () {
@@ -141,6 +92,7 @@ describe('mounts', function () {
           type: 'consul'
         }
       }).then(function (mounts) {
+        debuglog(mounts);
         existingMounts.should.not.be.empty;
         mounts.should.not.be.empty;
         existingMounts.should.not.contain.keys('other/');
@@ -153,72 +105,37 @@ describe('mounts', function () {
   describe('#reMount', function () {
 
     it('should reject no options provided', function () {
-      return myVault.reMount().then(function (mounts) {
-        debuglog('reMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide from mount.');
-      });
+      return myVault.reMount()
+        .should.be.rejectedWith(/You must provide from mount/);
     });
 
     it('should reject empty option from', function () {
       return myVault.reMount({
         from: ''
-      }).then(function (mounts) {
-        debuglog('reMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide from mount.');
-      });
+      }).should.be.rejectedWith(/You must provide from mount/);
     });
 
     it('should reject no option to', function () {
       return myVault.reMount({
         from: 'xyz'
-      }).then(function (mounts) {
-        debuglog('reMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide to mount.');
-      });
+      }).should.be.rejectedWith(/You must provide to mount/);
     });
 
     it('should reject empty option to', function () {
       return myVault.reMount({
         from: 'xyz',
         to: ''
-      }).then(function (mounts) {
-        debuglog('reMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide to mount.');
-      });
+      }).should.be.rejectedWith(/You must provide to mount/);
     });
 
     it('should reject no existing from mount', function () {
       return myVault.reMount({
         from: 'xyz',
         to: 'abc'
-      }).then(function (mounts) {
-        debuglog('reMount successful (should fail)', mounts);
-        assert.notOk(mounts, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('Could not find existing mount named: xyz');
-      });
+      }).should.be.rejectedWith(/Could not find existing mount named/);
     });
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       newVault.mounts = _.cloneDeep(myVault.mounts);
       return newVault.reMount({
         from: 'other',
@@ -232,6 +149,7 @@ describe('mounts', function () {
         from: 'other/',
         to: 'samplex'
       }).then(function (mounts) {
+        debuglog(mounts);
         existingMounts.should.not.be.empty;
         mounts.should.not.be.empty;
         existingMounts.should.contain.keys('other/');
@@ -247,6 +165,7 @@ describe('mounts', function () {
         from: 'samplex',
         to: 'sample'
       }).then(function (mounts) {
+        debuglog(mounts);
         existingMounts.should.not.be.empty;
         mounts.should.not.be.empty;
         existingMounts.should.contain.keys('samplex/');
@@ -261,34 +180,20 @@ describe('mounts', function () {
   describe('#deleteMount', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.deleteMount({
         id: 'sample'
       }).should.be.rejectedWith(/Vault has not been initialized/);
     });
 
     it('should reject if no options provided', function () {
-      return myVault.deleteMount().then(function (self) {
-        debuglog('deleteMount successful (should fail)', self);
-        assert.notOk(self, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide mount id.');
-      });
+      return myVault.deleteMount()
+        .should.be.rejectedWith(/You must provide mount id/);
     });
 
     it('should reject if no option id provided', function () {
       return myVault.deleteMount({
         id: ''
-      }).then(function (self) {
-        debuglog('deleteMount successful (should fail)', self);
-        assert.notOk(self, 'no mount details successfully created!');
-      }).then(null, function (err) {
-        debuglog(err);
-        err.should.be.an.instanceof(Error);
-        err.message.should.equal('You must provide mount id.');
-      });
+      }).should.be.rejectedWith(/You must provide mount id/);
     });
 
     it('should resolve to updated instance with mount removed', function () {
@@ -296,6 +201,7 @@ describe('mounts', function () {
       return myVault.deleteMount({
         id: 'sample'
       }).then(function (mounts) {
+        debuglog(mounts);
         existingMounts.should.not.be.empty;
         mounts.should.not.be.empty;
         existingMounts.should.contain.keys('sample/');
@@ -308,12 +214,7 @@ describe('mounts', function () {
 
   after(function () {
     if (!myVault.status.sealed) {
-      return myVault.seal().then(function () {
-        debuglog('vault sealed: %s', myVault.status.sealed);
-      }).then(null, function (err) {
-        debuglog(err);
-        debuglog('failed to seal vault: %s', err.message);
-      });
+      return helpers.resealVault(myVault);
     }
   });
 

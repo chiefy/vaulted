@@ -1,51 +1,34 @@
-require('../helpers.js').should;
+require('../helpers').should;
 
 var
   helpers = require('../helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
-  _ = require('lodash'),
+  debuglog = helpers.debuglog,
   chai = helpers.chai,
-  expect = helpers.expect,
-  Vault = require('../../lib/vaulted');
+  expect = helpers.expect;
 
 chai.use(helpers.cap);
 
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
-
 
 describe('auth/appid', function () {
+  var newVault = helpers.getEmptyVault();
   var myVault;
 
   before(function () {
-    myVault = new Vault({
-      // debug: 1,
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
-    });
-
-    return myVault.prepare().bind(myVault)
-      .then(myVault.init)
-      .then(myVault.unSeal)
-      .then(function () {
-        return myVault.createAuthMount({
-          id: 'app-id',
-          body: {
-            type: 'app-id'
-          }
-        });
-      })
-      .catch(function onError(err) {
-        debuglog('(before) vault setup failed: %s', err.message);
+    return helpers.getReadyVault().then(function (vault) {
+      myVault = vault;
+      return myVault.createAuthMount({
+        id: 'app-id',
+        body: {
+          type: 'app-id'
+        }
       });
+    });
 
   });
 
   describe('#createApp', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.createApp({
         id: 'fake',
         body: {
@@ -132,7 +115,6 @@ describe('auth/appid', function () {
   describe('#getApp', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.getApp({
         id: 'fake'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -156,6 +138,7 @@ describe('auth/appid', function () {
       return myVault.getApp({
         id: 'fakeapp',
       }).then(function (app) {
+        debuglog(app);
         expect(app).should.not.be.undefined;
         app.should.have.property('lease_id');
         app.should.have.property('renewable');
@@ -174,7 +157,6 @@ describe('auth/appid', function () {
   describe('#createUser', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.createUser({
         id: 'fake',
         body: {
@@ -240,7 +222,6 @@ describe('auth/appid', function () {
   describe('#getUser', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.getUser({
         id: 'fake'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -264,6 +245,7 @@ describe('auth/appid', function () {
       return myVault.getUser({
         id: 'fakeuser',
       }).then(function (user) {
+        debuglog(user);
         expect(user).should.not.be.undefined;
         user.should.have.property('lease_id');
         user.should.have.property('renewable');
@@ -282,7 +264,6 @@ describe('auth/appid', function () {
   describe('#appLogin', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.appLogin({
         body: {
           app_id: 'fakeapp',
@@ -343,6 +324,7 @@ describe('auth/appid', function () {
           user_id: 'fakeuser'
         }
       }).then(function (authres) {
+        debuglog(authres);
         expect(authres).should.not.be.undefined;
         authres.should.have.property('lease_id');
         authres.should.have.property('renewable');
@@ -361,7 +343,6 @@ describe('auth/appid', function () {
   describe('#deleteUser', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.deleteUser({
         id: 'fake'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -392,7 +373,6 @@ describe('auth/appid', function () {
   describe('#deleteApp', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.deleteApp({
         id: 'fake'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -423,14 +403,9 @@ describe('auth/appid', function () {
   after(function () {
     return myVault.deleteAuthMount({
       id: 'app-id'
-    }).then(function (auths) {
+    }).then(function () {
       if (!myVault.status.sealed) {
-        return myVault.seal().then(function () {
-          debuglog('vault sealed: %s', myVault.status.sealed);
-        }).then(null, function (err) {
-          debuglog(err);
-          debuglog('failed to seal vault: %s', err.message);
-        });
+        return helpers.resealVault(myVault);
       }
     });
 

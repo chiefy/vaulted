@@ -1,27 +1,21 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
   helpers = require('./helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
+  debuglog = helpers.debuglog,
   chai = helpers.chai,
-  assert = helpers.assert,
-  Vault = require('../lib/vaulted.js');
+  assert = helpers.assert;
 
 chai.use(helpers.cap);
 
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
 
 describe('health', function() {
-  var myVault = null;
+  var myVault;
 
   before(function() {
-    myVault = new Vault({
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
+    return helpers.getPreparedVault().then(function (vault) {
+      myVault = vault;
     });
-    return myVault.prepare();
   });
 
   it('should reject with Error and statusCode 500 when not initialized or sealed', function () {
@@ -111,12 +105,7 @@ describe('health', function() {
 
   after(function () {
     if (!myVault.status.sealed) {
-      return myVault.seal().then(function () {
-        debuglog('vault sealed: %s', myVault.status.sealed);
-      }).then(null, function (err) {
-        debuglog(err);
-        debuglog('failed to seal vault: %s', err.message);
-      });
+      return helpers.resealVault(myVault);
     }
   });
 

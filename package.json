@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm rebuild && node index.js",
-    "test": "mocha -R spec tests/**/*.js",
-    "coverage": "istanbul cover _mocha tests/**/*.js",
+    "test": "mocha -R spec tests/**",
+    "coverage": "istanbul cover _mocha -- tests/**",
     "test-watch": "mocha --growl -R spec -w tests/**/*.js"
   },
   "keywords": [

@@ -1,44 +1,30 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
   os = require('os'),
   helpers = require('./helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
-  _ = require('lodash'),
+  debuglog = helpers.debuglog,
   chai = helpers.chai,
-  expect = helpers.expect,
-  Vault = require('../lib/vaulted');
+  expect = helpers.expect;
 
 chai.use(helpers.cap);
-
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
+var SYSLOG_TESTING_ENABLED = os.platform() !== 'win32' && helpers.isTrue(process.env.TEST_SYSLOG);
 
 
 describe('audit', function () {
+  var newVault = helpers.getEmptyVault();
   var myVault;
 
   before(function () {
-    myVault = new Vault({
-      // debug: 1,
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
+    return helpers.getReadyVault().then(function (vault) {
+      myVault = vault;
     });
-
-    return myVault.prepare().bind(myVault)
-      .then(myVault.init)
-      .then(myVault.unSeal)
-      .catch(function onError(err) {
-        debuglog('(before) vault setup failed: %s', err.message);
-      });
 
   });
 
   describe('#enableAudit', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.enableAudit({
         id: 'other',
         body: {
@@ -114,7 +100,6 @@ describe('audit', function () {
   describe('#enableFileAudit', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.enableFileAudit({
         id: 'other',
         body: {
@@ -188,7 +173,6 @@ describe('audit', function () {
   describe('#enableSyslogAudit', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.enableSyslogAudit({
         id: 'other'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -212,7 +196,7 @@ describe('audit', function () {
 
     // unable to test on a windows platform because syslog does not
     // exist on windows
-    if (os.platform() !== 'win32') {
+    if (SYSLOG_TESTING_ENABLED) {
       it('should resolve', function () {
         return myVault.enableSyslogAudit({
           id: 'myauditsyslog',
@@ -233,7 +217,6 @@ describe('audit', function () {
 
   describe('#getAuditMounts', function () {
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.getAuditMounts()
         .should.be.rejectedWith(/Vault has not been initialized/);
     });
@@ -245,12 +228,9 @@ describe('audit', function () {
 
         // unable to test on a windows platform because syslog does not
         // exist on windows
-        if (os.platform() !== 'win32') {
+        if (SYSLOG_TESTING_ENABLED) {
           audits.should.have.property('myauditsyslog/');
         }
-      }).catch(function (err) {
-        debuglog(err);
-        expect(err).to.be.undefined;
       });
     });
   });
@@ -258,7 +238,6 @@ describe('audit', function () {
   describe('#disableAudit', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
-      var newVault = new Vault({});
       return newVault.disableAudit({
         id: 'other'
       }).should.be.rejectedWith(/Vault has not been initialized/);
@@ -282,7 +261,7 @@ describe('audit', function () {
 
     // unable to test on a windows platform because syslog does not
     // exist on windows
-    if (os.platform() !== 'win32') {
+    if (SYSLOG_TESTING_ENABLED) {
       it('should resolve with syslog removed', function () {
         return myVault.disableAudit({
           id: 'myauditsyslog'
@@ -313,12 +292,7 @@ describe('audit', function () {
 
   after(function () {
     if (!myVault.status.sealed) {
-      return myVault.seal().then(function () {
-        debuglog('vault sealed: %s', myVault.status.sealed);
-      }).then(null, function (err) {
-        debuglog(err);
-        debuglog('failed to seal vault: %s', err.message);
-      });
+      return helpers.resealVault(myVault);
     }
   });
 

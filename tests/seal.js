@@ -1,32 +1,20 @@
-require('./helpers.js').should;
+require('./helpers').should;
 
 var
   helpers = require('./helpers'),
-  debuglog = require('util').debuglog('vaulted-tests'),
   _ = require('lodash'),
-  chai = helpers.chai,
-  assert = helpers.assert,
-  expect = helpers.expect,
-  Vault = require('../lib/vaulted');
+  chai = helpers.chai;
 
 chai.use(helpers.cap);
-
-var VAULT_HOST = helpers.VAULT_HOST;
-var VAULT_PORT = helpers.VAULT_PORT;
 
 
 describe('seal', function () {
   var myVault;
 
-  before(function () {
-    myVault = new Vault({
-      // debug: 1,
-      vault_host: VAULT_HOST,
-      vault_port: VAULT_PORT,
-      vault_ssl: 0
+  before(function() {
+    return helpers.getPreparedVault().then(function (vault) {
+      myVault = vault;
     });
-
-    return myVault.prepare();
   });
 
   describe('#getSealedStatus', function () {
@@ -96,12 +84,7 @@ describe('seal', function () {
 
   after(function () {
     if (!myVault.status.sealed) {
-      return myVault.seal().then(function () {
-        debuglog('vault sealed: %s', myVault.status.sealed);
-      }).then(null, function (err) {
-        debuglog(err);
-        debuglog('failed to seal vault: %s', err.message);
-      });
+      return helpers.resealVault(myVault);
     }
   });
 
