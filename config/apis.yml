@@ -1,0 +1,280 @@
+v1:
+  sys/init:
+    get:
+      id: false
+      params: []
+    put:
+      id: false
+      params:
+        - name: "secret_shares"
+          type: "number"
+          required: true
+        - name: "secret_threshold"
+          type: "number"
+          required: true
+  sys/seal-status:
+    get:
+      id: false
+      params: []
+  sys/seal:
+    put:
+      id: false
+      params: []
+  sys/unseal:
+    put:
+      id: false
+      params:
+        - name: "secret_shares"
+          type: "number"
+          required: true
+        - name: "key"
+          type: "string"
+          required: true
+  "sys/mounts/:id":
+    get:
+      id: false
+      params: []
+    delete:
+      id: true
+      params: []
+    post:
+      id: true
+      params:
+        - name: "type"
+          type: "string"
+          required: true
+        - name: "description"
+          type: "string"
+          required: false
+  sys/remount:
+    post:
+      id: false
+      params:
+        - name: "from"
+          type: "string"
+          required: true
+        - name: "to"
+          type: "string"
+          required: true
+  "sys/auth/:id":
+    get:
+      id: false
+      params: []
+    delete:
+      id: true
+      params: []
+    post:
+      id: true
+      params:
+        - name: "type"
+          type: "string"
+          required: true
+        - name: "description"
+          type: "string"
+          required: false
+  "sys/policy/:id":
+    get:
+      id: false
+      params: []
+    delete:
+      id: true
+      params: []
+    put:
+      id: true
+      params:
+        - name: "rules"
+          type: "string"
+          required: true
+  "sys/audit/:id":
+    get:
+      id: false
+      params: []
+    delete:
+      id: true
+      params: []
+    put:
+      id: true
+      params:
+        - name: "type"
+          type: "string"
+          required: true
+        - name: "description"
+          type: "string"
+          required: false
+        - name: "options"
+          type: "object"
+          required: false
+  "sys/renew/:id":
+    put:
+      id: true
+      params:
+        - name: "increment"
+          type: "number"
+          required: false
+  "sys/revoke/:id":
+    put:
+      id: true
+      params: []
+  "sys/revoke-prefix/:id":
+    put:
+      id: true
+      params: []
+  sys/leader:
+    get:
+      id: false
+      params: []
+  sys/raw:
+    get:
+      id: false
+      params: []
+    delete:
+      id: true
+      params: []
+    put:
+      id: true
+      params:
+        - name: "value"
+          type: "string"
+          required: true
+  sys/health:
+    get:
+      id: false
+      params: []
+  sys/key-status:
+    get:
+      id: false
+      params: []
+  sys/rotate:
+    put:
+      id: false
+      params: []
+  sys/rekey/init:
+    get:
+      id: false
+      params: []
+    delete:
+      id: false
+      params: []
+    put:
+      params:
+        - name: "secret_shares"
+          type: "number"
+          required: true
+        - name: "secret_threshold"
+          type: "number"
+          required: true
+  sys/rekey/update:
+    put:
+      id: false
+      params:
+        - name: "key"
+          type: "string"
+          required: true
+  "secret/:id":
+    get:
+      id: true
+      params: []
+    put:
+      id: true
+      params: []
+    delete:
+      id: true
+      params: []
+  auth/token/create:
+    post:
+      id: false
+      params:
+        - name: "id"
+          type: "string"
+          required: false
+        - name: "policies"
+          type: "list"
+          required: false
+        - name: "meta"
+          type: "object"
+          required: false
+        - name: "no_parent"
+          type: "bool"
+          required: false
+        - name: "ttl"
+          type: "duration"
+          required: false
+        - name: "display_name"
+          type: "string"
+          required: false
+        - name: "num_uses"
+          type: "number"
+          required: false
+  auth/token/lookup-self:
+    get:
+      id: false
+      params: []
+  "auth/token/lookup/:id":
+    get:
+      id: true
+      params: []
+  "auth/token/revoke/:id":
+    post:
+      id: true
+      params: []
+  auth/token/revoke-self:
+    post:
+      id: false
+      params: []
+  "auth/token/revoke-orphan/:id":
+    post:
+      id: true
+      params: []
+  "auth/token/revoke-prefix/:id":
+    post:
+      id: true
+      params: []
+  "auth/token/renew/:id":
+    post:
+      id: true
+      params:
+        - name: "increment"
+          type: "number"
+          required: false
+  "auth/app-id/map/app-id/:id":
+    post:
+      id: true
+      params:
+        - name: "value"
+          type: "string"
+          required: true
+        - name: "display_name"
+          type: "string"
+          required: true
+    get:
+      id: true
+      params: []
+    delete:
+      id: true
+      params: []
+  "auth/app-id/map/user-id/:id":
+    post:
+      id: true
+      params:
+        - name: "value"
+          type: "string"
+          required: true
+        - name: "cidr_block"
+          type: "string"
+          required: false
+    get:
+      id: true
+      params: []
+    delete:
+      id: true
+      params: []
+  auth/app-id/login:
+    post:
+      id: false
+      params:
+        - name: "app_id"
+          type: "string"
+          required: true
+        - name: "user_id"
+          type: "string"
+          required: true
