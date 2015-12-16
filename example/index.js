@@ -9,7 +9,6 @@ var
 app.use(body_parser);
 app.use(router);
 
-// TODO: this seems hacky, i stink at express.
 require('./routes.js')(app, router);
 
 server = app.listen(process.env.PORT || 3000, function() {
@@ -31,3 +30,4 @@ server = app.listen(process.env.PORT || 3000, function() {
   console.log('Vaulted example server listening at http://%s:%s', host, port);
 
 });
+
