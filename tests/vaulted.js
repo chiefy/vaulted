@@ -48,15 +48,6 @@ describe('Vaulted', function () {
       env.should.equal(options.env);
     });
 
-    it('should throw an error when it can\'t find an api definition', function () {
-      function shouldThrow() {
-        return new Vault({
-          prefix: 'vdfsdf4'
-        });
-      }
-      shouldThrow.should.throw(Error);
-    });
-
     it('should be in the sealed state by default', function () {
       var vault = new Vault();
       vault.status.sealed.should.be.true;
@@ -172,7 +163,7 @@ describe('Vaulted', function () {
       }
       myVault.initialized = true;
       myVault.status.sealed = false;
-      shouldThrow.should.throw(/Could not get API for/);
+      shouldThrow.should.throw(/Could not find endpoint/);
     });
 
     it('validateEndpoint - success', function () {

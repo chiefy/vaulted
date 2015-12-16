@@ -1,0 +1,26 @@
+v1:
+  punts:
+    get:
+      id: false
+      params: []
+    delete:
+      id: true
+      params: []
+    put:
+      id: false
+      params:
+        - name: "distance"
+          type: "number"
+          required: true
+        - name: "hangtime"
+          type: "number"
+          required: true
+  sys/bad_def:
+  sys/no_get:
+    put:
+      id: true
+      params: []
+  "sys/no_get/:id":
+    put:
+      id: true
+      params: []

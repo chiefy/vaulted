@@ -1,6 +1,8 @@
 require('./helpers').should;
 
 var
+  _ = require('lodash'),
+  fs = require('fs'),
   path = require('path'),
   helpers = require('./helpers'),
   chai = helpers.chai,
@@ -8,7 +10,6 @@ var
   API = require('../lib/api');
 
 chai.use(helpers.cap);
-var CONFIG_DIR = path.normalize(path.join(__dirname, 'configs'));
 
 
 describe('API', function() {
@@ -51,68 +52,122 @@ describe('API', function() {
       shouldThrow.should.throw(/Could not find endpoint/);
     });
 
+    it('should return Endpoint for sys/rekey/init', function () {
+      var ep = myAPI.getEndpoint('sys/rekey/init');
+      ep.should.have.property('get');
+      ep.should.have.property('put');
+      ep.should.have.property('delete');
+    });
+
   });
 
   describe('#_loadAPIDefinitions', function() {
     var original_config;
 
     beforeEach(function () {
-        original_config = config;
+        original_config = _.cloneDeep(config);
     });
 
-    it('should throw exception if there is no api prefix', function () {
-      (function() {
-        config.set('prefix', null);
-        new API(config);
-      }).should.throw(/Could not get API version to load defintion file/);
+    it('should load a well formed YAML doc with the correct filename', function () {
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+    });
+
+    it('with proxy configuration', function () {
+      config.set('proxy_address', 'abc.example.com');
+      config.set('proxy_port', '443');
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+      result['auth/token/create'].should.include.keys('defaults');
+      result['auth/token/create']['defaults'].should.include.keys('proxy');
+      result['auth/token/create']['defaults']['proxy'].should.be.equal('https://abc.example.com:443');
+    });
+
+    it('with proxy configuration - insecure', function () {
+      config.set('proxy_address', 'abc.example.com');
+      config.set('proxy_port', '8000');
+      config.set('vault_ssl', 0);
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+      result['auth/token/create'].should.include.keys('defaults');
+      result['auth/token/create']['defaults'].should.include.keys('proxy');
+      result['auth/token/create']['defaults']['proxy'].should.be.equal('http://abc.example.com:8000');
+    });
+
+    it('with proxy configuration - with auth', function () {
+      config.set('proxy_address', 'abc.example.com');
+      config.set('proxy_port', '443');
+      config.set('proxy_username', 'dummy');
+      config.set('proxy_password', 'pass');
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+      result['auth/token/create'].should.include.keys('defaults');
+      result['auth/token/create']['defaults'].should.include.keys('proxy');
+      result['auth/token/create']['defaults']['proxy'].should.be.equal('https://dummy:pass@abc.example.com:443');
+    });
+
+    it('with ssl configuration - cacert', function () {
+      config.set('ssl_ca_cert', path.join(__dirname, 'configs', 'ca.cert.pem'));
+      var cacert = fs.readFileSync(config.get('ssl_ca_cert'));
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+      result['auth/token/create'].should.include.keys('defaults');
+      result['auth/token/create']['defaults'].should.include.keys('ca');
+      result['auth/token/create']['defaults']['ca'].should.be.eql(cacert);
+    });
+
+    it('with ssl configuration - cert and key', function () {
+      config.set('ssl_cert_file', path.join(__dirname, 'configs', 'client.crt'));
+      config.set('ssl_pem_file', path.join(__dirname, 'configs', 'client.key'));
+      var clientcert = fs.readFileSync(config.get('ssl_cert_file'));
+      var clientkey = fs.readFileSync(config.get('ssl_pem_file'));
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+      result['auth/token/create'].should.include.keys('defaults');
+      result['auth/token/create']['defaults'].should.include.keys('cert');
+      result['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
+      result['auth/token/create']['defaults'].should.include.keys('key');
+      result['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
+    });
+
+    it('with ssl configuration  - cert and key with passphrase', function () {
+      config.set('ssl_cert_file', path.join(__dirname, 'configs', 'client.crt'));
+      config.set('ssl_pem_file', path.join(__dirname, 'configs', 'client.key'));
+      config.set('ssl_pem_passphrase', 'fakephrase');
+      var clientcert = fs.readFileSync(config.get('ssl_cert_file'));
+      var clientkey = fs.readFileSync(config.get('ssl_pem_file'));
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+      result['auth/token/create'].should.include.keys('defaults');
+      result['auth/token/create']['defaults'].should.include.keys('cert');
+      result['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
+      result['auth/token/create']['defaults'].should.include.keys('key');
+      result['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
+      result['auth/token/create']['defaults'].should.include.keys('passphrase');
+      result['auth/token/create']['defaults']['passphrase'].should.be.equal('fakephrase');
+    });
+
+    it('with timeout specified', function () {
+      config.set('timeout', 10);
+      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      result.should.exist;
+      result.should.include.keys('auth/token/create');
+      result['auth/token/create'].should.include.keys('defaults');
+      result['auth/token/create']['defaults'].should.include.keys('timeout');
+      result['auth/token/create']['defaults']['timeout'].should.be.equal(10);
     });
 
     afterEach(function () {
       config = original_config;
     });
 
-  });
-
-  describe('#_readConfigFromPath', function() {
-    var
-      config = require('../lib/config')(),
-      o_prefix;
-
-    beforeEach(function () {
-      o_prefix = config.get('prefix');
-    });
-
-    it('should throw exception if the api definition file is missing', function () {
-      (function() {
-        var bad_path = path.join(CONFIG_DIR, 'asdfasdf.json');
-        API.prototype._readConfigFromPath.call(null, config, {}, bad_path);
-      }).should.throw(/Invalid file name at/);
-    });
-
-    it('should throw exception if the api definition file contains invalid JSON', function () {
-      (function() {
-        var bad_path = path.join(CONFIG_DIR, 'bad_json.json');
-        API.prototype._readConfigFromPath.call(null, config, {}, bad_path);
-      }).should.throw(/Could not read API definition file/);
-    });
-
-    it('should load a well formed JSON doc with the correct filename', function () {
-        var good_path = path.normalize(path.join(__dirname, '..', 'config', 'api_auth.json'));
-        var result = API.prototype._readConfigFromPath.call(null, config, {}, good_path);
-        result.should.exist;
-        result.should.include.keys('auth');
-    });
-
-    it('should throw exception if the api prefix is not defined', function () {
-      (function() {
-        config.set('prefix', 'someprefix');
-        new API(config);
-      }).should.throw(/Could not find API definition/);
-    });
-
-    afterEach(function () {
-      config.set('prefix', o_prefix);
-    });
   });
 
 });
