@@ -1,5 +1,9 @@
 sudo: required
 
+language: node_js
+node_js:
+  - "4.1"
+
 services:
   - docker
 
@@ -8,12 +12,12 @@ before_install:
   - docker pull kenjones/authstore-consul
   - docker pull kenjones/authstore-vault
   - docker pull kenjones/nodejs-mocha
-  - docker-compose --x-networking -f docker-compose-test.yml up -d
+  - docker-compose -f docker-compose-test.yml up -d
 
 # the sleep statement should give enough time for the containers to start up
 script:
   - sleep 30
-  - docker run -it --rm -v `pwd`:/app --net=vaulted kenjones/nodejs-mocha sh -c 'npm install --quiet && npm run coverage'
+  - docker run -it --rm -v $(pwd):/app --net=vault kenjones/nodejs-mocha sh -c 'npm install --quiet && npm run coverage'
 
 # token can be added after registering with CodeClimate
 addons:
@@ -25,4 +29,5 @@ after_script:
   - docker-compose -f docker-compose-test.yml stop
   - docker-compose -f docker-compose-test.yml rm -f
   - codeclimate-test-reporter < lcov.info
+
 
