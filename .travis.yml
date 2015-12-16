@@ -15,7 +15,8 @@ before_install:
 
 script:
   - sleep 30
-  - docker run -it --rm -v $(pwd):/app --link=vault -e "VAULT_HOST=vault" kenjones/nodejs-mocha sh -c 'mkdir -p /app/coverage && npm install --quiet && npm run coverage'
+  - mkdir -p $(pwd)/coverage
+  - docker run -it --rm -v $(pwd):/app --link=vault -e "VAULT_HOST=vault" kenjones/nodejs-mocha sh -c 'npm install --quiet && npm run coverage'
 
 addons:
   code_climate:
@@ -26,6 +27,7 @@ after_script:
   - docker-compose -f docker-compose-test.yml stop
   - docker-compose -f docker-compose-test.yml rm -f
   - codeclimate-test-reporter < lcov.info
+
 
 
 
