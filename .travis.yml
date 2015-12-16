@@ -1,0 +1,28 @@
+sudo: required
+
+services:
+  - docker
+
+# make sure all images are available locally and then start them up in the background
+before_install:
+  - docker pull kenjones/authstore-consul
+  - docker pull kenjones/authstore-vault
+  - docker pull kenjones/nodejs-mocha
+  - docker-compose --x-networking -f docker-compose-test.yml up -d
+
+# the sleep statement should give enough time for the containers to start up
+script:
+  - sleep 30
+  - docker run -it --rm -v `pwd`:/app --net=vaulted kenjones/nodejs-mocha sh -c 'npm install --quiet && npm run coverage'
+
+# token can be added after registering with CodeClimate
+addons:
+  code_climate:
+    repo_token: 9b083d9de876dd53937f28b364a2493b091ebbb867430325922f20280483863
+
+# clean up the running support processes and then report code coverage to CodeClimate
+after_script:
+  - docker-compose -f docker-compose-test.yml stop
+  - docker-compose -f docker-compose-test.yml rm -f
+  - codeclimate-test-reporter < lcov.info
+
