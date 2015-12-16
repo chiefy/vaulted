@@ -17,7 +17,7 @@ before_install:
 # the sleep statement should give enough time for the containers to start up
 script:
   - sleep 30
-  - docker run -it --rm -v $(pwd):/app --link=vault -e "VAULT_HOST:vault" kenjones/nodejs-mocha sh -c 'npm install --quiet && npm run coverage'
+  - docker run -it --rm -v $(pwd):/app --link=vault -e "VAULT_HOST=vault" kenjones/nodejs-mocha sh -c 'npm install --quiet && npm run coverage'
 
 # token can be added after registering with CodeClimate
 addons:
@@ -29,6 +29,7 @@ after_script:
   - docker-compose -f docker-compose-test.yml stop
   - docker-compose -f docker-compose-test.yml rm -f
   - codeclimate-test-reporter < lcov.info
+
 
 
 
