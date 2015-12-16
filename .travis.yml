@@ -8,7 +8,9 @@ services:
   - docker
 
 before_install:
-  - docker run --name vault -d -p 8200:8200 -v ${pwd}/config/dev.hcl:/etc/vault.hcl chiefy/alpine-vault:0.3.1
+  - docker pull chiefy/alpine-vault:0.3.1
+  - docker run --name vault -d -p 127.0.0.1:8200:8200 -v ${pwd}/config/dev.hcl:/etc/vault.hcl chiefy/alpine-vault:0.3.1
+  - docker ps -a
 
 env:
   VAULT_HOST: 127.0.0.1
