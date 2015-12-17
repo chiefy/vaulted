@@ -18,6 +18,7 @@ env:
 
 script:
   - mkdir -p $(pwd)/coverage
+  - npm install --quiet
   - npm run coverage
 
 addons:
