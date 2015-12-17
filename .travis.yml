@@ -23,7 +23,7 @@ script:
 
 addons:
   code_climate:
-    repo_token: 9b083d9de876dd53937f28b364a2493b091ebbb867430325922f20280483863
+    repo_token: a9b083d9de876dd53937f28b364a2493b091ebbb867430325922f20280483863
 
 # clean up the running support processes and then report code coverage to CodeClimate
 after_script:
