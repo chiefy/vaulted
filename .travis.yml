@@ -30,6 +30,7 @@ after_script:
   - docker logs vault
   - docker stop vault
   - docker rm vault
+  - npm install -g codeclimate-test-reporter
   - codeclimate-test-reporter < coverage/lcov.info
 
 notifications:
