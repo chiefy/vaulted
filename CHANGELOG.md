@@ -2,7 +2,27 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0][unreleased]
+## [unreleased]
+#### Added
+- Support for Consul storage backend
+- Support for Conssul secrets backend
+  + `consul/config/access`: Provides the capability to configure a Consul cluster as a secrets backend.
+  + `consul/roles/*`: Provides the capability to create, delete, and retrieve roles (aka policies) associated with secrets.
+  + `consul/creds/*`: Provides the capability to get a token for writing/reading secrets stored within Consul.
+- SSL configuration options
+  + `ssl_ciphers`, `ssl_cert_file`, `ssl_pem_file`, `ssl_pem_passphrase`, `ssl_ca_cert`, `ssl_verify`
+- Proxy configuration options
+  + `proxy_address`, `proxy_port`, `proxy_username`, `proxy_password`
+- timeout configuration option
+  + `timeout`
+- Automated builds using Travis-ci.
+- Automated static code analysis and coverage using Code Climate
+
+#### Changed
+- Removed internal configuration options `prefix`, `api_def_files`
+
+
+## [2.0.0] - 2015-12-15
 #### Added
 - Add Authentication and Authorization support
   + `sys/auth`: Provides the capability to create, delete, and retrieve
