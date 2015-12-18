@@ -15,6 +15,7 @@ before_install:
 
 script:
   - mkdir -p $(pwd)/coverage
+  - chmod 777 $(pwd)/coverage
   - docker-compose -f docker-compose-test.yml run vaulted
 
 addons:
