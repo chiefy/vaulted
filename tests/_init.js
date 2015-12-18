@@ -2,6 +2,7 @@ require('./helpers').should;
 
 var
   helpers = require('./helpers'),
+  debuglog = helpers.debuglog,
   chai = helpers.chai,
   Vault = require('../lib/vaulted');
 
@@ -44,6 +45,24 @@ describe('init', function() {
   it('initialized true', function () {
     return myVault.getInitStatus().then(function (result) {
         result.initialized.should.be.true;
+    });
+  });
+
+  it('#health: should reject with Error and statusCode 500 when not initialized or sealed', function () {
+    return myVault.checkHealth().then(function (status) {
+      debuglog('health status: ', status);
+      assert.notOk(status, 'health status should not be returned');
+    }).catch(function (err) {
+      err.should.have.property('statusCode');
+      err.statusCode.should.equal(500);
+      err.should.have.property('error');
+      debuglog(err.error);
+
+      err.error.should.have.property('initialized');
+      err.error.initialized.should.be.true;
+      err.error.should.have.property('sealed');
+      err.error.sealed.should.be.true;
+      err.error.should.have.property('standby');
     });
   });
 

@@ -8,18 +8,14 @@ services:
   - docker
 
 before_install:
-  - docker pull chiefy/alpine-vault:0.3.1
-  - docker run --name vault -d -p 127.0.0.1:8200:8200 -v $(pwd)/config/dev.hcl:/etc/vault.hcl chiefy/alpine-vault:0.3.1
-  - docker ps -a
-
-env:
-  VAULT_HOST: 127.0.0.1
-  VAULT_PORT: 8200
+  - docker pull kenjones/authstore-consul
+  - docker pull kenjones/authstore-vault
+  - docker pull kenjones/nodejs-mocha
+  - docker-compose -f docker-compose-test.yml up -d vault
 
 script:
   - mkdir -p $(pwd)/coverage
-  - npm install --quiet
-  - npm run coverage
+  - docker-compose -f docker-compose-test.yml run vaulted
 
 addons:
   code_climate:
@@ -27,9 +23,12 @@ addons:
 
 # clean up the running support processes and then report code coverage to CodeClimate
 after_script:
+  - docker logs $(docker ps -q -f status=exited)
+  - docker rm $(docker ps -q -f status=exited)
+  - docker logs consul
   - docker logs vault
-  - docker stop vault
-  - docker rm vault
+  - docker-compose -f docker-compose-test.yml stop
+  - docker-compose -f docker-compose-test.yml rm -f
   - npm install -g codeclimate-test-reporter
   - codeclimate-test-reporter < coverage/lcov.info
 

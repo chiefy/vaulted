@@ -27,11 +27,8 @@ describe('auths', function () {
     });
 
     it('should update internal state with list of auth mounts', function () {
-      var existingAuthMounts = _.cloneDeep(myVault.auths);
       return myVault.getAuthMounts().then(function (auths) {
         debuglog(auths);
-        existingAuthMounts.should.be.empty;
-        existingAuthMounts.should.not.contain.keys('token/');
         auths.should.not.be.empty;
         auths.should.contain.keys('token/');
       });
@@ -136,12 +133,6 @@ describe('auths', function () {
       });
     });
 
-  });
-
-  after(function () {
-    if (!myVault.status.sealed) {
-      return helpers.resealVault(myVault);
-    }
   });
 
 });

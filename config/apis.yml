@@ -278,3 +278,39 @@ v1:
         - name: "user_id"
           type: "string"
           required: true
+  consul/config/access:
+    post:
+      id: false
+      params:
+        - name: "address"
+          type: "string"
+          required: true
+        - name: "scheme"
+          type: "string"
+          required: false
+        - name: "token"
+          type: "string"
+          required: true
+  "consul/roles/:id":
+    post:
+      id: true
+      params:
+        - name: "policy"
+          type: "string"
+          required: true
+        - name: "token_type"
+          type: "string"
+          required: false
+        - name: "lease"
+          type: "duration"
+          required: false
+    get:
+      id: true
+      params: []
+    delete:
+      id: true
+      params: []
+  "consul/creds/:id":
+    get:
+      id: true
+      params: []

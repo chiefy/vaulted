@@ -27,12 +27,9 @@ describe('mounts', function () {
     });
 
     it('should update internal state with list of mounts', function () {
-      var existingMounts = myVault.mounts;
       return myVault.getMounts().then(function (mounts) {
         debuglog(mounts);
-        existingMounts.should.be.empty;
         mounts.should.not.be.empty;
-        existingMounts.should.not.contain.keys('sys/');
         mounts.should.contain.keys('sys/');
       });
     });
@@ -210,12 +207,6 @@ describe('mounts', function () {
       });
     });
 
-  });
-
-  after(function () {
-    if (!myVault.status.sealed) {
-      return helpers.resealVault(myVault);
-    }
   });
 
 });

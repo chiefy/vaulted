@@ -51,13 +51,11 @@ describe('internal state', function () {
     });
   });
 
-  it('loadState - sealed', function () {
+  it('loadState - initialized', function () {
     return initOrRename(myVault).then(function () {
       return internal.loadState(myVault).then(function (self) {
         self.initialized.should.be.true;
         myVault.initialized.should.be.true;
-        self.status.sealed.should.be.true;
-        myVault.status.sealed.should.be.true;
       });
     });
   });
@@ -239,10 +237,7 @@ describe('internal state', function () {
   after(function () {
     return myVault.deleteMount({
       id: 'consul'
-    }).then(function () {
-      if (!myVault.status.sealed) {
-        return helpers.resealVault(myVault);
-      }
     });
   });
+
 });
