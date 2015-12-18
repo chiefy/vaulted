@@ -28,12 +28,9 @@ describe('policy', function () {
     });
 
     it('should resolve to updated list of policies', function () {
-      var existingPolicies = _.cloneDeep(myVault.policies);
       return myVault.getPolicies().then(function (policies) {
         debuglog(policies);
-        existingPolicies.should.be.empty;
         policies.should.not.be.empty;
-        existingPolicies.should.not.contain('root');
         policies.should.contain('root');
       });
     });
@@ -147,12 +144,6 @@ describe('policy', function () {
       });
     });
 
-  });
-
-  after(function () {
-    if (!myVault.status.sealed) {
-      return helpers.resealVault(myVault);
-    }
   });
 
 });

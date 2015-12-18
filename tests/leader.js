@@ -32,10 +32,4 @@ describe('leader', function () {
     });
   });
 
-  after(function () {
-    if (!myVault.status.sealed) {
-      return helpers.resealVault(myVault);
-    }
-  });
-
 });

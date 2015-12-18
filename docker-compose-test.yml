@@ -1,20 +1,38 @@
 consul:
   container_name: consul
-  image: kenjones/authstore-consul:0.5.2
+  image: kenjones/authstore-consul
   ports:
     - "8301"
     - "8302"
     - "8400"
     - "8500"
     - "8600"
+
 vault:
   container_name: vault
-  image: kenjones/authstore-vault:0.3.1
+  image: kenjones/authstore-vault
   links:
-    - consul
+    - consul:consul
   cap_add:
     - IPC_LOCK
   ports:
-    - "8200:8200"
+    - "8200"
+    - "8500"
 
-
+vaulted:
+  container_name: vaulted
+  image: kenjones/nodejs-mocha
+  links:
+    - vault:vault
+  command: ./test.sh
+  environment:
+    - VAULT_HOST=vault
+    - VAULT_PORT=8200
+    - CONSUL_HOST
+    - CONSUL_PORT
+    - TEST_CONSUL_HOST=vault
+    - TEST_CONSUL_PORT
+    - NODE_DEBUG
+    - TEST_SYSLOG=true
+  volumes:
+    - .:/app

@@ -4,6 +4,7 @@ var
   helpers = require('../helpers'),
   debuglog = helpers.debuglog,
   chai = helpers.chai,
+  assert = helpers.assert,
   expect = helpers.expect;
 
 chai.use(helpers.cap);
@@ -101,13 +102,13 @@ describe('auth/appid', function () {
     });
 
     it('should resolve when all required and valid inputs provided', function () {
-      return myVault.createApp({
+      return assert.isFulfilled(myVault.createApp({
         id: 'fakeapp',
         body: {
           value: 'root',
           display_name: 'TheFakeApp'
         }
-      }).should.be.fullfilled;
+      }));
     });
 
   });
@@ -144,7 +145,8 @@ describe('auth/appid', function () {
         app.should.have.property('renewable');
         app.should.have.property('lease_duration');
         app.should.have.property('data');
-        app.data.should.not.be.undefined;
+        expect(app.data).not.to.be.undefined;
+        expect(app.data).not.to.be.null;
         app.data.should.have.property('key');
         app.data.key.should.be.equal('fakeapp');
         app.data.should.have.property('value');
@@ -209,12 +211,12 @@ describe('auth/appid', function () {
     });
 
     it('should resolve when all required and valid inputs provided', function () {
-      return myVault.createUser({
+      return assert.isFulfilled(myVault.createUser({
         id: 'fakeuser',
         body: {
           value: 'fakeapp'
         }
-      }).should.be.fullfilled;
+      }));
     });
 
   });
@@ -251,7 +253,8 @@ describe('auth/appid', function () {
         user.should.have.property('renewable');
         user.should.have.property('lease_duration');
         user.should.have.property('data');
-        user.data.should.not.be.undefined;
+        expect(user.data).not.to.be.undefined;
+        expect(user.data).not.to.be.null;
         user.data.should.have.property('key');
         user.data.key.should.be.equal('fakeuser');
         user.data.should.have.property('value');
@@ -324,13 +327,13 @@ describe('auth/appid', function () {
           user_id: 'fakeuser'
         }
       }).then(function (authres) {
-        debuglog(authres);
+        debuglog('applogin: ', authres);
         expect(authres).should.not.be.undefined;
         authres.should.have.property('lease_id');
         authres.should.have.property('renewable');
         authres.should.have.property('lease_duration');
+        authres.should.have.property('data');
         authres.should.have.property('auth');
-        authres.auth.should.not.be.undefined;
         authres.auth.should.have.property('client_token');
         authres.auth.client_token.should.not.be.undefined;
         authres.auth.should.have.property('policies');
@@ -403,11 +406,7 @@ describe('auth/appid', function () {
   after(function () {
     return myVault.deleteAuthMount({
       id: 'app-id'
-    }).then(function () {
-      if (!myVault.status.sealed) {
-        return helpers.resealVault(myVault);
-      }
     });
-
   });
+
 });
