@@ -63,11 +63,12 @@ of the vault.
 - Refactored a lot of code making it a bit more modular.
 - Config now supports debug, vault-server host, vault-server port etc.
 
-## 1.0.0 - 2015-07-31
+## [1.0.0] - 2015-07-31
 #### Added
 - This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
 - Initial project release. Supporting small subset of Vault's HTTP API
 
-[unreleased]: https://github.com/chiefy/vaulted/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/chiefy/vaulted/compare/v2.0.0...master
+[2.0.0]: https://github.com/chiefy/vaulted/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/chiefy/vaulted/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/chiefy/vaulted/compare/v1.0.0...v1.0.0
+[1.0.0]: https://github.com/chiefy/vaulted/compare/55a14aff522d5d5b45a1ea35ef3e6b6fa37e5e49...v1.0.0
