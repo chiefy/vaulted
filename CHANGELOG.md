@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   + `timeout`
 - Automated builds using Travis-ci.
 - Automated static code analysis and coverage using Code Climate
+- Generated documentation
 
 #### Changed
 - Removed internal configuration options `prefix`, `api_def_files`
