@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm rebuild && node index.js",
     "test": "mocha -R spec tests/**",
-    "coverage": "gulp test",
+    "coverage": "istanbul cover _mocha -- tests/**",
     "test-watch": "mocha --growl -R spec -w tests/**/*.js",
     "docs": "gulp docs",
     "lint": "gulp lint"
