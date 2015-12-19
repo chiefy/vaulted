@@ -7,7 +7,8 @@
     "start": "npm rebuild && node index.js",
     "test": "mocha -R spec tests/**",
     "coverage": "istanbul cover _mocha -- tests/**",
-    "test-watch": "mocha --growl -R spec -w tests/**/*.js"
+    "test-watch": "mocha --growl -R spec -w tests/**/*.js",
+    "docs": "gulp docs"
   },
   "keywords": [
     "vault",
@@ -35,7 +36,11 @@
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
     "istanbul": "^0.4.1",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "gulp": "^3.9.0",
+    "gulp-jsdoc-to-markdown": "^1.2.0",
+    "gulp-util": "^3.0.7",
+    "gulp-rename": "^1.2.2"
   },
   "repository": "https://github.com/chiefy/vaulted"
 }
