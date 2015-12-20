@@ -34,5 +34,6 @@ vaulted:
     - TEST_CONSUL_PORT
     - NODE_DEBUG
     - TEST_SYSLOG=true
+    - ALLOW_CONFIG_MUTATIONS=true
   volumes:
     - .:/app

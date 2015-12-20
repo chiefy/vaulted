@@ -172,6 +172,9 @@ describe('internal state', function () {
   });
 
   it('recover - no file', function () {
+    myVault.config = myVault.config.util.extendDeep(myVault.config, {
+      backup_dir: BACKUP_DIR
+    });
     renameFile('keys.json', 'prev-keys.json');
     myVault.token = null;
     myVault.keys = [];
