@@ -21,6 +21,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 #### Changed
 - Removed internal configuration options `prefix`, `api_def_files`
+- Use `vault_token` configuration option as provided by user.
+- Treat configuration options that are not required as optional.
 
 
 ## [2.0.0] - 2015-12-15
