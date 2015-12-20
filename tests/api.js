@@ -62,22 +62,26 @@ describe('API', function() {
   });
 
   describe('#_loadAPIDefinitions', function() {
-    var original_config;
+    var myconfig;
 
     beforeEach(function () {
-        original_config = _.cloneDeep(config);
+        myconfig = require('../lib/config')();
     });
 
     it('should load a well formed YAML doc with the correct filename', function () {
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var result = API.prototype._loadAPIDefinitions.call(null, myconfig);
       result.should.exist;
       result.should.include.keys('auth/token/create');
     });
 
     it('with proxy configuration', function () {
-      config.set('proxy_address', 'abc.example.com');
-      config.set('proxy_port', '443');
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var options = {
+        proxy_address: 'abc.example.com',
+        proxy_port: 443,
+        vault_ssl: true
+      };
+      var testcfg = config.util.extendDeep(myconfig, options);
+      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
       result.should.exist;
       result.should.include.keys('auth/token/create');
       result['auth/token/create'].should.include.keys('defaults');
@@ -86,10 +90,13 @@ describe('API', function() {
     });
 
     it('with proxy configuration - insecure', function () {
-      config.set('proxy_address', 'abc.example.com');
-      config.set('proxy_port', '8000');
-      config.set('vault_ssl', 0);
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var options = {
+        proxy_address: 'abc.example.com',
+        proxy_port: 8000,
+        vault_ssl: false
+      };
+      var testcfg = config.util.extendDeep(myconfig, options);
+      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
       result.should.exist;
       result.should.include.keys('auth/token/create');
       result['auth/token/create'].should.include.keys('defaults');
@@ -98,11 +105,15 @@ describe('API', function() {
     });
 
     it('with proxy configuration - with auth', function () {
-      config.set('proxy_address', 'abc.example.com');
-      config.set('proxy_port', '443');
-      config.set('proxy_username', 'dummy');
-      config.set('proxy_password', 'pass');
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var options = {
+        proxy_address: 'abc.example.com',
+        proxy_port: 443,
+        proxy_username: 'dummy',
+        proxy_password: 'pass',
+        vault_ssl: true
+      };
+      var testcfg = config.util.extendDeep(myconfig, options);
+      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
       result.should.exist;
       result.should.include.keys('auth/token/create');
       result['auth/token/create'].should.include.keys('defaults');
@@ -111,9 +122,12 @@ describe('API', function() {
     });
 
     it('with ssl configuration - cacert', function () {
-      config.set('ssl_ca_cert', path.join(__dirname, 'configs', 'ca.cert.pem'));
-      var cacert = fs.readFileSync(config.get('ssl_ca_cert'));
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var options = {
+        ssl_ca_cert: path.join(__dirname, 'configs', 'ca.cert.pem')
+      };
+      var testcfg = config.util.extendDeep(myconfig, options);
+      var cacert = fs.readFileSync(testcfg.get('ssl_ca_cert'));
+      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
       result.should.exist;
       result.should.include.keys('auth/token/create');
       result['auth/token/create'].should.include.keys('defaults');
@@ -122,11 +136,14 @@ describe('API', function() {
     });
 
     it('with ssl configuration - cert and key', function () {
-      config.set('ssl_cert_file', path.join(__dirname, 'configs', 'client.crt'));
-      config.set('ssl_pem_file', path.join(__dirname, 'configs', 'client.key'));
-      var clientcert = fs.readFileSync(config.get('ssl_cert_file'));
-      var clientkey = fs.readFileSync(config.get('ssl_pem_file'));
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var options = {
+        ssl_cert_file: path.join(__dirname, 'configs', 'client.crt'),
+        ssl_pem_file: path.join(__dirname, 'configs', 'client.key')
+      };
+      var testcfg = config.util.extendDeep(myconfig, options);
+      var clientcert = fs.readFileSync(testcfg.get('ssl_cert_file'));
+      var clientkey = fs.readFileSync(testcfg.get('ssl_pem_file'));
+      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
       result.should.exist;
       result.should.include.keys('auth/token/create');
       result['auth/token/create'].should.include.keys('defaults');
@@ -137,12 +154,15 @@ describe('API', function() {
     });
 
     it('with ssl configuration  - cert and key with passphrase', function () {
-      config.set('ssl_cert_file', path.join(__dirname, 'configs', 'client.crt'));
-      config.set('ssl_pem_file', path.join(__dirname, 'configs', 'client.key'));
-      config.set('ssl_pem_passphrase', 'fakephrase');
-      var clientcert = fs.readFileSync(config.get('ssl_cert_file'));
-      var clientkey = fs.readFileSync(config.get('ssl_pem_file'));
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var options = {
+        ssl_cert_file: path.join(__dirname, 'configs', 'client.crt'),
+        ssl_pem_file: path.join(__dirname, 'configs', 'client.key'),
+        ssl_pem_passphrase: 'fakephrase'
+      };
+      var testcfg = config.util.extendDeep(myconfig, options);
+      var clientcert = fs.readFileSync(testcfg.get('ssl_cert_file'));
+      var clientkey = fs.readFileSync(testcfg.get('ssl_pem_file'));
+      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
       result.should.exist;
       result.should.include.keys('auth/token/create');
       result['auth/token/create'].should.include.keys('defaults');
@@ -155,8 +175,11 @@ describe('API', function() {
     });
 
     it('with timeout specified', function () {
-      config.set('timeout', 10);
-      var result = API.prototype._loadAPIDefinitions.call(null, config);
+      var options = {
+        timeout: 10
+      };
+      var testcfg = config.util.extendDeep(myconfig, options);
+      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
       result.should.exist;
       result.should.include.keys('auth/token/create');
       result['auth/token/create'].should.include.keys('defaults');
@@ -165,7 +188,17 @@ describe('API', function() {
     });
 
     afterEach(function () {
-      config = original_config;
+      var options = {
+        proxy_address: undefined,
+        proxy_port: undefined,
+        proxy_username: undefined,
+        proxy_password: undefined,
+        ssl_cert_file: undefined,
+        ssl_pem_file: undefined,
+        ssl_pem_passphrase: undefined,
+        timeout: undefined
+      };
+      config = config.util.extendDeep(myconfig, options);;
     });
 
   });

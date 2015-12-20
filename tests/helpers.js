@@ -20,9 +20,9 @@ var Vault = require('../lib/vaulted');
 
 helpers.getVault = function getVault() {
   return new Vault({
-    vault_host: this.VAULT_HOST,
-    vault_port: this.VAULT_PORT,
-    vault_ssl: 0
+    vault_host: helpers.VAULT_HOST,
+    vault_port: helpers.VAULT_PORT,
+    vault_ssl: false
   });
 };
 

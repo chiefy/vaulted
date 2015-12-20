@@ -6,7 +6,7 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
 
 * [vaulted](#module_vaulted)
     * [~Vaulted](#module_vaulted..Vaulted)
-        * [new Vaulted(config)](#new_module_vaulted..Vaulted_new)
+        * [new Vaulted(options)](#new_module_vaulted..Vaulted_new)
         * [.config](#module_vaulted..Vaulted+config) : <code>Object</code>
         * [.api](#module_vaulted..Vaulted+api) : <code>API</code>
         * [.status](#module_vaulted..Vaulted+status) : <code>Object</code>
@@ -28,7 +28,7 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
 **Kind**: inner class of <code>[vaulted](#module_vaulted)</code>  
 
 * [~Vaulted](#module_vaulted..Vaulted)
-    * [new Vaulted(config)](#new_module_vaulted..Vaulted_new)
+    * [new Vaulted(options)](#new_module_vaulted..Vaulted_new)
     * [.config](#module_vaulted..Vaulted+config) : <code>Object</code>
     * [.api](#module_vaulted..Vaulted+api) : <code>API</code>
     * [.status](#module_vaulted..Vaulted+status) : <code>Object</code>
@@ -41,13 +41,13 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
     * [.initialized](#module_vaulted..Vaulted+initialized) : <code>boolean</code>
 
 <a name="new_module_vaulted..Vaulted_new"></a>
-#### new Vaulted(config)
+#### new Vaulted(options)
 Vaulted constructor
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| config | <code>Object</code> | overrides any configuration set by node-convict setup. |
+| options | <code>Object</code> | overrides any default configurations. |
 
 <a name="module_vaulted..Vaulted+config"></a>
 #### vaulted.config : <code>Object</code>

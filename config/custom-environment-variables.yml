@@ -1,0 +1,23 @@
+debug: DEBUG
+
+vault_host: VAULT_HOST
+vault_port: VAULT_PORT
+vault_ssl: VAULT_SSL
+vault_token: VAULT_TOKEN
+
+ssl_ciphers: VAULT_SSL_CIPHERS
+ssl_cert_file: VAULT_SSL_CERT
+ssl_pem_file: VAULT_SSL_CERT_KEY
+ssl_pem_passphrase: VAULT_SSL_CERT_PASSPHRASE
+ssl_ca_cert: VAULT_CACERT
+ssl_verify: VAULT_SSL_VERIFY
+
+proxy_address: VAULT_PROXY_ADDRESS
+proxy_port: VAULT_PROXY_PORT
+proxy_username: VAULT_PROXY_USERNAME
+proxy_password: VAULT_PROXY_PASSWORD
+
+timeout: VAULT_TIMEOUT
+secret_shares: SECRET_SHARES
+secret_threshold: SECRET_THRESHOLD
+backup_dir: VAULT_SAFE

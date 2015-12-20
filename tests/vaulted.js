@@ -38,14 +38,17 @@ describe('Vaulted', function () {
     it('should take an options hash, and override any default settings', function () {
       var
         options = {
-          debug: 1,
-          vault_url: 'https://some.other.host:1234',
-          env: 'test'
+          debug: true
         },
         vault = new Vault(options),
-        env = vault.config.get('env');
+        debugflag = vault.config.get('debug');
 
-      env.should.equal(options.env);
+      debugflag.should.equal(options.debug);
+      var options = {
+        debug: undefined
+      };
+      // reset debug flag
+      vault.config.util.extendDeep(vault.config, options);
     });
 
     it('should be in the sealed state by default', function () {
@@ -53,6 +56,28 @@ describe('Vaulted', function () {
       vault.status.sealed.should.be.true;
     });
 
+    it('should throw exception if invalid option provided', function () {
+      var
+        options = {
+          'abcxyz': true,
+          'sample': 'value'
+        };
+
+      function shouldThrow() {
+        new Vault(options);
+      }
+      shouldThrow.should.throw(/Unsupported option provided/);
+    });
+
+    it('should accept token as input and update state accordingly', function () {
+      var
+        options = {
+          vault_token: 'sample.secret'
+        },
+        vault = new Vault(options);
+      vault.token.should.equal('sample.secret');
+      vault.headers.should.contain.keys('X-Vault-Token');
+    });
   });
 
   describe('#methods', function () {
