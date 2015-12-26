@@ -1,0 +1,149 @@
+v1:
+  token:
+    "auth/%s/create":
+      post:
+        id: false
+        params:
+          - name: "id"
+            type: "string"
+            required: false
+          - name: "policies"
+            type: "list"
+            required: false
+          - name: "meta"
+            type: "object"
+            required: false
+          - name: "no_parent"
+            type: "bool"
+            required: false
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "display_name"
+            type: "string"
+            required: false
+          - name: "num_uses"
+            type: "number"
+            required: false
+    "auth/%s/lookup-self":
+      get:
+        id: false
+        params: []
+    "auth/%s/lookup/:id":
+      get:
+        id: true
+        params: []
+    "auth/%s/revoke/:id":
+      post:
+        id: true
+        params: []
+    "auth/%s/revoke-self":
+      post:
+        id: false
+        params: []
+    "auth/%s/revoke-orphan/:id":
+      post:
+        id: true
+        params: []
+    "auth/%s/revoke-prefix/:id":
+      post:
+        id: true
+        params: []
+    "auth/%s/renew/:id":
+      post:
+        id: true
+        params:
+          - name: "increment"
+            type: "number"
+            required: false
+  app-id:
+    "auth/%s/map/app-id/:id":
+      post:
+        id: true
+        params:
+          - name: "value"
+            type: "string"
+            required: true
+          - name: "display_name"
+            type: "string"
+            required: true
+      get:
+        id: true
+        params: []
+      delete:
+        id: true
+        params: []
+    "auth/%s/map/user-id/:id":
+      post:
+        id: true
+        params:
+          - name: "value"
+            type: "string"
+            required: true
+          - name: "cidr_block"
+            type: "string"
+            required: false
+      get:
+        id: true
+        params: []
+      delete:
+        id: true
+        params: []
+    "auth/%s/login":
+      post:
+        id: false
+        params:
+          - name: "app_id"
+            type: "string"
+            required: true
+          - name: "user_id"
+            type: "string"
+            required: true
+  secret:
+    "%s/:id":
+      get:
+        id: true
+        params: []
+      put:
+        id: true
+        params: []
+      delete:
+        id: true
+        params: []
+  consul:
+    "%s/config/access":
+      post:
+        id: false
+        params:
+          - name: "address"
+            type: "string"
+            required: true
+          - name: "scheme"
+            type: "string"
+            required: false
+          - name: "token"
+            type: "string"
+            required: true
+    "%s/roles/:id":
+      post:
+        id: true
+        params:
+          - name: "policy"
+            type: "string"
+            required: true
+          - name: "token_type"
+            type: "string"
+            required: false
+          - name: "lease"
+            type: "duration"
+            required: false
+      get:
+        id: true
+        params: []
+      delete:
+        id: true
+        params: []
+    "%s/creds/:id":
+      get:
+        id: true
+        params: []
