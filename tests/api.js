@@ -13,23 +13,13 @@ chai.use(helpers.cap);
 
 
 describe('API', function() {
+  var myAPI = null;
 
-  describe('#constructor', function() {
-
-    it('should throw when no params are sent', function () {
-      (function() {
-        new API();
-      }).should.throw(/API must be instantiated with a node-convict based object/);
-    });
-
+  before(function () {
+    myAPI = new API(config);
   });
 
   describe('#getEndpoint', function() {
-    var myAPI = null;
-
-    before(function () {
-      myAPI = new API(config);
-    });
 
     it('should throw error if no endpoint name provided', function () {
       function shouldThrow() {
@@ -61,17 +51,79 @@ describe('API', function() {
 
   });
 
-  describe('#_loadAPIDefinitions', function() {
+  describe('#mountEndpoints', function () {
+
+    it('should thrown when no config', function () {
+      (function() {
+        myAPI.mountEndpoints();
+      }).should.throw(/configuration object not provided/);
+    });
+
+    it('should thrown when not config object', function () {
+      (function() {
+        myAPI.mountEndpoints({});
+      }).should.throw(/configuration object not provided/);
+    });
+
+    it('should throw when no type', function () {
+      (function() {
+        myAPI.mountEndpoints(config);
+      }).should.throw(/type not provided or has no length/);
+    });
+
+    it('should throw when type empty', function () {
+      (function() {
+        myAPI.mountEndpoints(config, '');
+      }).should.throw(/type not provided or has no length/);
+    });
+
+    it('should throw when no namespace', function () {
+      (function() {
+        myAPI.mountEndpoints(config, 'auth');
+      }).should.throw(/namespace not provided or has no length/);
+    });
+
+    it('should throw when namespace empty', function () {
+      (function() {
+        myAPI.mountEndpoints(config, 'auth', '');
+      }).should.throw(/namespace not provided or has no length/);
+    });
+
+  });
+
+  describe('#unmountEndpoints', function () {
+
+    it('should throw when no namespace', function () {
+      (function() {
+        myAPI.unmountEndpoints();
+      }).should.throw(/namespace not provided or has no length/);
+    });
+
+    it('should throw when namespace empty', function () {
+      (function() {
+        myAPI.unmountEndpoints('');
+      }).should.throw(/namespace not provided or has no length/);
+    });
+
+  });
+
+  describe('#constructor', function() {
     var myconfig;
 
     beforeEach(function () {
         myconfig = require('../lib/config')();
     });
 
+    it('should throw when no params are sent', function () {
+      (function() {
+        new API();
+      }).should.throw(/API must be configurations object/);
+    });
+
     it('should load a well formed YAML doc with the correct filename', function () {
-      var result = API.prototype._loadAPIDefinitions.call(null, myconfig);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
+      var api = new API(myconfig);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
     });
 
     it('with proxy configuration', function () {
@@ -81,12 +133,12 @@ describe('API', function() {
         vault_ssl: true
       };
       var testcfg = config.util.extendDeep(myconfig, options);
-      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
-      result['auth/token/create'].should.include.keys('defaults');
-      result['auth/token/create']['defaults'].should.include.keys('proxy');
-      result['auth/token/create']['defaults']['proxy'].should.be.equal('https://abc.example.com:443');
+      var api = new API(testcfg);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
+      api.endpoints['auth/token/create'].should.include.keys('defaults');
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('proxy');
+      api.endpoints['auth/token/create']['defaults']['proxy'].should.be.equal('https://abc.example.com:443');
     });
 
     it('with proxy configuration - insecure', function () {
@@ -96,12 +148,12 @@ describe('API', function() {
         vault_ssl: false
       };
       var testcfg = config.util.extendDeep(myconfig, options);
-      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
-      result['auth/token/create'].should.include.keys('defaults');
-      result['auth/token/create']['defaults'].should.include.keys('proxy');
-      result['auth/token/create']['defaults']['proxy'].should.be.equal('http://abc.example.com:8000');
+      var api = new API(testcfg);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
+      api.endpoints['auth/token/create'].should.include.keys('defaults');
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('proxy');
+      api.endpoints['auth/token/create']['defaults']['proxy'].should.be.equal('http://abc.example.com:8000');
     });
 
     it('with proxy configuration - with auth', function () {
@@ -113,12 +165,12 @@ describe('API', function() {
         vault_ssl: true
       };
       var testcfg = config.util.extendDeep(myconfig, options);
-      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
-      result['auth/token/create'].should.include.keys('defaults');
-      result['auth/token/create']['defaults'].should.include.keys('proxy');
-      result['auth/token/create']['defaults']['proxy'].should.be.equal('https://dummy:pass@abc.example.com:443');
+      var api = new API(testcfg);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
+      api.endpoints['auth/token/create'].should.include.keys('defaults');
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('proxy');
+      api.endpoints['auth/token/create']['defaults']['proxy'].should.be.equal('https://dummy:pass@abc.example.com:443');
     });
 
     it('with ssl configuration - cacert', function () {
@@ -127,12 +179,12 @@ describe('API', function() {
       };
       var testcfg = config.util.extendDeep(myconfig, options);
       var cacert = fs.readFileSync(testcfg.get('ssl_ca_cert'));
-      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
-      result['auth/token/create'].should.include.keys('defaults');
-      result['auth/token/create']['defaults'].should.include.keys('ca');
-      result['auth/token/create']['defaults']['ca'].should.be.eql(cacert);
+      var api = new API(testcfg);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
+      api.endpoints['auth/token/create'].should.include.keys('defaults');
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('ca');
+      api.endpoints['auth/token/create']['defaults']['ca'].should.be.eql(cacert);
     });
 
     it('with ssl configuration - cert and key', function () {
@@ -143,14 +195,14 @@ describe('API', function() {
       var testcfg = config.util.extendDeep(myconfig, options);
       var clientcert = fs.readFileSync(testcfg.get('ssl_cert_file'));
       var clientkey = fs.readFileSync(testcfg.get('ssl_pem_file'));
-      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
-      result['auth/token/create'].should.include.keys('defaults');
-      result['auth/token/create']['defaults'].should.include.keys('cert');
-      result['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
-      result['auth/token/create']['defaults'].should.include.keys('key');
-      result['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
+      var api = new API(testcfg);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
+      api.endpoints['auth/token/create'].should.include.keys('defaults');
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('cert');
+      api.endpoints['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('key');
+      api.endpoints['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
     });
 
     it('with ssl configuration  - cert and key with passphrase', function () {
@@ -162,16 +214,16 @@ describe('API', function() {
       var testcfg = config.util.extendDeep(myconfig, options);
       var clientcert = fs.readFileSync(testcfg.get('ssl_cert_file'));
       var clientkey = fs.readFileSync(testcfg.get('ssl_pem_file'));
-      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
-      result['auth/token/create'].should.include.keys('defaults');
-      result['auth/token/create']['defaults'].should.include.keys('cert');
-      result['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
-      result['auth/token/create']['defaults'].should.include.keys('key');
-      result['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
-      result['auth/token/create']['defaults'].should.include.keys('passphrase');
-      result['auth/token/create']['defaults']['passphrase'].should.be.equal('fakephrase');
+      var api = new API(testcfg);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
+      api.endpoints['auth/token/create'].should.include.keys('defaults');
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('cert');
+      api.endpoints['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('key');
+      api.endpoints['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('passphrase');
+      api.endpoints['auth/token/create']['defaults']['passphrase'].should.be.equal('fakephrase');
     });
 
     it('with timeout specified', function () {
@@ -179,12 +231,12 @@ describe('API', function() {
         timeout: 10
       };
       var testcfg = config.util.extendDeep(myconfig, options);
-      var result = API.prototype._loadAPIDefinitions.call(null, testcfg);
-      result.should.exist;
-      result.should.include.keys('auth/token/create');
-      result['auth/token/create'].should.include.keys('defaults');
-      result['auth/token/create']['defaults'].should.include.keys('timeout');
-      result['auth/token/create']['defaults']['timeout'].should.be.equal(10);
+      var api = new API(testcfg);
+      api.should.exist;
+      api.endpoints.should.include.keys('auth/token/create');
+      api.endpoints['auth/token/create'].should.include.keys('defaults');
+      api.endpoints['auth/token/create']['defaults'].should.include.keys('timeout');
+      api.endpoints['auth/token/create']['defaults']['timeout'].should.be.equal(10);
     });
 
     afterEach(function () {
