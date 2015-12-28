@@ -38,38 +38,38 @@ describe('audit', function () {
 
     it('should reject with an Error if no options provided', function () {
       return myVault.enableAudit()
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id option provided', function () {
       return myVault.enableAudit({})
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id option provided', function () {
       return myVault.enableAudit({
         id: ''
-      }).should.be.rejectedWith(/You must provide audit id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no body option provided', function () {
       return myVault.enableAudit({
         id: 'abcxyz'
-      }).should.be.rejectedWith(/You must provide audit details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty body option provided', function () {
       return myVault.enableAudit({
         id: 'abcxyz',
         body: null
-      }).should.be.rejectedWith(/You must provide audit details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body without type', function () {
       return myVault.enableAudit({
         id: 'abcxyz',
         body: {}
-      }).should.be.rejectedWith(/You must provide audit type/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body with empty type', function () {
@@ -78,7 +78,7 @@ describe('audit', function () {
         body: {
           type: ''
         }
-      }).should.be.rejectedWith(/You must provide audit type/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if required options of specific type not provided', function () {
@@ -110,38 +110,38 @@ describe('audit', function () {
 
     it('should reject with an Error if no options provided', function () {
       return myVault.enableFileAudit()
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id option provided', function () {
       return myVault.enableFileAudit({})
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id option provided', function () {
       return myVault.enableFileAudit({
         id: ''
-      }).should.be.rejectedWith(/You must provide audit id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no body option provided', function () {
       return myVault.enableFileAudit({
         id: 'abcxyz'
-      }).should.be.rejectedWith(/You must provide audit details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty body option provided', function () {
       return myVault.enableFileAudit({
         id: 'abcxyz',
         body: null
-      }).should.be.rejectedWith(/You must provide audit details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body without path', function () {
       return myVault.enableFileAudit({
         id: 'abcxyz',
         body: {}
-      }).should.be.rejectedWith(/You must provide audit file path/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body with empty path', function () {
@@ -150,7 +150,7 @@ describe('audit', function () {
         body: {
           path: ''
         }
-      }).should.be.rejectedWith(/You must provide audit file path/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should resolve', function () {
@@ -180,18 +180,18 @@ describe('audit', function () {
 
     it('should reject with an Error if no options provided', function () {
       return myVault.enableSyslogAudit()
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id option provided', function () {
       return myVault.enableSyslogAudit({})
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id option provided', function () {
       return myVault.enableSyslogAudit({
         id: ''
-      }).should.be.rejectedWith(/You must provide audit id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     // unable to test on a windows platform because syslog does not
@@ -245,18 +245,18 @@ describe('audit', function () {
 
     it('should reject with an Error if no options provided', function () {
       return myVault.disableAudit()
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id option provided', function () {
       return myVault.disableAudit({})
-        .should.be.rejectedWith(/You must provide audit id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id option provided', function () {
       return myVault.disableAudit({
         id: ''
-      }).should.be.rejectedWith(/You must provide audit id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     // unable to test on a windows platform because syslog does not

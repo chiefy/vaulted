@@ -135,12 +135,15 @@ describe('Endpoint', function () {
     });
 
     it('should reject the promise if the endpoint does not support the verb', function () {
-      endpoint = new Endpoint({
-        base_url: BASE_URL,
-        name: 'sys/no_get',
-        verbs: api_def['sys/no_get']
-      });
-      endpoint.get().should.be.rejectedWith(/Could not find method/);
+      function shouldThrow() {
+        endpoint = new Endpoint({
+          base_url: BASE_URL,
+          name: 'sys/no_get',
+          verbs: api_def['sys/no_get']
+        });
+        endpoint.get();
+      }
+      shouldThrow.should.throw(/Unsupported method get for API/);
     });
 
     it('should return a promise if the endpoint supports the verb', function () {
@@ -151,12 +154,15 @@ describe('Endpoint', function () {
     });
 
     it('should reject promise if endpoint requires id and one is not provided', function () {
-      endpoint = new Endpoint({
-        base_url: BASE_URL,
-        name: 'sys/no_get/:id',
-        verbs: api_def['sys/no_get/:id']
-      });
-      endpoint.put().should.be.rejectedWith(/requires an id, none was given/);
+      function shouldThrow() {
+        endpoint = new Endpoint({
+          base_url: BASE_URL,
+          name: 'sys/no_get/:id',
+          verbs: api_def['sys/no_get/:id']
+        });
+        endpoint.put();
+      }
+      shouldThrow.should.throw(/requires an id/);
     });
 
   });

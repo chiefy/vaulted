@@ -33,26 +33,13 @@ describe('secret', function () {
     });
 
     it('no secret id provided', function () {
-      return myVault.write().should.be.rejectedWith(/You must provide secret id/);
+      return myVault.write().should.be.rejectedWith(/requires an id/);
     });
 
     it('empty secret id provided', function () {
       return myVault.write({
         id: ''
-      }).should.be.rejectedWith(/You must provide secret id/);
-    });
-
-    it('no secret provided', function () {
-      return myVault.write({
-        id: 'dummy'
-      }).should.be.rejectedWith(/You must provide an secret to write to the Vault/);
-    });
-
-    it('empty secret provided', function () {
-      return myVault.write({
-        id: 'dummy',
-        body: null
-      }).should.be.rejectedWith(/You must provide an secret to write to the Vault/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('secret written', function () {
@@ -75,13 +62,13 @@ describe('secret', function () {
     });
 
     it('no secret id provided', function () {
-      return myVault.read().should.be.rejectedWith(/You must provide secret id/);
+      return myVault.read().should.be.rejectedWith(/requires an id/);
     });
 
     it('empty secret id provided', function () {
       return myVault.read({
         id: ''
-      }).should.be.rejectedWith(/You must provide secret id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('secret not found', function () {
@@ -121,13 +108,13 @@ describe('secret', function () {
 
     it('no secret id provided', function () {
       return myVault.delete()
-        .should.be.rejectedWith(/You must provide secret id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('empty secret id provided', function () {
       return myVault.delete({
         id: ''
-      }).should.be.rejectedWith(/You must provide secret id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it.skip('secret not deleted', function () {

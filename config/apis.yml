@@ -24,9 +24,6 @@ v1:
     put:
       id: false
       params:
-        - name: "secret_shares"
-          type: "number"
-          required: true
         - name: "key"
           type: "string"
           required: true

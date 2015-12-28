@@ -40,37 +40,37 @@ describe('auth/appid', function () {
     });
 
     it('should reject with an Error if no options', function () {
-      return myVault.createApp().should.be.rejectedWith(/You must provide app id/);
+      return myVault.createApp().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.createApp({}).should.be.rejectedWith(/You must provide app id/);
+      return myVault.createApp({}).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.createApp({
         id: ''
-      }).should.be.rejectedWith(/You must provide app id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no body provided', function () {
       return myVault.createApp({
         id: 'fake'
-      }).should.be.rejectedWith(/You must provide app details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty body provided', function () {
       return myVault.createApp({
         id: 'fake',
         body: null
-      }).should.be.rejectedWith(/You must provide app details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if no value provided in body', function () {
       return myVault.createApp({
         id: 'fake',
         body: {}
-      }).should.be.rejectedWith(/You must provide app policy id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty value provided in body', function () {
@@ -79,7 +79,7 @@ describe('auth/appid', function () {
         body: {
           value: ''
         }
-      }).should.be.rejectedWith(/You must provide app policy id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if no display_name provided in body', function () {
@@ -88,7 +88,7 @@ describe('auth/appid', function () {
         body: {
           value: 'root'
         }
-      }).should.be.rejectedWith(/You must provide app display name/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty display_name provided in body', function () {
@@ -98,7 +98,7 @@ describe('auth/appid', function () {
           value: 'root',
           display_name: ''
         }
-      }).should.be.rejectedWith(/You must provide app display name/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should resolve when all required and valid inputs provided', function () {
@@ -122,17 +122,17 @@ describe('auth/appid', function () {
     });
 
     it('should reject with an Error if no options', function () {
-      return myVault.getApp().should.be.rejectedWith(/You must provide app id/);
+      return myVault.getApp().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.getApp({}).should.be.rejectedWith(/You must provide app id/);
+      return myVault.getApp({}).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.getApp({
         id: ''
-      }).should.be.rejectedWith(/You must provide app id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve when all required and valid inputs provided', function () {
@@ -168,37 +168,37 @@ describe('auth/appid', function () {
     });
 
     it('should reject with an Error if no options', function () {
-      return myVault.createUser().should.be.rejectedWith(/You must provide user id/);
+      return myVault.createUser().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.createUser({}).should.be.rejectedWith(/You must provide user id/);
+      return myVault.createUser({}).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.createUser({
         id: ''
-      }).should.be.rejectedWith(/You must provide user id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no body provided', function () {
       return myVault.createUser({
         id: 'fake'
-      }).should.be.rejectedWith(/You must provide user details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty body provided', function () {
       return myVault.createUser({
         id: 'fake',
         body: null
-      }).should.be.rejectedWith(/You must provide user details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if no value provided in body', function () {
       return myVault.createUser({
         id: 'fake',
         body: {}
-      }).should.be.rejectedWith(/You must provide the user app id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty value provided in body', function () {
@@ -207,7 +207,7 @@ describe('auth/appid', function () {
         body: {
           value: ''
         }
-      }).should.be.rejectedWith(/You must provide the user app id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should resolve when all required and valid inputs provided', function () {
@@ -230,17 +230,17 @@ describe('auth/appid', function () {
     });
 
     it('should reject with an Error if no options', function () {
-      return myVault.getUser().should.be.rejectedWith(/You must provide user id/);
+      return myVault.getUser().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.getUser({}).should.be.rejectedWith(/You must provide user id/);
+      return myVault.getUser({}).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.getUser({
         id: ''
-      }).should.be.rejectedWith(/You must provide user id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve when all required and valid inputs provided', function () {
@@ -276,23 +276,23 @@ describe('auth/appid', function () {
     });
 
     it('should reject with an Error if no options', function () {
-      return myVault.appLogin().should.be.rejectedWith(/You must provide user details/);
+      return myVault.appLogin().should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if no body provided', function () {
-      return myVault.appLogin({}).should.be.rejectedWith(/You must provide user details/);
+      return myVault.appLogin({}).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty body provided', function () {
       return myVault.appLogin({
         body: null
-      }).should.be.rejectedWith(/You must provide user details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if no app_id provided in body', function () {
       return myVault.appLogin({
         body: {}
-      }).should.be.rejectedWith(/You must provide app id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty app_id provided in body', function () {
@@ -300,7 +300,7 @@ describe('auth/appid', function () {
         body: {
           app_id: ''
         }
-      }).should.be.rejectedWith(/You must provide app id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if no user_id provided in body', function () {
@@ -308,7 +308,7 @@ describe('auth/appid', function () {
         body: {
           app_id: 'fakeapp'
         }
-      }).should.be.rejectedWith(/You must provide user id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if empty user_id provided in body', function () {
@@ -317,7 +317,7 @@ describe('auth/appid', function () {
           app_id: 'fakeapp',
           user_id: ''
         }
-      }).should.be.rejectedWith(/You must provide user id/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should resolve when all required and valid inputs provided', function () {
@@ -352,17 +352,17 @@ describe('auth/appid', function () {
     });
 
     it('should reject with an Error if no options', function () {
-      return myVault.deleteUser().should.be.rejectedWith(/You must provide user id/);
+      return myVault.deleteUser().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.deleteUser({}).should.be.rejectedWith(/You must provide user id/);
+      return myVault.deleteUser({}).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.deleteUser({
         id: ''
-      }).should.be.rejectedWith(/You must provide user id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve when all required and valid inputs provided', function () {
@@ -382,17 +382,17 @@ describe('auth/appid', function () {
     });
 
     it('should reject with an Error if no options', function () {
-      return myVault.deleteApp().should.be.rejectedWith(/You must provide app id/);
+      return myVault.deleteApp().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.deleteApp({}).should.be.rejectedWith(/You must provide app id/);
+      return myVault.deleteApp({}).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.deleteApp({
         id: ''
-      }).should.be.rejectedWith(/You must provide app id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve when all required and valid inputs provided', function () {

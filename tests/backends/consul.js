@@ -41,12 +41,12 @@ describe('consul', function () {
 
     it('configure failed - no options', function () {
       return myVault.configConsulAccess()
-        .should.be.rejectedWith(/You must provide Consul configurations/);
+        .should.be.rejectedWith(/Missing required input/);
     });
 
     it('configure failed - no body', function () {
       return myVault.configConsulAccess({})
-        .should.be.rejectedWith(/You must provide Consul configurations/);
+        .should.be.rejectedWith(/Missing required input/);
     });
 
     it('configure failed - missing address', function () {
@@ -54,7 +54,7 @@ describe('consul', function () {
         body: {
           address: ''
         }
-      }).should.be.rejectedWith(/You must provide Consul address/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('configure success - no token', function () {
@@ -62,7 +62,7 @@ describe('consul', function () {
         body: {
           address: CONSUL_HOST
         }
-      }).should.be.rejectedWith(/You must provide Consul management token/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('configure success - empty token', function () {
@@ -71,7 +71,7 @@ describe('consul', function () {
           address: CONSUL_HOST,
           token: ''
         }
-      }).should.be.rejectedWith(/You must provide Consul management token/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('configure success', function () {
@@ -103,26 +103,26 @@ describe('consul', function () {
 
     it('create role failed - no options', function () {
       return myVault.createConsulRole()
-        .should.be.rejectedWith(/You must provide Consul role id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('create role failed - empty id', function () {
       return myVault.createConsulRole({
         id: ''
-      }).should.be.rejectedWith(/You must provide Consul role id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('create role failed - no body', function () {
       return myVault.createConsulRole({
         id: 'sample'
-      }).should.be.rejectedWith(/You must provide Consul role definition/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('create role failed - body empty', function () {
       return myVault.createConsulRole({
         id: 'sample',
         body: null
-      }).should.be.rejectedWith(/You must provide Consul role definition/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('create role failed - no policy', function () {
@@ -131,7 +131,7 @@ describe('consul', function () {
         body: {
           policy: null
         }
-      }).should.be.rejectedWith(/Consul role definition must be a string/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('create role failed - no policy and token_type client', function () {
@@ -140,16 +140,7 @@ describe('consul', function () {
         body: {
           token_type: 'client'
         }
-      }).should.be.rejectedWith(/Consul role definition must be a string/);
-    });
-
-    it('create role failed - policy not string', function () {
-      return myVault.createConsulRole({
-        id: 'sample',
-        body: {
-          policy: {}
-        }
-      }).should.be.rejectedWith(/Consul role definition must be a string/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('create role success - no policy and token_type management', function () {
@@ -183,13 +174,13 @@ describe('consul', function () {
 
     it('get role - no options', function () {
       return myVault.getConsulRole()
-        .should.be.rejectedWith(/You must provide Consul role id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('get role - id empty', function () {
       return myVault.getConsulRole({
         id: ''
-      }).should.be.rejectedWith(/You must provide Consul role id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('get role - not found', function () {
@@ -228,13 +219,13 @@ describe('consul', function () {
 
     it('delete role - no options', function () {
       return myVault.deleteConsulRole()
-        .should.be.rejectedWith(/You must provide Consul role id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('delete role - empty id', function () {
       return myVault.deleteConsulRole({
         id: ''
-      }).should.be.rejectedWith(/You must provide Consul role id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     // the Vault API seems to always return 204 whether the specified
@@ -277,13 +268,13 @@ describe('consul', function () {
 
     it('generate token - no options', function () {
       return myVault.generateConsulRoleToken()
-        .should.be.rejectedWith(/You must provide Consul role id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('generate token - empty id', function () {
       return myVault.generateConsulRoleToken({
         id: ''
-      }).should.be.rejectedWith(/You must provide Consul role id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('generate token - not found', function () {

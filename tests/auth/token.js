@@ -84,13 +84,13 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.renewToken().should.be.rejectedWith(/You must provide client token/);
+      return myVault.renewToken().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.renewToken({
         id: ''
-      }).should.be.rejectedWith(/You must provide client token/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should be resolved with a renewed token', function () {
@@ -164,13 +164,13 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.lookupToken().should.be.rejectedWith(/You must provide client token/);
+      return myVault.lookupToken().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.lookupToken({
         id: ''
-      }).should.be.rejectedWith(/You must provide client token/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve to the specified token', function () {
@@ -213,13 +213,13 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.revokeToken().should.be.rejectedWith(/You must provide client token/);
+      return myVault.revokeToken().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.revokeToken({
         id: ''
-      }).should.be.rejectedWith(/You must provide client token/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should be resolved', function () {
@@ -264,13 +264,13 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.revokeTokenOrphan().should.be.rejectedWith(/You must provide client token/);
+      return myVault.revokeTokenOrphan().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.revokeTokenOrphan({
         id: ''
-      }).should.be.rejectedWith(/You must provide client token/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should be resolved', function () {
@@ -325,13 +325,13 @@ describe('auth/tokens', function () {
     });
 
     it('should reject with an Error if no id provided', function () {
-      return myVault.revokeTokenPrefix().should.be.rejectedWith(/You must provide token prefix/);
+      return myVault.revokeTokenPrefix().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if empty id provided', function () {
       return myVault.revokeTokenPrefix({
         id: ''
-      }).should.be.rejectedWith(/You must provide token prefix/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve after token prefix revoked', function () {
