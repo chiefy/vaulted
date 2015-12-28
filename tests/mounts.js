@@ -49,27 +49,27 @@ describe('mounts', function () {
 
     it('should reject with an Error if no options provided', function () {
       return myVault.createMount()
-        .should.be.rejectedWith(/You must provide mount id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if option id empty', function () {
       return myVault.createMount({
         id: ''
-      }).should.be.rejectedWith(/You must provide mount id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if option body empty', function () {
       return myVault.createMount({
         id: 'xzy',
         body: null
-      }).should.be.rejectedWith(/You must provide mount details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body without type', function () {
       return myVault.createMount({
         id: 'xzy',
         body: {}
-      }).should.be.rejectedWith(/You must provide mount type/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body with empty type', function () {
@@ -78,7 +78,7 @@ describe('mounts', function () {
         body: {
           type: ''
         }
-      }).should.be.rejectedWith(/You must provide mount type/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should resolve to updated list of mounts', function () {
@@ -103,33 +103,26 @@ describe('mounts', function () {
 
     it('should reject no options provided', function () {
       return myVault.reMount()
-        .should.be.rejectedWith(/You must provide from mount/);
+        .should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject empty option from', function () {
       return myVault.reMount({
         from: ''
-      }).should.be.rejectedWith(/You must provide from mount/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject no option to', function () {
       return myVault.reMount({
         from: 'xyz'
-      }).should.be.rejectedWith(/You must provide to mount/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject empty option to', function () {
       return myVault.reMount({
         from: 'xyz',
         to: ''
-      }).should.be.rejectedWith(/You must provide to mount/);
-    });
-
-    it('should reject no existing from mount', function () {
-      return myVault.reMount({
-        from: 'xyz',
-        to: 'abc'
-      }).should.be.rejectedWith(/Could not find existing mount named/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if not initialized or unsealed', function () {
@@ -184,13 +177,13 @@ describe('mounts', function () {
 
     it('should reject if no options provided', function () {
       return myVault.deleteMount()
-        .should.be.rejectedWith(/You must provide mount id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject if no option id provided', function () {
       return myVault.deleteMount({
         id: ''
-      }).should.be.rejectedWith(/You must provide mount id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve to updated instance with mount removed', function () {

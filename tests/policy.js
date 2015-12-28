@@ -51,27 +51,27 @@ describe('policy', function () {
 
     it('should reject with an Error if no options provided', function () {
       return myVault.createPolicy()
-        .should.be.rejectedWith(/You must provide policy id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if option id empty', function () {
       return myVault.createPolicy({
         id: ''
-      }).should.be.rejectedWith(/You must provide policy id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if option body empty', function () {
       return myVault.createPolicy({
         id: 'xyz',
         body: null
-      }).should.be.rejectedWith(/You must provide policy details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body without rule', function () {
       return myVault.createPolicy({
         id: 'xyz',
         body: {}
-      }).should.be.rejectedWith(/You must provide policy rule as string/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body with empty rule', function () {
@@ -80,16 +80,7 @@ describe('policy', function () {
         body: {
           rules: ''
         }
-      }).should.be.rejectedWith(/You must provide policy rule as string/);
-    });
-
-    it('should reject with an Error if rule not string', function () {
-      return myVault.createPolicy({
-        id: 'xyz',
-        body: {
-          rules: {}
-        }
-      }).should.be.rejectedWith(/You must provide policy rule as string/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should resolve to updated list of policies', function () {
@@ -123,11 +114,11 @@ describe('policy', function () {
     });
 
     it('should reject if no options provided', function () {
-      return myVault.deletePolicy().should.be.rejectedWith(/You must provide policy id/);
+      return myVault.deletePolicy().should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject if no option id provided', function () {
-      return myVault.deletePolicy({}).should.be.rejectedWith(/You must provide policy id/);
+      return myVault.deletePolicy({}).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve to updated instance with policy removed', function () {

@@ -49,27 +49,27 @@ describe('auths', function () {
 
     it('should reject with an Error if no options provided', function () {
       return myVault.createAuthMount()
-        .should.be.rejectedWith(/You must provide auth mount id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if option id empty', function () {
       return myVault.createAuthMount({
         id: ''
-      }).should.be.rejectedWith(/You must provide auth mount id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject with an Error if option body empty', function () {
       return myVault.createAuthMount({
         id: 'xzy',
         body: null
-      }).should.be.rejectedWith(/You must provide auth mount details/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body without type', function () {
       return myVault.createAuthMount({
         id: 'xzy',
         body: {}
-      }).should.be.rejectedWith(/You must provide auth mount type/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should reject with an Error if option body with empty type', function () {
@@ -78,7 +78,7 @@ describe('auths', function () {
         body: {
           type: ''
         }
-      }).should.be.rejectedWith(/You must provide auth mount type/);
+      }).should.be.rejectedWith(/Missing required input/);
     });
 
     it('should resolve to updated list of auths', function () {
@@ -110,13 +110,13 @@ describe('auths', function () {
 
     it('should reject if no options provided', function () {
       return myVault.deleteAuthMount()
-        .should.be.rejectedWith(/You must provide auth mount id/);
+        .should.be.rejectedWith(/requires an id/);
     });
 
     it('should reject if no option id provided', function () {
       return myVault.deleteAuthMount({
         id: ''
-      }).should.be.rejectedWith(/You must provide auth mount id/);
+      }).should.be.rejectedWith(/requires an id/);
     });
 
     it('should resolve to updated instance with mount removed', function () {
