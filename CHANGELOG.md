@@ -15,6 +15,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   + `sys/renew/*`: Provides requesting to extend the lease of secret.
   + `sys/revoke/*`: Provides revoking a secret immediately.
   + `sys/revoke-prefix/*`: Provides revoking all secrets generated under a given prefix immediately.
+- Support for get Policy
+  + `sys/policy/*`: Provides retrieving a specified policy.
+- Support for Cubbyhole secret backend
+  + `cubbyhole/*`: Provides the capability to create, delete, and retrieves secret.
 - Support for dynamically mounted endpoints
 - Dynamic API validation based on parameter definitions
 - SSL configuration options
