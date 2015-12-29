@@ -21,7 +21,7 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
     * [~setToken(vault_token)](#module_vaulted..setToken) ⇒ <code>Vaulted</code>
     * [~setKeys(keys)](#module_vaulted..setKeys) ⇒ <code>Vaulted</code>
     * [~setStatus(status)](#module_vaulted..setStatus) ⇒ <code>Vaulted</code>
-    * [~validateEndpoint(endpoint)](#module_vaulted..validateEndpoint) ⇒ <code>EndPoint</code>
+    * [~validateEndpoint(endpoint, [mountName], [defaultName])](#module_vaulted..validateEndpoint) ⇒ <code>EndPoint</code>
 
 <a name="module_vaulted..Vaulted"></a>
 ### vaulted~Vaulted
@@ -129,7 +129,7 @@ Set status hash
 | status | <code>Object</code> | representing vaulted status, which includes 'sealed' property. |
 
 <a name="module_vaulted..validateEndpoint"></a>
-### vaulted~validateEndpoint(endpoint) ⇒ <code>EndPoint</code>
+### vaulted~validateEndpoint(endpoint, [mountName], [defaultName]) ⇒ <code>EndPoint</code>
 Validate the request endpoint and that the Vault is prepared for use.
 
 **Kind**: inner method of <code>[vaulted](#module_vaulted)</code>  
@@ -143,4 +143,6 @@ Validate the request endpoint and that the Vault is prepared for use.
 | Param | Type | Description |
 | --- | --- | --- |
 | endpoint | <code>string</code> | the name / path of the defined endpoint. |
+| [mountName] | <code>string</code> | path name an endpoint is mounted on |
+| [defaultName] | <code>string</code> | default path name an endpoint is mounted on |
 

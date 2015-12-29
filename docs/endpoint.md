@@ -22,7 +22,7 @@ the Endpoint class.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| config | <code>Object</code> | overrides any configuration set by node-convict setup. |
+| config | <code>Object</code> | overrides any default configurations. |
 
 <a name="module_endpoint--module.exports..Endpoint"></a>
 #### module.exports~Endpoint
