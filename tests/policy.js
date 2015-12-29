@@ -105,6 +105,35 @@ describe('policy', function () {
 
   });
 
+  describe('#getPolicy', function () {
+
+    it('should reject with an Error if not initialized or unsealed', function () {
+      return newVault.getPolicy({
+        id: 'other'
+      }).should.be.rejectedWith(/Vault has not been initialized/);
+    });
+
+    it('should reject if no options provided', function () {
+      return myVault.getPolicy().should.be.rejectedWith(/requires an id/);
+    });
+
+    it('should reject if no option id provided', function () {
+      return myVault.getPolicy({}).should.be.rejectedWith(/requires an id/);
+    });
+
+    it('should resolve to instance of policy', function () {
+      return myVault.getPolicy({
+        id: 'other'
+      }).then(function (policy) {
+        debuglog(policy);
+        policy.should.not.be.undefined;
+        policy.should.have.property('name');
+        policy.name.should.be.equal('other');
+      });
+    });
+
+  });
+
   describe('#deletePolicy', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
