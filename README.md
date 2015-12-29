@@ -55,6 +55,7 @@ Vaulted Method | Vault API (/v1)
 [enableFileAudit](./docs/audit.md#module_audit..enableFileAudit) | PUT `sys/audit/:id`
 [enableSyslogAudit](./docs/audit.md#module_audit..enableSyslogAudit) | PUT `sys/audit/:id`
 [getPolicies](./docs/policy.md#module_policy..getPolicies) | GET `sys/policy`
+[getPolicy](./docs/policy.md#module_policy..getPolicy) | GET `sys/policy/:id`
 [createPolicy](./docs/policy.md#module_policy..createPolicy) | PUT `sys/policy/:id`
 [deletePolicy](./docs/policy.md#module_policy..deletePolicy) | DELETE `sys/policy/:id`
 [getLeader](./docs/leader.md#leadergetinitstatus--promise) | GET `sys/leader`
@@ -89,6 +90,9 @@ Vaulted Method | Vault API (/v1)
 [read](./docs/secret.md#module_secret..read) | GET `secret/:id`
 [write](./docs/secret.md#module_secret..write) | PUT `secret/:id`
 [delete](./docs/secret.md#module_secret..delete) | DELETE `secret/:id`
+[readCubby](./docs/backends/cubbyhole.md#module_cubbyhole..read) | GET `cubbyhole/:id`
+[writeCubby](./docs/backends/cubbyhole.md#module_cubbyhole..write) | PUT `cubbyhole/:id`
+[deleteCubby](./docs/backends/cubbyhole.md#module_cubbyhole..delete) | DELETE `cubbyhole/:id`
 [configConsulAccess](./docs/backends/consul.md#module_backend/consul..configConsulAccess) | POST `consul/config/access`
 [getConsulRole](./docs/backends/consul.md#module_backend/consul..getConsulRole) | GET `consul/roles/:id`
 [createConsulRole](./docs/backends/consul.md#module_backend/consul..createConsulRole) | POST `consul/roles/:id`

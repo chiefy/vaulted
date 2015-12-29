@@ -6,6 +6,7 @@ Provides implementation for the Vault Policy APIs
 
 * [policy](#module_policy) ⇐ <code>Vaulted</code>
     * [~getPolicies()](#module_policy..getPolicies) ⇒ <code>Promise</code>
+    * [~getPolicy(options)](#module_policy..getPolicy) ⇒ <code>Promise</code>
     * [~createPolicy(options)](#module_policy..createPolicy) ⇒ <code>Promise</code>
     * [~deletePolicy(options)](#module_policy..deletePolicy) ⇒ <code>Promise</code>
 
@@ -16,6 +17,19 @@ Gets the list of policies for the vault and sets internal property accordingly
 **Kind**: inner method of <code>[policy](#module_policy)</code>  
 **Resolve**: <code>[Policy]</code> Resolves with list of policy.  
 **Reject**: <code>Error</code> An error indicating what went wrong  
+<a name="module_policy..getPolicy"></a>
+### policy~getPolicy(options) ⇒ <code>Promise</code>
+Gets the specified policy details
+
+**Kind**: inner method of <code>[policy](#module_policy)</code>  
+**Resolve**: <code>[Policy]</code> Resolves with policy.  
+**Reject**: <code>Error</code> An error indicating what went wrong  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | object of options to send to API request |
+| options.id | <code>string</code> | unique identifier for the policy |
+
 <a name="module_policy..createPolicy"></a>
 ### policy~createPolicy(options) ⇒ <code>Promise</code>
 Creates the specified policy in the vault and sets internal property accordingly
