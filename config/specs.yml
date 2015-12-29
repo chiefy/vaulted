@@ -147,3 +147,323 @@ v1:
       get:
         id: true
         params: []
+  pki:
+    "%s/ca":
+      get:
+        id: false
+        params: []
+    "%s/ca/pem":
+      get:
+        id: false
+        params: []
+    "%s/cert/ca":
+      get:
+        id: false
+        params: []
+    "%s/cert/crl":
+      get:
+        id: false
+        params: []
+    "%s/cert/:id":
+      get:
+        id: true
+        params: []
+    "%s/config/ca":
+      post:
+        id: false
+        params:
+          - name: "pem_bundle"
+            type: "string"
+            required: true
+    "%s/config/crl":
+      get:
+        id: false
+        params: []
+      post:
+        id: false
+        params:
+          - name: "expiry"
+            type: "duration"
+            required: true
+    "%s/config/urls":
+      get:
+        id: false
+        params: []
+      post:
+        id: false
+        params:
+          - name: "issuing_certificates"
+            type: "string"
+            required: false
+          - name: "crl_distribution_points"
+            type: "string"
+            required: false
+          - name: "ocsp_servers"
+            type: "string"
+            required: false
+    "%s/crl":
+      get:
+        id: false
+        params: []
+    "%s/crl/pem":
+      get:
+        id: false
+        params: []
+    "%s/crl/rotate":
+      get:
+        id: false
+        params: []
+    "%s/intermediate/generate/exported":
+      post:
+        id: false
+        params:
+          - name: "common_name"
+            type: "string"
+            required: true
+          - name: "alt_names"
+            type: "string"
+            required: false
+          - name: "ip_sans"
+            type: "string"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false
+          - name: "key_type"
+            type: "string"
+            required: false
+          - name: "key_bits"
+            type: "string"
+            required: false
+    "%s/intermediate/generate/internal":
+      post:
+        id: false
+        params:
+          - name: "common_name"
+            type: "string"
+            required: true
+          - name: "alt_names"
+            type: "string"
+            required: false
+          - name: "ip_sans"
+            type: "string"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false
+          - name: "key_type"
+            type: "string"
+            required: false
+          - name: "key_bits"
+            type: "string"
+            required: false
+    "%s/intermediate/set-signed":
+      post:
+        id: false
+        params:
+          - name: "certificate"
+            type: "string"
+            required: true
+    "%s/issue/:id":
+      post:
+        id: true
+        params:
+          - name: "common_name"
+            type: "string"
+            required: true
+          - name: "alt_names"
+            type: "string"
+            required: false
+          - name: "ip_sans"
+            type: "string"
+            required: false
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false
+    "%s/revoke":
+      post:
+        id: false
+        params:
+          - name: "serial_number"
+            type: "string"
+            required: true
+    "%s/roles/:id":
+      post:
+        id: true
+        params:
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "max_ttl"
+            type: "duration"
+            required: false
+          - name: "allow_localhost"
+            type: "bool"
+            required: false
+          - name: "allowed_domains"
+            type: "string"
+            required: false
+          - name: "allow_bare_domains"
+            type: "bool"
+            required: false
+          - name: "allow_subdomains"
+            type: "bool"
+            required: false
+          - name: "allow_any_name"
+            type: "bool"
+            required: false
+          - name: "enforce_hostnames"
+            type: "bool"
+            required: false
+          - name: "allow_ip_sans"
+            type: "bool"
+            required: false
+          - name: "server_flag"
+            type: "bool"
+            required: false
+          - name: "client_flag"
+            type: "bool"
+            required: false
+          - name: "code_signing_flag"
+            type: "bool"
+            required: false
+          - name: "email_protection_flag"
+            type: "bool"
+            required: false
+          - name: "key_type"
+            type: "string"
+            required: false
+          - name: "key_bits"
+            type: "string"
+            required: false
+          - name: "use_csr_common_name"
+            type: "bool"
+            required: false
+      get:
+        id: true
+        params: []
+      delete:
+        id: true
+        params: []
+    "%s/root/generate/exported":
+      post:
+        id: false
+        params:
+          - name: "common_name"
+            type: "string"
+            required: true
+          - name: "alt_names"
+            type: "string"
+            required: false
+          - name: "ip_sans"
+            type: "string"
+            required: false
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false
+          - name: "key_type"
+            type: "string"
+            required: false
+          - name: "key_bits"
+            type: "string"
+            required: false
+          - name: "max_path_length"
+            type: "number"
+            required: false
+    "%s/root/generate/internal":
+      post:
+        id: false
+        params:
+          - name: "common_name"
+            type: "string"
+            required: true
+          - name: "alt_names"
+            type: "string"
+            required: false
+          - name: "ip_sans"
+            type: "string"
+            required: false
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false
+          - name: "key_type"
+            type: "string"
+            required: false
+          - name: "key_bits"
+            type: "string"
+            required: false
+          - name: "max_path_length"
+            type: "number"
+            required: false
+    "%s/root/sign-intermediate":
+      post:
+        id: false
+        params:
+          - name: "csr"
+            type: "string"
+            required: true
+          - name: "common_name"
+            type: "string"
+            required: true
+          - name: "alt_names"
+            type: "string"
+            required: false
+          - name: "ip_sans"
+            type: "string"
+            required: false
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false
+          - name: "max_path_length"
+            type: "number"
+            required: false
+          - name: "use_csr_values"
+            type: "bool"
+            required: false
+    "%s/sign/:id":
+      post:
+        id: true
+        params:
+          - name: "csr"
+            type: "string"
+            required: true
+          - name: "common_name"
+            type: "string"
+            required: true
+          - name: "alt_names"
+            type: "string"
+            required: false
+          - name: "ip_sans"
+            type: "string"
+            required: false
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false
+    "%s/sign-verbatim":
+      post:
+        id: false
+        params:
+          - name: "csr"
+            type: "string"
+            required: true
+          - name: "ttl"
+            type: "duration"
+            required: false
+          - name: "format"
+            type: "string"
+            required: false

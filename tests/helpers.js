@@ -86,3 +86,44 @@ helpers.createConsulToken = function createConsulToken() {
     return null;
   });
 }
+
+helpers.getToken = function getToken(vault) {
+
+  var configConsulAccess = function (token) {
+    return vault.configConsulAccess({
+      body: {
+        address: helpers.CONSUL_HOST + ':' + helpers.CONSUL_PORT,
+        token: token
+      }
+    });
+  }
+
+  var createConsulRole = function () {
+    return vault.createConsulRole({
+      id: 'writer',
+      body: {
+        policy: 'path "secret/*" { policy = "write" }',
+        lease: '1h'
+      }
+    });
+  }
+
+  var generateConsulRoleToken = function () {
+    return vault.generateConsulRoleToken({
+      id: 'writer'
+    });
+  }
+
+  return helpers.createConsulToken()
+    .then(configConsulAccess)
+    .then(createConsulRole)
+    .then(generateConsulRoleToken)
+    .then(function (role) {
+      debuglog('generated token: ', role);
+      return role;
+    }).catch(function (err) {
+      debuglog('getToken error: ', err);
+      return null;
+  });
+
+}
