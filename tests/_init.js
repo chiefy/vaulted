@@ -4,6 +4,7 @@ var
   helpers = require('./helpers'),
   debuglog = helpers.debuglog,
   chai = helpers.chai,
+  assert = helpers.assert,
   Vault = require('../lib/vaulted');
 
 chai.use(helpers.cap);

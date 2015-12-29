@@ -85,12 +85,7 @@ describe('internal state', function () {
   });
 
   it('loadState - consul mounted', function () {
-    return myVault.createMount({
-      id: 'consul',
-      body: {
-        type: 'consul'
-      }
-    }).then(function () {
+    return myVault.mountConsul().then(function () {
       return internal.loadState(myVault).then(function (self) {
         self.initialized.should.be.true;
         myVault.initialized.should.be.true;

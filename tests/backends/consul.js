@@ -18,12 +18,7 @@ describe('consul', function () {
   before(function () {
     return helpers.getReadyVault().then(function (vault) {
       myVault = vault;
-      return myVault.createMount({
-        id: 'consul',
-        body: {
-          type: 'consul'
-        }
-      });
+      return myVault.mountConsul();
     });
 
   });
