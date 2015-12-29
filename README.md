@@ -65,6 +65,9 @@ Vaulted Method | Vault API (/v1)
 [startRekey](./docs/keys.md#module_keys..startRekey) | PUT `sys/rekey/init`
 [stopRekey](./docs/keys.md#module_keys..stopRekey) | DELETE `sys/rekey/init`
 [updateRekey](./docs/keys.md#module_keys..updateRekey) | PUT `sys/rekey/update`
+[renewLease](./docs/leases.md#module_leases..renewLease) | PUT `sys/renew/:id`
+[revokeLease](./docs/leases.md#module_leases..revokeLease) | PUT `sys/revoke/:id`
+[revokeLeasePrefix](./docs/leases.md#module_leases..revokeLeasePrefix) | PUT `sys/revoke-prefix/:id`
 [getAuthMounts](./docs/auth.md#module_auth..getAuthMounts) | GET `sys/auth`
 [deleteAuthMount](./docs/auth.md#module_auth..deleteAuthMount) | DELETE `sys/auth/:id`
 [createAuthMount](./docs/auth.md#module_auth..createAuthMount) | POST `sys/auth/:id`
@@ -91,6 +94,32 @@ Vaulted Method | Vault API (/v1)
 [createConsulRole](./docs/backends/consul.md#module_backend/consul..createConsulRole) | POST `consul/roles/:id`
 [deleteConsulRole](./docs/backends/consul.md#module_backend/consul..deleteConsulRole) | DELETE `consul/roles/:id`
 [generateConsulRoleToken](./docs/backends/consul.md#module_backend/consul..generateConsulRoleToken) | GET `consul/creds/:id`
+[getCaDer](./docs/backends/pki.md#backendpkigetcadermountname--promise) | GET `pki/ca`
+[getCaPem](./docs/backends/pki.md#backendpkigetcapemmountname--promise) | GET `pki/ca/pem`
+[getCertCa](./docs/backends/pki.md#backendpkigetcertcamountname--promise) | GET `pki/cert/ca`
+[getCertCrl](./docs/backends/pki.md#backendpkigetcertcrlmountname--promise) | GET `pki/cert/crl`
+[getCertSerial](./docs/backends/pki.md#backendpkigetcertserialoptions-mountname--promise) | GET `pki/cert/:id`
+[setConfigCa](./docs/backends/pki.md#backendpkisetconfigcamountname--promise) | POST `pki/config/ca`
+[getConfigCrl](./docs/backends/pki.md#backendpkigetconfigcrlmountname--promise) | GET `pki/config/crl`
+[setConfigCrl](./docs/backends/pki.md#backendpkisetconfigcrlmountname--promise) | POST `pki/config/crl`
+[getConfigUrls](//docs/backends/pki.md#backendpkigetconfigurlsmountname--promise) | GET `pki/config/urls`
+[setConfigUrls](./docs/backends/pki.md#backendpkisetconfigurlsmountname--promise) | POST `pki/config/urls`
+[getCrlDer](./docs/backends/pki.md#backendpkigetcrldermountname--promise) | GET `pki/crl`
+[getCrlPem](./docs/backends/pki.md#backendpkigetcrlpemmountname--promise) | GET `pki/crl/pem`
+[getCrlRotate](./docs/backends/pki.md#backendpkigetcrlrotatemountname--promise) | GET `pki/crl/rotate`
+[genIntermediatesExported](./docs/backends/pki.md#backendpkigenintermediatesexportedmountname--promise) | POST `pki/intermediate/generate/exported`
+[genIntermediatesInternal](./docs/backends/pki.md#backendpkigenintermediatesinternalmountname--promise) | POST `pki/intermediate/generate/internal`
+[setSignedIntermediates](./docs/backends/pki.md#backendpkisetsignedintermediatesmountname--promise) | POST `pki/intermediate/set-signed`
+[issueCertCredentials](./docs/backends/pki.md#backendpkiissuecertcredentialsmountname--promise) | POST `pki/issue/:id`
+[revokeCertCredentials](./docs/backends/pki.md#backendpkirevokecertcredentialsmountname--promise) | POST `pki/revoke`
+[createCertRole](./docs/backends/pki.md#backendpkicreatecertroleoptions-mountname--promise) | POST `pki/roles/:id`
+[getCertRole](./docs/backends/pki.md#backendpkigetcertroleoptions-mountname--promise) | GET `pki/roles/:id`
+[deleteCertRole](./docs/backends/pki.md#backendpkideletecertroleoptions-mountname--promise) | DELETE `pki/roles/:id`
+[genRootExported](./docs/backends/pki.md#backendpkigenrootexportedmountname--promise) | POST `pki/root/generate/exported`
+[genRootInternal](./docs/backends/pki.md#backendpkigenrootinternalmountname--promise) | POST `pki/root/generate/internal`
+[signIntermediateWithRoot](./docs/backends/pki.md#backendpkisignintermediatewithrootmountname--promise) | POST `pki/root/sign-intermediate`
+[signCertificate](./docs/backends/pki.md#backendpkisigncertificateoptions-mountname--promise) | POST `pki/sign/:id`
+[signCertificateVerbatim](./docs/backends/pki.md#backendpkisigncertificateverbatimmountname--promise) | POST `pki/sign-verbatim`
 
 # Available Options
 Attribute | Environment Variable | Default Value | Description
