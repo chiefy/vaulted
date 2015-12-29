@@ -167,3 +167,13 @@ v1:
         - name: "key"
           type: "string"
           required: true
+  "cubbyhole/:id":
+    get:
+      id: true
+      params: []
+    put:
+      id: true
+      params: []
+    delete:
+      id: true
+      params: []
