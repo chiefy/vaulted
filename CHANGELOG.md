@@ -5,10 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [unreleased]
 #### Added
 - Support for Consul storage backend
-- Support for Conssul secrets backend
+- Support for Consul secrets backend
   + `consul/config/access`: Provides the capability to configure a Consul cluster as a secrets backend.
   + `consul/roles/*`: Provides the capability to create, delete, and retrieve roles (aka policies) associated with secrets.
   + `consul/creds/*`: Provides the capability to get a token for writing/reading secrets stored within Consul.
+- Support for PKI secret backend for Vault that generates X.509 certificates dynamically based on configured roles.
+  + `pki/*`: Provides several ways to manage certificates and generation for use by clients to authenticate.
+- Support for Lease Renewal/Revocation
+  + `sys/renew/*`: Provides requesting to extend the lease of secret.
+  + `sys/revoke/*`: Provides revoking a secret immediately.
+  + `sys/revoke-prefix/*`: Provides revoking all secrets generated under a given prefix immediately.
+- Support for dynamically mounted endpoints
+- Dynamic API validation based on parameter definitions
 - SSL configuration options
   + `ssl_ciphers`, `ssl_cert_file`, `ssl_pem_file`, `ssl_pem_passphrase`, `ssl_ca_cert`, `ssl_verify`
 - Proxy configuration options
