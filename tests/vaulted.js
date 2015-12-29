@@ -98,9 +98,12 @@ describe('Vaulted', function () {
     });
 
     it('setToken success', function () {
+      myVault.initialized.should.be.false;
       myVault.setToken('xyzabc');
       myVault.token.should.equal('xyzabc');
       myVault.headers.should.contain.keys('X-Vault-Token');
+      myVault.initialized.should.be.true;
+      myVault.initialized = false;
     });
 
     it('setKeys undefined', function () {
@@ -118,12 +121,9 @@ describe('Vaulted', function () {
     });
 
     it('setKeys success', function () {
-      myVault.initialized.should.be.false;
       myVault.setKeys(['xyzabc', 'abcxyz']);
       myVault.keys.should.contain('xyzabc');
       myVault.keys.should.contain('abcxyz');
-      myVault.initialized.should.be.true;
-      myVault.initialized = false;
     });
 
     it('setStatus null', function () {
