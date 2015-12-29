@@ -165,6 +165,12 @@ describe('Endpoint', function () {
       shouldThrow.should.throw(/requires an id/);
     });
 
+    it('should reject promise if endpoint requires param', function () {
+      function shouldThrow() {
+        endpoint.put({id: 'abc', _required: 'id'});
+      }
+      shouldThrow.should.throw(/Missing required input/);
+    });
   });
 
 });

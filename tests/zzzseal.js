@@ -42,4 +42,7 @@ describe('#seal', function () {
     });
   });
 
+  after(function () {
+    myVault.disableListeners();
+  });
 });

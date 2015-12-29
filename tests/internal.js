@@ -41,51 +41,39 @@ var initOrRename = function (vault) {
 describe('internal state', function () {
   var myVault = helpers.getVault();
 
-  it('loadState - not initialized', function () {
-    renameFile('keys.json', 'prev-keys.json');
-    return internal.loadState(myVault).then(function (self) {
-      self.initialized.should.be.false;
-      myVault.initialized.should.be.false;
-      self.keys.should.be.empty;
-      myVault.keys.should.be.empty;
-    });
-  });
+  describe('#loadState', function () {
 
-  it('loadState - initialized', function () {
-    return initOrRename(myVault).then(function () {
+    it('not initialized', function () {
+      renameFile('keys.json', 'prev-keys.json');
       return internal.loadState(myVault).then(function (self) {
-        self.initialized.should.be.true;
-        myVault.initialized.should.be.true;
+        self.initialized.should.be.false;
+        myVault.initialized.should.be.false;
+        self.keys.should.be.empty;
+        myVault.keys.should.be.empty;
       });
     });
-  });
 
-  it('loadState - unsealed', function () {
-    return myVault.unSeal().then(function () {
-      return internal.loadState(myVault).then(function (self) {
-        self.initialized.should.be.true;
-        myVault.initialized.should.be.true;
-        self.status.sealed.should.be.false;
-        myVault.status.sealed.should.be.false;
+    it('initialized', function () {
+      return initOrRename(myVault).then(function () {
+        return internal.loadState(myVault).then(function (self) {
+          self.initialized.should.be.true;
+          myVault.initialized.should.be.true;
+        });
       });
     });
-  });
 
-  it('loadState - default mounts only', function () {
-    return internal.loadState(myVault).then(function (self) {
-      self.initialized.should.be.true;
-      myVault.initialized.should.be.true;
-      self.status.sealed.should.be.false;
-      myVault.status.sealed.should.be.false;
-      self.mounts.should.not.be.empty;
-      myVault.mounts.should.not.be.empty;
-      self.mounts.should.contain.keys('sys/');
-      myVault.mounts.should.contain.keys('sys/');
+    it('unsealed', function () {
+      return myVault.unSeal().then(function () {
+        return internal.loadState(myVault).then(function (self) {
+          self.initialized.should.be.true;
+          myVault.initialized.should.be.true;
+          self.status.sealed.should.be.false;
+          myVault.status.sealed.should.be.false;
+        });
+      });
     });
-  });
 
-  it('loadState - consul mounted', function () {
-    return myVault.mountConsul().then(function () {
+    it('default mounts only', function () {
       return internal.loadState(myVault).then(function (self) {
         self.initialized.should.be.true;
         myVault.initialized.should.be.true;
@@ -93,143 +81,213 @@ describe('internal state', function () {
         myVault.status.sealed.should.be.false;
         self.mounts.should.not.be.empty;
         myVault.mounts.should.not.be.empty;
-        self.mounts.should.contain.keys('consul/');
-        myVault.mounts.should.contain.keys('consul/');
+        self.mounts.should.contain.keys('sys/');
+        myVault.mounts.should.contain.keys('sys/');
       });
     });
-  });
 
-  it('loadState - initialized with no backup', function () {
-    renameFile('keys.json', 'prev-keys.json');
-    myVault.keys = [];
-    return internal.loadState(myVault).then(function (self) {
-      self.initialized.should.be.true;
-      myVault.initialized.should.be.true;
-      self.keys.should.be.empty;
-      myVault.keys.should.be.empty;
+    it('consul mounted', function () {
+      return myVault.mountConsul().then(function () {
+        return internal.loadState(myVault).then(function (self) {
+          self.initialized.should.be.true;
+          myVault.initialized.should.be.true;
+          self.status.sealed.should.be.false;
+          myVault.status.sealed.should.be.false;
+          self.mounts.should.not.be.empty;
+          myVault.mounts.should.not.be.empty;
+          self.mounts.should.contain.keys('consul/');
+          myVault.mounts.should.contain.keys('consul/');
+        });
+      });
     });
-  });
 
-  it('backup - no data', function () {
-    myVault.token = null;
-    myVault.keys = [];
-    return internal.backup(myVault).then(function () {
-      try {
-        var stats = fs.statSync(BACKUP_FILE);
-        assert.notOk(stats, 'file should not exist');
-      } catch (err) {
-        err.should.be.an.instanceof(Error);
-        err.code.should.equal('ENOENT');
-      }
-    });
-  });
-
-  it('backup - keys not Array', function () {
-    myVault.keys = null;
-    return internal.backup(myVault).then(function () {
-      try {
-        var stats = fs.statSync(BACKUP_FILE);
-        assert.notOk(stats, 'file should not exist');
-      } catch (err) {
-        err.should.be.an.instanceof(Error);
-        err.code.should.equal('ENOENT');
-      }
+    it('initialized with no backup', function () {
+      renameFile('keys.json', 'prev-keys.json');
       myVault.keys = [];
+      return internal.loadState(myVault).then(function (self) {
+        self.initialized.should.be.true;
+        myVault.initialized.should.be.true;
+        self.keys.should.be.empty;
+        myVault.keys.should.be.empty;
+      });
     });
+
   });
 
-  it('backup - keys empty Array', function () {
-    return internal.backup(myVault).then(function () {
-      try {
-        var stats = fs.statSync(BACKUP_FILE);
-        assert.notOk(stats, 'file should not exist');
-      } catch (err) {
-        err.should.be.an.instanceof(Error);
-        err.code.should.equal('ENOENT');
-      }
-    });
-  });
+  describe('#backup', function () {
 
-  it('backup success', function () {
-    return initOrRename(myVault).then(function () {
+    it('no data', function () {
+      myVault.token = null;
+      myVault.keys = [];
       return internal.backup(myVault).then(function () {
         try {
           var stats = fs.statSync(BACKUP_FILE);
-          debuglog(stats);
-          debuglog(stats.isFile());
-          stats.isFile().should.be.true;
+          assert.notOk(stats, 'file should not exist');
         } catch (err) {
-          debuglog(err);
-          assert.notOk(err, 'backup file failed for some reason');
+          err.should.be.an.instanceof(Error);
+          err.code.should.equal('ENOENT');
         }
       });
     });
+
+    it('keys not Array', function () {
+      myVault.keys = null;
+      return internal.backup(myVault).then(function () {
+        try {
+          var stats = fs.statSync(BACKUP_FILE);
+          assert.notOk(stats, 'file should not exist');
+        } catch (err) {
+          err.should.be.an.instanceof(Error);
+          err.code.should.equal('ENOENT');
+        }
+        myVault.keys = [];
+      });
+    });
+
+    it('keys empty Array', function () {
+      return internal.backup(myVault).then(function () {
+        try {
+          var stats = fs.statSync(BACKUP_FILE);
+          assert.notOk(stats, 'file should not exist');
+        } catch (err) {
+          err.should.be.an.instanceof(Error);
+          err.code.should.equal('ENOENT');
+        }
+      });
+    });
+
+    it('success', function () {
+      return initOrRename(myVault).then(function () {
+        return internal.backup(myVault).then(function () {
+          try {
+            var stats = fs.statSync(BACKUP_FILE);
+            debuglog(stats);
+            debuglog(stats.isFile());
+            stats.isFile().should.be.true;
+          } catch (err) {
+            debuglog(err);
+            assert.notOk(err, 'backup file failed for some reason');
+          }
+        });
+      });
+    });
+
   });
 
-  it('recover - no file', function () {
-    myVault.config = myVault.config.util.extendDeep(myVault.config, {
-      backup_dir: BACKUP_DIR
+  describe('#recover', function () {
+
+    it('no file', function () {
+      myVault.config = myVault.config.util.extendDeep(myVault.config, {
+        backup_dir: BACKUP_DIR
+      });
+      renameFile('keys.json', 'prev-keys.json');
+      myVault.token = null;
+      myVault.keys = [];
+      return internal.recover(myVault).then(function () {
+        expect(myVault.token).to.be.null;
+        expect(myVault.keys).to.be.empty;
+      });
     });
-    renameFile('keys.json', 'prev-keys.json');
-    myVault.token = null;
-    myVault.keys = [];
-    return internal.recover(myVault).then(function () {
-      expect(myVault.token).to.be.null;
-      expect(myVault.keys).to.be.empty;
+
+    it('invalid file data', function () {
+      var data = '{"root"}';
+      fs.writeFileSync(BACKUP_FILE, data);
+      return internal.recover(myVault).then(function () {
+        expect(myVault.token).to.be.null;
+        expect(myVault.keys).to.be.empty;
+      });
     });
+
+    it('no root token', function () {
+      var data = JSON.stringify({
+        'keys': []
+      });
+      fs.writeFileSync(BACKUP_FILE, data);
+      return internal.recover(myVault).then(function () {
+        expect(myVault.token).to.be.null;
+        expect(myVault.keys).to.be.empty;
+      });
+    });
+
+    it('keys not Array', function () {
+      var data = JSON.stringify({
+        'root': 'xyz',
+        'keys': 'abc,xyz'
+      });
+      fs.writeFileSync(BACKUP_FILE, data);
+      return internal.recover(myVault).then(function () {
+        expect(myVault.token).to.be.null;
+        expect(myVault.keys).to.be.empty;
+      });
+    });
+
+    it('keys empty Array', function () {
+      var data = JSON.stringify({
+        'root': 'xyz',
+        'keys': []
+      });
+      fs.writeFileSync(BACKUP_FILE, data);
+      return internal.recover(myVault).then(function () {
+        expect(myVault.token).to.be.null;
+        expect(myVault.keys).to.be.empty;
+      });
+    });
+
+    it('success', function () {
+      fs.unlinkSync(BACKUP_FILE);
+      renameFile('prev-keys.json', 'keys.json');
+      return internal.recover(myVault).then(function () {
+        expect(myVault.token).to.not.be.null;
+        expect(myVault.keys).to.not.be.empty;
+      });
+    });
+
   });
 
-  it('recover - invalid file data', function () {
-    var data = '{"root"}';
-    fs.writeFileSync(BACKUP_FILE, data);
-    return internal.recover(myVault).then(function () {
-      expect(myVault.token).to.be.null;
-      expect(myVault.keys).to.be.empty;
-    });
-  });
+  describe('#syncMounts', function () {
+    var aVault;
 
-  it('recover - no root token', function () {
-    var data = JSON.stringify({
-      'keys': []
+    beforeEach(function () {
+      return helpers.getReadyVault().then(function (vault) {
+        aVault = vault;
+        return vault.mountConsul({
+          id: 'myCon'
+        }).then(function () {
+          return aVault.createAuthMount({
+            id: 'myApp',
+            body: {
+              type: 'app-id'
+            }
+          }).then(function () {
+            return helpers.getReadyVault().then(function (theVault) {
+              aVault = theVault;
+            });
+          });
+        });
+      });
     });
-    fs.writeFileSync(BACKUP_FILE, data);
-    return internal.recover(myVault).then(function () {
-      expect(myVault.token).to.be.null;
-      expect(myVault.keys).to.be.empty;
-    });
-  });
 
-  it('recover - keys not Array', function () {
-    var data = JSON.stringify({
-      'root': 'xyz',
-      'keys': 'abc,xyz'
+    it('sync up mounts', function () {
+      expect(aVault.api.endpoints['myCon/config/access']).to.be.undefined;
+      expect(aVault.api.endpoints['auth/myApp/login']).to.be.undefined;
+      internal.syncMounts(aVault);
+      // return Promise.delay(500).then(function () {
+      //   expect(aVault.api.endpoints['myCon/config/access']).to.not.be.undefined;
+      //   expect(aVault.api.endpoints['auth/myApp/login']).to.not.be.undefined;
+      // });
     });
-    fs.writeFileSync(BACKUP_FILE, data);
-    return internal.recover(myVault).then(function () {
-      expect(myVault.token).to.be.null;
-      expect(myVault.keys).to.be.empty;
-    });
-  });
 
-  it('recover - keys empty Array', function () {
-    var data = JSON.stringify({
-      'root': 'xyz',
-      'keys': []
-    });
-    fs.writeFileSync(BACKUP_FILE, data);
-    return internal.recover(myVault).then(function () {
-      expect(myVault.token).to.be.null;
-      expect(myVault.keys).to.be.empty;
-    });
-  });
+    afterEach(function () {
+      return aVault.deleteMount({
+        id: 'myCon'
+      }).then(function () {
+        return aVault.deleteAuthMount({
+          id: 'myApp'
+        });
+      });
 
-  it('recover - success', function () {
-    fs.unlinkSync(BACKUP_FILE);
-    renameFile('prev-keys.json', 'keys.json');
-    return internal.recover(myVault).then(function () {
-      expect(myVault.token).to.not.be.null;
-      expect(myVault.keys).to.not.be.empty;
     });
+
   });
 
   after(function () {
