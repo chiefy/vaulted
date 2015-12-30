@@ -11,7 +11,7 @@ $ npm install vaulted
 # Documentation
 
 * [Getting Starting Guide](./docs/getting_started.md)
-* [Vaulted API Index](./docs/index.md)
+* [Vaulted API Index](./docs/api_index.md)
 * [Available Configurations](./docs/all_options.md)
 
 # Running The Express-app Example
