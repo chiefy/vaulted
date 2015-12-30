@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Added
 #### Changed
 
+## [2.1.1] - 2015-12-31
+#### Changed
+- Set a path to the default configuration files to leverage default values.
 
 ## [2.1.0] - 2015-12-30
 #### Added
@@ -88,7 +91,8 @@ of the vault.
 - This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
 - Initial project release. Supporting small subset of Vault's HTTP API
 
-[unreleased]: https://github.com/chiefy/vaulted/compare/v2.1.0...master
+[unreleased]: https://github.com/chiefy/vaulted/compare/v2.1.1...master
+[2.1.1]: https://github.com/chiefy/vaulted/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/chiefy/vaulted/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/chiefy/vaulted/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/chiefy/vaulted/compare/v1.0.0...v1.1.0
