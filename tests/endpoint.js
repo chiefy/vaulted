@@ -101,6 +101,19 @@ describe('Endpoint', function () {
       });
       endpoint_uri.should.equal(BASE_URL + '/sys/no_get/test');
     });
+
+    it('should replace :id with provided option id with / prefix', function () {
+      endpoint = new Endpoint({
+        base_url: BASE_URL,
+        name: 'sys/no_get/:id',
+        verbs: api_def['sys/no_get/:id']
+      });
+      var endpoint_uri = endpoint.getURI({
+        id: '/test'
+      });
+      endpoint_uri.should.equal(BASE_URL + '/sys/no_get/test');
+    });
+
   });
 
   describe('#_createRequest', function () {
