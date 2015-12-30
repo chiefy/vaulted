@@ -1,3 +1,47 @@
+# Configuring
+The available options below can either be passed to the Vaulted constructor, using environment variables, or configuration files.
+
+## Constructor
+```javascript
+var Vaulted = require('vaulted');
+
+var myVault = new Vaulted({
+  vault_host: '127.0.0.1',
+  vault_port: 8200,
+  vault_ssl: false,
+  timeout: 5000
+});
+```
+
+## Environment Variables
+```bash
+$ export VAULT_HOST=127.0.0.1
+$ export VAULT_PORT=8200
+$ export VAULT_SSL=false
+$ export VAULT_TIMEOUT=5000
+```
+
+```javascript
+var Vaulted = require('vaulted');
+
+var myVault = new Vaulted();
+```
+
+## Configuration File
+File: `config/default.yml`
+
+```yaml
+vault_host: 127.0.0.1
+vault_port: 8200
+vault_ssl: true
+```
+
+```javascript
+var Vaulted = require('vaulted');
+
+var myVault = new Vaulted();
+```
+
 # Available Options
 
 Attribute | Environment Variable | Default Value | Description
