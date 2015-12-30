@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 #### Added
+#### Changed
+
+
+## [2.1.0] - 2015-12-30
+#### Added
 - Support for Consul storage backend
 - Support for Consul secrets backend
   + `consul/config/access`: Provides the capability to configure a Consul cluster as a secrets backend.
@@ -83,7 +88,8 @@ of the vault.
 - This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
 - Initial project release. Supporting small subset of Vault's HTTP API
 
-[unreleased]: https://github.com/chiefy/vaulted/compare/v2.0.0...master
+[unreleased]: https://github.com/chiefy/vaulted/compare/v2.1.0...master
+[2.1.0]: https://github.com/chiefy/vaulted/compare/v1.1.0...v2.1.0
 [2.0.0]: https://github.com/chiefy/vaulted/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/chiefy/vaulted/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/chiefy/vaulted/compare/55a14aff522d5d5b45a1ea35ef3e6b6fa37e5e49...v1.0.0
