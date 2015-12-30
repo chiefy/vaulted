@@ -4,6 +4,7 @@
   "description": "A nodejs wrapper library for using HashiCorp's Vault",
   "main": "index.js",
   "files": [
+    "lib",
     "config"
   ],
   "scripts": {
