@@ -3,6 +3,9 @@
   "version": "2.1.0",
   "description": "A nodejs wrapper library for using HashiCorp's Vault",
   "main": "index.js",
+  "files": [
+    "config"
+  ],
   "scripts": {
     "start": "npm rebuild && node index.js",
     "test": "mocha -R spec tests/**",

@@ -89,7 +89,7 @@ of the vault.
 - Initial project release. Supporting small subset of Vault's HTTP API
 
 [unreleased]: https://github.com/chiefy/vaulted/compare/v2.1.0...master
-[2.1.0]: https://github.com/chiefy/vaulted/compare/v1.1.0...v2.1.0
+[2.1.0]: https://github.com/chiefy/vaulted/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/chiefy/vaulted/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/chiefy/vaulted/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/chiefy/vaulted/compare/55a14aff522d5d5b45a1ea35ef3e6b6fa37e5e49...v1.0.0

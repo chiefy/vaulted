@@ -68,7 +68,7 @@ Vaulted Method | Vault API (/v1)
 [setConfigCa](./backends/pki.md#backendpkisetconfigcamountname--promise) | POST `pki/config/ca`
 [getConfigCrl](./backends/pki.md#backendpkigetconfigcrlmountname--promise) | GET `pki/config/crl`
 [setConfigCrl](./backends/pki.md#backendpkisetconfigcrlmountname--promise) | POST `pki/config/crl`
-[getConfigUrls](//docs/backends/pki.md#backendpkigetconfigurlsmountname--promise) | GET `pki/config/urls`
+[getConfigUrls](./backends/pki.md#backendpkigetconfigurlsmountname--promise) | GET `pki/config/urls`
 [setConfigUrls](./backends/pki.md#backendpkisetconfigurlsmountname--promise) | POST `pki/config/urls`
 [getCrlDer](./backends/pki.md#backendpkigetcrldermountname--promise) | GET `pki/crl`
 [getCrlPem](./backends/pki.md#backendpkigetcrlpemmountname--promise) | GET `pki/crl/pem`
