@@ -1,4 +1,5 @@
 debug: DEBUG
+no_global_token: VAULT_NO_GLOBAL_TOKEN
 
 vault_host: VAULT_HOST
 vault_port: VAULT_PORT

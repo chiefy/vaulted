@@ -120,11 +120,7 @@ describe('Endpoint', function () {
     var endpoint;
 
     beforeEach(function () {
-      endpoint = new Endpoint({
-        base_url: BASE_URL,
-        name: 'punts',
-        verbs: api_def.punts
-      });
+      endpoint = Endpoint.create(BASE_URL, {}, {}, api_def.punts, 'punts')['punts'];
     });
 
     it('should have a get method', function () {
@@ -168,11 +164,8 @@ describe('Endpoint', function () {
 
     it('should reject promise if endpoint requires id and one is not provided', function () {
       function shouldThrow() {
-        endpoint = new Endpoint({
-          base_url: BASE_URL,
-          name: 'sys/no_get/:id',
-          verbs: api_def['sys/no_get/:id']
-        });
+        endpoint = Endpoint.create(
+          BASE_URL, {}, {}, api_def['sys/no_get/:id'], 'sys/no_get/:id')['sys/no_get/:id'];
         endpoint.put();
       }
       shouldThrow.should.throw(/requires an id/);
