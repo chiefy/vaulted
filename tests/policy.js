@@ -103,6 +103,33 @@ describe('policy', function () {
       });
     });
 
+    it('should resolve to updated list of policies - using js objects', function () {
+      var existingPolicies = _.cloneDeep(myVault.policies);
+      var policy = {
+        "path": {
+          "secret/*": {
+            "policy": "write"
+          }
+        }
+      };
+      return myVault.createPolicy({
+        id: 'jsother',
+        body: {
+          rules: policy
+        }
+      }).then(function (policies) {
+        debuglog(policies);
+        existingPolicies.should.not.be.empty;
+        policies.should.not.be.empty;
+        existingPolicies.should.not.contain('jsother');
+        policies.should.contain('jsother');
+      }).finally(function () {
+        return myVault.deletePolicy({
+          id: 'jsother'
+        });
+      });
+    });
+
   });
 
   describe('#getPolicy', function () {
