@@ -30,8 +30,8 @@ after_script:
   - docker logs vault
   - docker-compose -f docker-compose-test.yml stop
   - docker-compose -f docker-compose-test.yml rm -f
-  - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < coverage/lcov.info
+  # - npm install -g codeclimate-test-reporter
+  # - codeclimate-test-reporter < coverage/lcov.info
 
 notifications:
   webhooks:
