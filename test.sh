@@ -32,7 +32,7 @@ sleep .5
 npm install --quiet
 npm run coverage
 
-echo "$TRAVIS_JOB_ID"
+echo "TRAVIS_JOB_ID is $TRAVIS_JOB_ID"
 if [ -n "$TRAVIS_JOB_ID" ]
 then
   echo "running in Travis context"

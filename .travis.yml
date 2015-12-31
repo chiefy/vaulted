@@ -16,6 +16,7 @@ before_install:
 script:
   - mkdir -p $(pwd)/coverage
   - chmod 777 $(pwd)/coverage
+  - echo "(pre) TRAVIS_JOB_ID is $TRAVIS_JOB_ID"
   - docker-compose -f docker-compose-test.yml run vaulted
 
 addons:
