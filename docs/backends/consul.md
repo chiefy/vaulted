@@ -25,6 +25,7 @@ Configures the access information for Consul secret backend
 | options.body.address | <code>string</code> |  | address of the Consul instance, provided as host:port |
 | options.body.token | <code>string</code> |  | Consul ACL token to use; must be a management type token |
 | [options.body.scheme] | <code>string</code> | <code>&quot;HTTP&quot;</code> | URL scheme to use |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;consul&quot;</code> | path name the consul secret backend is mounted on |
 
 <a name="module_backend/consul..createConsulRole"></a>
@@ -43,6 +44,7 @@ Creates or updates the Consul role definition
 | options.body.policy | <code>string</code> |  | base64 encoded Consul ACL policy |
 | [options.body.token_type] | <code>string</code> | <code>&quot;client&quot;</code> | type of token to create using this role ('client', 'management') |
 | [options.body.lease] | <code>string</code> |  | lease value provided as a string duration with time suffix |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;consul&quot;</code> | path name the consul secret backend is mounted on |
 
 <a name="module_backend/consul..getConsulRole"></a>
@@ -57,6 +59,7 @@ Retrieve a specified Consul role definition
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the consul role |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;consul&quot;</code> | path name the consul secret backend is mounted on |
 
 <a name="module_backend/consul..deleteConsulRole"></a>
@@ -71,6 +74,7 @@ Removes a specified Consul role definition
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the consul role |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;consul&quot;</code> | path name the consul secret backend is mounted on |
 
 <a name="module_backend/consul..generateConsulRoleToken"></a>
@@ -85,5 +89,6 @@ Generate a dynamic Consul token based on the role definition
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the consul role |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;consul&quot;</code> | path name the consul secret backend is mounted on |
 

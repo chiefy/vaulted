@@ -5,18 +5,24 @@ Provides implementation for the Vault Policy APIs
 **Extends:** <code>Vaulted</code>  
 
 * [policy](#module_policy) ⇐ <code>Vaulted</code>
-    * [~getPolicies()](#module_policy..getPolicies) ⇒ <code>Promise</code>
+    * [~getPolicies([options])](#module_policy..getPolicies) ⇒ <code>Promise</code>
     * [~getPolicy(options)](#module_policy..getPolicy) ⇒ <code>Promise</code>
     * [~createPolicy(options)](#module_policy..createPolicy) ⇒ <code>Promise</code>
     * [~deletePolicy(options)](#module_policy..deletePolicy) ⇒ <code>Promise</code>
 
 <a name="module_policy..getPolicies"></a>
-### policy~getPolicies() ⇒ <code>Promise</code>
+### policy~getPolicies([options]) ⇒ <code>Promise</code>
 Gets the list of policies for the vault and sets internal property accordingly
 
 **Kind**: inner method of <code>[policy](#module_policy)</code>  
 **Resolve**: <code>[Policy]</code> Resolves with list of policy.  
 **Reject**: <code>Error</code> An error indicating what went wrong  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>Object</code> | object of options to send to API request |
+| [options.token] | <code>string</code> | the authentication token |
+
 <a name="module_policy..getPolicy"></a>
 ### policy~getPolicy(options) ⇒ <code>Promise</code>
 Gets the specified policy details
@@ -29,6 +35,7 @@ Gets the specified policy details
 | --- | --- | --- |
 | options | <code>Object</code> | object of options to send to API request |
 | options.id | <code>string</code> | unique identifier for the policy |
+| [options.token] | <code>string</code> | the authentication token |
 
 <a name="module_policy..createPolicy"></a>
 ### policy~createPolicy(options) ⇒ <code>Promise</code>
@@ -44,6 +51,7 @@ Creates the specified policy in the vault and sets internal property accordingly
 | options.id | <code>string</code> | unique identifier for the policy |
 | options.body | <code>Object</code> | holds the attributes passed as inputs |
 | options.body.rules | <code>string</code> | the definition of the policy rules (HCL or json format) |
+| [options.token] | <code>string</code> | the authentication token |
 
 <a name="module_policy..deletePolicy"></a>
 ### policy~deletePolicy(options) ⇒ <code>Promise</code>
@@ -57,4 +65,5 @@ Deletes the specified policy from the vault and sets internal property according
 | --- | --- | --- |
 | options | <code>Object</code> | object of options to send to API request |
 | options.id | <code>string</code> | unique identifier for the policy |
+| [options.token] | <code>string</code> | the authentication token |
 

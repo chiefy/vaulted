@@ -22,6 +22,7 @@ Stores a secret at the specified location
 | options | <code>Object</code> | object of options to send to API request |
 | options.id | <code>string</code> | unique identifier for the secret |
 | options.body | <code>Object</code> | containing the structure of the secret to store |
+| [options.token] | <code>string</code> | the authentication token |
 
 <a name="module_cubbyhole..readCubby"></a>
 ### cubbyhole~readCubby(options) ⇒ <code>Promise</code>
@@ -35,6 +36,7 @@ Retrieves the secret at the specified location
 | --- | --- | --- |
 | options | <code>Object</code> | object of options to send to API request |
 | options.id | <code>string</code> | unique identifier for the secret |
+| [options.token] | <code>string</code> | the authentication token |
 
 <a name="module_cubbyhole..deleteCubby"></a>
 ### cubbyhole~deleteCubby(options) ⇒ <code>Promise</code>
@@ -48,4 +50,5 @@ Delete secret at the specified location
 | --- | --- | --- |
 | options | <code>Object</code> | object of options to send to API request |
 | options.id | <code>string</code> | unique identifier for the secret |
+| [options.token] | <code>string</code> | the authentication token |
 

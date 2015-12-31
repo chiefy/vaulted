@@ -65,3 +65,4 @@ debug | DEBUG | `false` | Show verbose messages, network requests?
 secret_shares | SECRET_SHARES | `3` | Number of shared secret keys to generate
 secret_threshold | SECRET_THRESHOLD | `2` | Threshold at which to unseal vault (must be <= SECRET_SHARES)
 backup_dir | VAULT_SAFE | `~/.vault` | Directory to backup keys
+no_global_token | VAULT_NO_GLOBAL_TOKEN | `false` | Require token per API call

@@ -22,6 +22,7 @@ Write a secret to the generic backend
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the secret |
 | options.body | <code>Object</code> |  | containing the structure of the secret to store |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;secret&quot;</code> | path name the generic secret backend is mounted on |
 
 <a name="module_secret..read"></a>
@@ -36,6 +37,7 @@ Read / get a secret from the generic backend
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the secret |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;secret&quot;</code> | path name the generic secret backend is mounted on |
 
 <a name="module_secret..delete"></a>
@@ -50,5 +52,6 @@ Delete a secret from the generic backend
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the secret |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;secret&quot;</code> | path name the generic secret backend is mounted on |
 

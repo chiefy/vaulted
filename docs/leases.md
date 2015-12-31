@@ -22,6 +22,7 @@ Renew the lease (extend) on a secret
 | options.id | <code>string</code> | unique identifier for the lease |
 | [options.body] | <code>Object</code> | holds the attributes passed as inputs |
 | [options.body.increment] | <code>string</code> | requested amount of time in seconds to extend the lease. |
+| [options.token] | <code>string</code> | the authentication token |
 
 <a name="module_leases..revokeLease"></a>
 ### leases~revokeLease(options) ⇒ <code>Promise</code>
@@ -35,6 +36,7 @@ Revoke the lease on a secret immediately.
 | --- | --- | --- |
 | options | <code>Object</code> | object of options to send to API request |
 | options.id | <code>string</code> | unique identifier for the lease |
+| [options.token] | <code>string</code> | the authentication token |
 
 <a name="module_leases..revokeLeasePrefix"></a>
 ### leases~revokeLeasePrefix(options) ⇒ <code>Promise</code>
@@ -48,4 +50,5 @@ Revoke the lease on all secrets under the specified prefix immediately.
 | --- | --- | --- |
 | options | <code>Object</code> | object of options to send to API request |
 | options.id | <code>string</code> | unique identifier for the lease |
+| [options.token] | <code>string</code> | the authentication token |
 

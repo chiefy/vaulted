@@ -11,8 +11,8 @@ Provides implementation for the Vault Auth Token backend APIs
     * [~revokeToken(options, [mountName])](#module_auth/token..revokeToken) ⇒ <code>Promise</code>
     * [~revokeTokenOrphan(options, [mountName])](#module_auth/token..revokeTokenOrphan) ⇒ <code>Promise</code>
     * [~revokeTokenPrefix(options, [mountName])](#module_auth/token..revokeTokenPrefix) ⇒ <code>Promise</code>
-    * [~lookupTokenSelf([mountName])](#module_auth/token..lookupTokenSelf) ⇒ <code>Promise</code>
-    * [~revokeTokenSelf([mountName])](#module_auth/token..revokeTokenSelf) ⇒ <code>Promise</code>
+    * [~lookupTokenSelf([options], [mountName])](#module_auth/token..lookupTokenSelf) ⇒ <code>Promise</code>
+    * [~revokeTokenSelf([options], [mountName])](#module_auth/token..revokeTokenSelf) ⇒ <code>Promise</code>
 
 <a name="module_auth/token..createToken"></a>
 ### auth/token~createToken([mountName]) ⇒ <code>Promise</code>
@@ -33,6 +33,7 @@ Creates a token to use for authenticating with the Vault.
 | [options.body.ttl] | <code>string</code> |  | TTL period of the token |
 | [options.body.display_name] | <code>string</code> |  | display name of the token |
 | [options.body.num_uses] | <code>number</code> |  | maximum uses for the given token |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 
 <a name="module_auth/token..renewToken"></a>
@@ -49,6 +50,7 @@ Renew an existing token to use for authenticating with the Vault.
 | options.id | <code>string</code> |  | unique identifier for the token |
 | options.body | <code>Object</code> |  | holds the attributes passed as inputs |
 | [options.body.increment] | <code>number</code> |  | lease increment |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 
 <a name="module_auth/token..lookupToken"></a>
@@ -63,6 +65,7 @@ Retrieve information about the specified existing token.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the token |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 
 <a name="module_auth/token..revokeToken"></a>
@@ -77,6 +80,7 @@ Revokes the specified existing token and all child tokens.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the token |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 
 <a name="module_auth/token..revokeTokenOrphan"></a>
@@ -91,6 +95,7 @@ Revokes the specified existing token but not the child tokens.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the token |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 
 <a name="module_auth/token..revokeTokenPrefix"></a>
@@ -105,10 +110,11 @@ Revokes all tokens generated at a given prefix including children and secrets.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | token prefix |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 
 <a name="module_auth/token..lookupTokenSelf"></a>
-### auth/token~lookupTokenSelf([mountName]) ⇒ <code>Promise</code>
+### auth/token~lookupTokenSelf([options], [mountName]) ⇒ <code>Promise</code>
 Retrieve information about the current client token.
 
 **Kind**: inner method of <code>[auth/token](#module_auth/token)</code>  
@@ -117,10 +123,12 @@ Retrieve information about the current client token.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
+| [options] | <code>Object</code> |  | object of options to send to API request |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 
 <a name="module_auth/token..revokeTokenSelf"></a>
-### auth/token~revokeTokenSelf([mountName]) ⇒ <code>Promise</code>
+### auth/token~revokeTokenSelf([options], [mountName]) ⇒ <code>Promise</code>
 Revokes the current client token and all child tokens.
 
 **Kind**: inner method of <code>[auth/token](#module_auth/token)</code>  
@@ -129,5 +137,7 @@ Revokes the current client token and all child tokens.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
+| [options] | <code>Object</code> |  | object of options to send to API request |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;token&quot;</code> | path name the token auth backend is mounted on |
 

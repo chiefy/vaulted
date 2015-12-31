@@ -25,6 +25,7 @@ Retrieve the specified app using the app id.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the app |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;app-id&quot;</code> | path name the app-id auth backend is mounted on |
 
 <a name="module_auth/appid..createApp"></a>
@@ -42,6 +43,7 @@ Creates the specified app in the app-id auth backend of the vault.
 | options.body | <code>Object</code> |  | holds the attributes passed as inputs |
 | options.body.value | <code>string</code> |  | the policy id |
 | options.body.display_name | <code>string</code> |  | human-readable name of the app. |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;app-id&quot;</code> | path name the app-id auth backend is mounted on |
 
 <a name="module_auth/appid..deleteApp"></a>
@@ -56,6 +58,7 @@ Deletes the specified app from the app-id auth backend of the vault.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the app |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;app-id&quot;</code> | path name the app-id auth backend is mounted on |
 
 <a name="module_auth/appid..getUser"></a>
@@ -70,6 +73,7 @@ Retrieve the specified user using the user id.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the user |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;app-id&quot;</code> | path name the app-id auth backend is mounted on |
 
 <a name="module_auth/appid..createUser"></a>
@@ -86,6 +90,7 @@ Creates the specified user in the app-id auth backend of the vault.
 | options.id | <code>string</code> |  | unique identifier for the user |
 | options.body | <code>Object</code> |  | holds the attributes passed as inputs |
 | options.body.value | <code>string</code> |  | the app id |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;app-id&quot;</code> | path name the app-id auth backend is mounted on |
 
 <a name="module_auth/appid..deleteUser"></a>
@@ -100,6 +105,7 @@ Deletes the specified user from the app-id auth backend of the vault.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | object of options to send to API request |
 | options.id | <code>string</code> |  | unique identifier for the user |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;app-id&quot;</code> | path name the app-id auth backend is mounted on |
 
 <a name="module_auth/appid..appLogin"></a>
@@ -115,5 +121,6 @@ Authenticates the user of the app using the app-id authentication backend.
 | options.body | <code>Object</code> |  | holds the attributes passed as inputs |
 | options.body.app_id | <code>string</code> |  | the app id |
 | options.body.user_id | <code>string</code> |  | the user id |
+| [options.token] | <code>string</code> |  | the authentication token |
 | [mountName] | <code>string</code> | <code>&quot;app-id&quot;</code> | path name the app-id auth backend is mounted on |
 

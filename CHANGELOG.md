@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 #### Added
+- Gracefully handle mounts or paths that are prefixed with '/'.
+- Support policies as javascript objects (automatically converted to JSON string)
+- Support for requiring token as input option instead of using global token.
+
 #### Changed
 
 ## [2.1.1] - 2015-12-31
