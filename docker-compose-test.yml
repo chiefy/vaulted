@@ -35,5 +35,6 @@ vaulted:
     - NODE_DEBUG
     - TEST_SYSLOG=true
     - ALLOW_CONFIG_MUTATIONS=true
+    - TRAVIS_BUILD_ID
   volumes:
     - .:/app
