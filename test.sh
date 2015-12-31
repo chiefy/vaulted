@@ -34,8 +34,10 @@ npm run coverage
 
 if [ -n "$TRAVIS_JOB_ID" ]
 then
+  echo "running in Travis context"
   if [ $? -eq 0 ]
   then
+    echo "tests successful, sending results to Code Climate"
     npm install -g codeclimate-test-reporter
     CODECLIMATE_REPO_TOKEN=a9b083d9de876dd53937f28b364a2493b091ebbb867430325922f20280483863
     codeclimate-test-reporter < coverage/lcov.info
