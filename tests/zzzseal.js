@@ -22,9 +22,14 @@ describe('#seal', function () {
     return newVault.seal().should.be.rejectedWith(/Vault has not been initialized/);
   });
 
+  it('should be rejected with Error - missing token', function () {
+    myVault.headers = {};
+    return myVault.seal().should.be.rejectedWith(/Missing auth token/);
+  });
+
   it('should resolve to binded instance - success', function () {
     var existing = _.cloneDeep(myVault.status);
-    return myVault.seal().then(function (self) {
+    return myVault.seal({token: myVault.token}).then(function (self) {
       existing.should.have.property('sealed');
       existing.sealed.should.be.false;
       self.status.should.have.property('sealed');
@@ -34,7 +39,7 @@ describe('#seal', function () {
 
   it('should resolve to binded instance - already sealed', function () {
     var existing = _.cloneDeep(myVault.status);
-    return myVault.seal().then(function (self) {
+    return myVault.seal({token: myVault.token}).then(function (self) {
       existing.should.have.property('sealed');
       existing.sealed.should.be.true;
       self.status.should.have.property('sealed');
