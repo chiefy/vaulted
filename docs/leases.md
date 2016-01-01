@@ -49,6 +49,6 @@ Revoke the lease on all secrets under the specified prefix immediately.
 | Param | Type | Description |
 | --- | --- | --- |
 | options | <code>Object</code> | object of options to send to API request |
-| options.id | <code>string</code> | unique identifier for the lease |
+| options.id | <code>string</code> | secret path prefix |
 | [options.token] | <code>string</code> | the authentication token |
 
