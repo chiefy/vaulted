@@ -1,7 +1,7 @@
-require('./helpers').should;
+require('../helpers').should;
 
 var
-  helpers = require('./helpers'),
+  helpers = require('../helpers'),
   debuglog = helpers.debuglog,
   _ = require('lodash'),
   chai = helpers.chai;
