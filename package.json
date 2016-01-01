@@ -2,13 +2,13 @@
   "name": "vaulted",
   "version": "2.1.1",
   "description": "A nodejs wrapper library for using HashiCorp's Vault",
-  "main": "index.js",
+  "main": "./lib/vaulted.js",
   "files": [
     "lib",
     "config"
   ],
   "scripts": {
-    "start": "npm rebuild && node index.js",
+    "start": "npm rebuild && node ./lib/vaulted.js",
     "test": "mocha -R spec tests/**",
     "coverage": "istanbul cover _mocha -- tests/**",
     "test-watch": "mocha --growl -R spec -w tests/**/*.js",
