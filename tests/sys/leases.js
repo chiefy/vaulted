@@ -1,8 +1,8 @@
-require('./helpers').should;
+require('../helpers').should;
 
 var
   _ = require('lodash'),
-  helpers = require('./helpers'),
+  helpers = require('../helpers'),
   debuglog = helpers.debuglog,
   chai = helpers.chai,
   expect = helpers.expect;

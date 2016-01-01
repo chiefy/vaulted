@@ -1,12 +1,11 @@
-require('./helpers').should;
+require('../helpers').should;
 
 var
-  helpers = require('./helpers'),
+  helpers = require('../helpers'),
   debuglog = helpers.debuglog,
   _ = require('lodash'),
   chai = helpers.chai,
-  expect = helpers.expect,
-  Vault = require('../lib/vaulted');
+  expect = helpers.expect;
 
 chai.use(helpers.cap);
 
@@ -86,7 +85,6 @@ describe('keys', function () {
     it('should resolve with instance of binded Vault', function () {
       var existingKeys = _.cloneDeep(myVault.keys);
       return myVault.updateRekey().then(function (vault) {
-        vault.should.be.an.instanceof(Vault);
         vault.keys.should.not.be.empty;
         vault.keys.should.not.include.members(existingKeys);
       });
