@@ -28,10 +28,10 @@ describe('policy', function () {
     });
 
     it('should resolve to updated list of policies', function () {
-      return myVault.getPolicies().then(function (policies) {
-        debuglog(policies);
-        policies.should.not.be.empty;
-        policies.should.contain('root');
+      return myVault.getPolicies().then(function (data) {
+        debuglog(data);
+        data.policies.should.not.be.empty;
+        data.policies.should.contain('root');
       });
     });
 
@@ -84,27 +84,16 @@ describe('policy', function () {
     });
 
     it('should resolve to updated list of policies', function () {
-      var existingPolicies = _.cloneDeep(myVault.policies);
       var policy = 'path "secret/foo" { policy = "read" }';
       return myVault.createPolicy({
         id: 'other',
         body: {
           rules: policy
         }
-      }).then(function (policies) {
-        debuglog(policies);
-        existingPolicies.should.not.be.empty;
-        policies.should.not.be.empty;
-        existingPolicies.should.not.contain('other');
-        policies.should.contain('other');
-      }).catch(function (err) {
-        debuglog(err);
-        expect(err).to.be.undefined;
-      });
+      }).should.be.resolved;
     });
 
     it('should resolve to updated list of policies - using js objects', function () {
-      var existingPolicies = _.cloneDeep(myVault.policies);
       var policy = {
         "path": {
           "secret/*": {
@@ -117,12 +106,12 @@ describe('policy', function () {
         body: {
           rules: policy
         }
-      }).then(function (policies) {
-        debuglog(policies);
-        existingPolicies.should.not.be.empty;
-        policies.should.not.be.empty;
-        existingPolicies.should.not.contain('jsother');
-        policies.should.contain('jsother');
+      }).then(function () {
+        return myVault.getPolicies().then(function (data) {
+          debuglog(data);
+          data.policies.should.not.be.empty;
+          data.policies.should.contain('jsother');
+        });
       }).finally(function () {
         return myVault.deletePolicy({
           id: 'jsother'
@@ -181,14 +170,7 @@ describe('policy', function () {
       var existingPolicies = _.cloneDeep(myVault.policies);
       return myVault.deletePolicy({
         id: 'other'
-      }).then(function (policies) {
-        debuglog(policies);
-        existingPolicies.should.not.be.empty;
-        policies.should.not.be.empty;
-        existingPolicies.should.contain('other');
-        policies.should.not.contain('other');
-        policies.should.contain('root');
-      });
+      }).should.be.resolved;
     });
 
   });
