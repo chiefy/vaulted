@@ -14,7 +14,6 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
         * [.keys](#module_vaulted..Vaulted+keys) : <code>Array</code>
         * [.auths](#module_vaulted..Vaulted+auths) : <code>Object</code>
         * [.mounts](#module_vaulted..Vaulted+mounts) : <code>Object</code>
-        * [.policies](#module_vaulted..Vaulted+policies) : <code>Array</code>
         * [.headers](#module_vaulted..Vaulted+headers) : <code>Object</code>
         * [.initialized](#module_vaulted..Vaulted+initialized) : <code>boolean</code>
     * [~prepare()](#module_vaulted..prepare) ⇒ <code>Promise</code>
@@ -36,7 +35,6 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
     * [.keys](#module_vaulted..Vaulted+keys) : <code>Array</code>
     * [.auths](#module_vaulted..Vaulted+auths) : <code>Object</code>
     * [.mounts](#module_vaulted..Vaulted+mounts) : <code>Object</code>
-    * [.policies](#module_vaulted..Vaulted+policies) : <code>Array</code>
     * [.headers](#module_vaulted..Vaulted+headers) : <code>Object</code>
     * [.initialized](#module_vaulted..Vaulted+initialized) : <code>boolean</code>
 
@@ -69,9 +67,6 @@ Vaulted constructor
 **Kind**: instance property of <code>[Vaulted](#module_vaulted..Vaulted)</code>  
 <a name="module_vaulted..Vaulted+mounts"></a>
 #### vaulted.mounts : <code>Object</code>
-**Kind**: instance property of <code>[Vaulted](#module_vaulted..Vaulted)</code>  
-<a name="module_vaulted..Vaulted+policies"></a>
-#### vaulted.policies : <code>Array</code>
 **Kind**: instance property of <code>[Vaulted](#module_vaulted..Vaulted)</code>  
 <a name="module_vaulted..Vaulted+headers"></a>
 #### vaulted.headers : <code>Object</code>

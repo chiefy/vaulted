@@ -1,7 +1,6 @@
 require('./helpers').should;
 
 var
-  _ = require('lodash'),
   fs = require('fs'),
   yaml = require('js-yaml'),
   helpers = require('./helpers'),
@@ -65,53 +64,6 @@ describe('Endpoint', function () {
         endpoint = new Endpoint();
       }
       shouldThrow.should.throw(/Endpoint has no name defined/);
-    });
-
-  });
-
-  describe('#getURI', function () {
-    var endpoint;
-
-    beforeEach(function () {
-      endpoint = new Endpoint({
-        base_url: BASE_URL,
-        name: 'punts',
-        verbs: api_def.punts
-      });
-    });
-
-    it('should exist', function () {
-      endpoint.getURI.should.exist;
-      endpoint.getURI.should.be.an.instanceof(Function);
-    });
-
-    it('should append the endpoint to the base uri', function () {
-      var endpoint_uri = endpoint.getURI();
-      endpoint_uri.should.equal(BASE_URL + '/punts');
-    });
-
-    it('should replace :id with provided option id', function () {
-      endpoint = new Endpoint({
-        base_url: BASE_URL,
-        name: 'sys/no_get/:id',
-        verbs: api_def['sys/no_get/:id']
-      });
-      var endpoint_uri = endpoint.getURI({
-        id: 'test'
-      });
-      endpoint_uri.should.equal(BASE_URL + '/sys/no_get/test');
-    });
-
-    it('should replace :id with provided option id with / prefix', function () {
-      endpoint = new Endpoint({
-        base_url: BASE_URL,
-        name: 'sys/no_get/:id',
-        verbs: api_def['sys/no_get/:id']
-      });
-      var endpoint_uri = endpoint.getURI({
-        id: '/test'
-      });
-      endpoint_uri.should.equal(BASE_URL + '/sys/no_get/test');
     });
 
   });
