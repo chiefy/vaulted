@@ -139,7 +139,10 @@ v1:
   sys/health:
     get:
       id: false
-      params: []
+      params:
+        - name: "standbyok"
+          type: "bool"
+          required: false
   sys/key-status:
     get:
       id: false
