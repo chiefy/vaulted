@@ -73,7 +73,7 @@ describe('Endpoint', function () {
     var endpoint;
 
     beforeEach(function () {
-      endpoint = Endpoint.create(BASE_URL, {}, {}, api_def.punts, 'punts')['punts'];
+      endpoint = Endpoint.create(BASE_URL, {}, {}, api_def.punts, 'punts').punts;
     });
 
     it('should have a get method', function () {

@@ -4,7 +4,6 @@ require('../helpers').should;
 var
   helpers = require('../helpers'),
   debuglog = helpers.debuglog,
-  _ = require('lodash'),
   chai = helpers.chai,
   expect = helpers.expect;
 
@@ -14,10 +13,12 @@ chai.use(helpers.cap);
 describe('keys', function () {
   var newVault = helpers.getEmptyVault();
   var myVault;
+  var myKeys;
 
   before(function () {
     return helpers.getReadyVault().then(function (vault) {
       myVault = vault;
+      myKeys = helpers.recover().keys;
     });
 
   });
@@ -83,11 +84,15 @@ describe('keys', function () {
       return newVault.updateRekey().should.be.rejectedWith(/Vault has not been initialized/);
     });
 
-    it('should resolve with instance of binded Vault', function () {
-      var existingKeys = _.cloneDeep(myVault.keys);
-      return myVault.updateRekey().then(function (vault) {
-        vault.keys.should.not.be.empty;
-        vault.keys.should.not.include.members(existingKeys);
+    it('should resolve with instance of binded Vault - complete false', function () {
+      return myVault.updateRekey({body: {key: myKeys[0]}}).then(function (data) {
+        data.complete.should.be.false;
+      });
+    });
+
+    it('should resolve with instance of binded Vault - complete true', function () {
+      return myVault.updateRekey({body: {key: myKeys[1]}}).then(function (data) {
+        data.complete.should.be.true;
       });
     });
 

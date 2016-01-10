@@ -2,7 +2,6 @@
 require('./helpers').should;
 
 var
-  _ = require('lodash'),
   fs = require('fs'),
   path = require('path'),
   helpers = require('./helpers'),
@@ -138,8 +137,8 @@ describe('API', function() {
       api.should.exist;
       api.endpoints.should.include.keys('auth/token/create');
       api.endpoints['auth/token/create'].should.include.keys('defaults');
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('proxy');
-      api.endpoints['auth/token/create']['defaults']['proxy'].should.be.equal('https://abc.example.com:443');
+      api.endpoints['auth/token/create'].defaults.should.include.keys('proxy');
+      api.endpoints['auth/token/create'].defaults.proxy.should.be.equal('https://abc.example.com:443');
     });
 
     it('with proxy configuration - insecure', function () {
@@ -153,8 +152,8 @@ describe('API', function() {
       api.should.exist;
       api.endpoints.should.include.keys('auth/token/create');
       api.endpoints['auth/token/create'].should.include.keys('defaults');
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('proxy');
-      api.endpoints['auth/token/create']['defaults']['proxy'].should.be.equal('http://abc.example.com:8000');
+      api.endpoints['auth/token/create'].defaults.should.include.keys('proxy');
+      api.endpoints['auth/token/create'].defaults.proxy.should.be.equal('http://abc.example.com:8000');
     });
 
     it('with proxy configuration - with auth', function () {
@@ -170,8 +169,8 @@ describe('API', function() {
       api.should.exist;
       api.endpoints.should.include.keys('auth/token/create');
       api.endpoints['auth/token/create'].should.include.keys('defaults');
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('proxy');
-      api.endpoints['auth/token/create']['defaults']['proxy'].should.be.equal('https://dummy:pass@abc.example.com:443');
+      api.endpoints['auth/token/create'].defaults.should.include.keys('proxy');
+      api.endpoints['auth/token/create'].defaults.proxy.should.be.equal('https://dummy:pass@abc.example.com:443');
     });
 
     it('with ssl configuration - cacert', function () {
@@ -184,8 +183,8 @@ describe('API', function() {
       api.should.exist;
       api.endpoints.should.include.keys('auth/token/create');
       api.endpoints['auth/token/create'].should.include.keys('defaults');
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('ca');
-      api.endpoints['auth/token/create']['defaults']['ca'].should.be.eql(cacert);
+      api.endpoints['auth/token/create'].defaults.should.include.keys('ca');
+      api.endpoints['auth/token/create'].defaults.ca.should.be.eql(cacert);
     });
 
     it('with ssl configuration - cert and key', function () {
@@ -200,10 +199,10 @@ describe('API', function() {
       api.should.exist;
       api.endpoints.should.include.keys('auth/token/create');
       api.endpoints['auth/token/create'].should.include.keys('defaults');
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('cert');
-      api.endpoints['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('key');
-      api.endpoints['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
+      api.endpoints['auth/token/create'].defaults.should.include.keys('cert');
+      api.endpoints['auth/token/create'].defaults.cert.should.be.eql(clientcert);
+      api.endpoints['auth/token/create'].defaults.should.include.keys('key');
+      api.endpoints['auth/token/create'].defaults.key.should.be.eql(clientkey);
     });
 
     it('with ssl configuration  - cert and key with passphrase', function () {
@@ -219,12 +218,12 @@ describe('API', function() {
       api.should.exist;
       api.endpoints.should.include.keys('auth/token/create');
       api.endpoints['auth/token/create'].should.include.keys('defaults');
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('cert');
-      api.endpoints['auth/token/create']['defaults']['cert'].should.be.eql(clientcert);
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('key');
-      api.endpoints['auth/token/create']['defaults']['key'].should.be.eql(clientkey);
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('passphrase');
-      api.endpoints['auth/token/create']['defaults']['passphrase'].should.be.equal('fakephrase');
+      api.endpoints['auth/token/create'].defaults.should.include.keys('cert');
+      api.endpoints['auth/token/create'].defaults.cert.should.be.eql(clientcert);
+      api.endpoints['auth/token/create'].defaults.should.include.keys('key');
+      api.endpoints['auth/token/create'].defaults.key.should.be.eql(clientkey);
+      api.endpoints['auth/token/create'].defaults.should.include.keys('passphrase');
+      api.endpoints['auth/token/create'].defaults.passphrase.should.be.equal('fakephrase');
     });
 
     it('with timeout specified', function () {
@@ -236,8 +235,8 @@ describe('API', function() {
       api.should.exist;
       api.endpoints.should.include.keys('auth/token/create');
       api.endpoints['auth/token/create'].should.include.keys('defaults');
-      api.endpoints['auth/token/create']['defaults'].should.include.keys('timeout');
-      api.endpoints['auth/token/create']['defaults']['timeout'].should.be.equal(10);
+      api.endpoints['auth/token/create'].defaults.should.include.keys('timeout');
+      api.endpoints['auth/token/create'].defaults.timeout.should.be.equal(10);
     });
 
     afterEach(function () {
@@ -251,7 +250,7 @@ describe('API', function() {
         ssl_pem_passphrase: undefined,
         timeout: undefined
       };
-      config = config.util.extendDeep(myconfig, options);;
+      config = config.util.extendDeep(myconfig, options);
     });
 
   });

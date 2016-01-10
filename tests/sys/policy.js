@@ -4,8 +4,6 @@ require('../helpers').should;
 var
   helpers = require('../helpers'),
   debuglog = helpers.debuglog,
-  _ = require('lodash'),
-  expect = helpers.expect,
   chai = helpers.chai;
 
 chai.use(helpers.cap);
@@ -96,9 +94,9 @@ describe('policy', function () {
 
     it('should resolve to updated list of policies - using js objects', function () {
       var policy = {
-        "path": {
-          "secret/*": {
-            "policy": "write"
+        'path': {
+          'secret/*': {
+            'policy': 'write'
           }
         }
       };
@@ -168,7 +166,6 @@ describe('policy', function () {
     });
 
     it('should resolve to updated instance with policy removed', function () {
-      var existingPolicies = _.cloneDeep(myVault.policies);
       return myVault.deletePolicy({
         id: 'other'
       }).should.be.resolved;

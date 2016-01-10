@@ -7,5 +7,3 @@ ssl_verify: true
 
 secret_shares: 3
 secret_threshold: 2
-
-no_global_token: false

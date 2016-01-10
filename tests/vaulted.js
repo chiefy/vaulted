@@ -45,7 +45,7 @@ describe('Vaulted', function () {
         debugflag = vault.config.get('debug');
 
       debugflag.should.equal(options.debug);
-      var options = {
+      options = {
         debug: undefined
       };
       // reset debug flag
@@ -105,26 +105,6 @@ describe('Vaulted', function () {
       myVault.headers.should.contain.keys('X-Vault-Token');
       myVault.initialized.should.be.true;
       myVault.initialized = false;
-    });
-
-    it('setKeys undefined', function () {
-      function shouldThrow() {
-        myVault.setKeys();
-      }
-      shouldThrow.should.throw(/Vault keys not provided/);
-    });
-
-    it('setKeys empty Array', function () {
-      function shouldThrow() {
-        myVault.setKeys([]);
-      }
-      shouldThrow.should.throw(/Vault keys not provided/);
-    });
-
-    it('setKeys success', function () {
-      myVault.setKeys(['xyzabc', 'abcxyz']);
-      myVault.keys.should.contain('xyzabc');
-      myVault.keys.should.contain('abcxyz');
     });
 
     it('setStatus null', function () {

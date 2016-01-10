@@ -3,6 +3,9 @@ var debuglog = require('util').debuglog('vaulted-tests');
 var _ = require('lodash');
 var Promise = require('bluebird');
 var rp = require('request-promise');
+var fs = require('fs');
+var path = require('path');
+var os = require('os');
 
 var helpers = module.exports = {
   chai: require('chai'),
@@ -19,6 +22,12 @@ var helpers = module.exports = {
 
 var Vault = require('../lib/vaulted');
 
+var BACKUP_FILE = path.join(os.tmpdir(), 'keys.json');
+
+helpers.isTrue = function isTrue(value) {
+  return _.isString(value) && (value.toLowerCase() === 'true' || value.toLowerCase() === 'yes');
+};
+
 helpers.getVault = function getVault() {
   return new Vault({
     vault_host: helpers.VAULT_HOST,
@@ -32,22 +41,63 @@ helpers.getEmptyVault = function getEmptyVault() {
 };
 
 helpers.getPreparedVault = function getPreparedVault() {
-  return this.getVault().prepare();
+  var backupData = helpers.recover();
+  var myVault = this.getVault();
+
+  if (backupData.root_token) {
+    myVault.setToken(backupData.root_token);
+  }
+  return myVault.prepare();
 };
 
 helpers.getReadyVault = function getReadyVault() {
-  var myVault = this.getVault();
-
-  return myVault.prepare().bind(myVault)
-    .then(myVault.init)
-    .then(myVault.unSeal)
-    .catch(function onError(err) {
-      debuglog('(before) vault setup failed: %s', err.message);
-    });
+  return helpers.getPreparedVault().then(helpers.setupVault);
 };
 
-helpers.isTrue = function isTrue(value) {
-  return _.isString(value) && (value.toLowerCase() === 'true' || value.toLowerCase() === 'yes');
+helpers.setupVault = function (myVault) {
+
+  var backupData = helpers.recover();
+
+  return myVault.prepare().bind(myVault).then(function () {
+    if (myVault.initialized && !myVault.status.sealed) {
+      return myVault;
+    }
+    return myVault.init().then(function (data) {
+      if (data.root_token) {
+        myVault.setToken(data.root_token);
+        helpers.backup(data);
+      }
+      return myVault.unSeal({
+        body: {
+          key: _.sample(_.union(data.keys || [], backupData.keys || []))
+        }
+      }).then(function () {
+        return helpers.setupVault(myVault);
+      });
+    });
+  }).catch(function onError(err) {
+    debuglog('(before) vault setup failed: %s', err.message);
+  });
+
+};
+
+helpers.backup = function backup(data) {
+  fs.writeFileSync(BACKUP_FILE, JSON.stringify(data), {
+    mode: parseInt('0700', 8)
+  });
+  debuglog('backup file written');
+};
+
+helpers.recover = function recover() {
+  try {
+    return JSON.parse(fs.readFileSync(BACKUP_FILE));
+  } catch (err) {
+    // file most likely does not exist so just ignore it.
+    if (err.code !== 'ENOENT') {
+      debuglog('unable to read backup: %s', err.message);
+    }
+    return {};
+  }
 };
 
 helpers.isVaultReady = function isVaultReady(vault) {
@@ -66,7 +116,7 @@ helpers.isVaultReady = function isVaultReady(vault) {
 };
 
 helpers.createConsulToken = function createConsulToken() {
-  var TEST_CONSUL_HOST = process.env.TEST_CONSUL_HOST || '127.0.0.1'
+  var TEST_CONSUL_HOST = process.env.TEST_CONSUL_HOST || '127.0.0.1';
   var TEST_CONSUL_PORT = process.env.TEST_CONSUL_PORT || 8500;
   var options = {
     method: 'PUT',
@@ -86,7 +136,7 @@ helpers.createConsulToken = function createConsulToken() {
     debuglog('createConsulToken failed: ', err);
     return null;
   });
-}
+};
 
 helpers.getToken = function getToken(vault) {
 
@@ -97,7 +147,7 @@ helpers.getToken = function getToken(vault) {
         token: token
       }
     });
-  }
+  };
 
   var createConsulRole = function () {
     return vault.createConsulRole({
@@ -107,13 +157,13 @@ helpers.getToken = function getToken(vault) {
         lease: '1h'
       }
     });
-  }
+  };
 
   var generateConsulRoleToken = function () {
     return vault.generateConsulRoleToken({
       id: 'writer'
     });
-  }
+  };
 
   return helpers.createConsulToken()
     .then(configConsulAccess)
@@ -125,6 +175,6 @@ helpers.getToken = function getToken(vault) {
     }).catch(function (err) {
       debuglog('getToken error: ', err);
       return null;
-  });
+    });
 
-}
+};
