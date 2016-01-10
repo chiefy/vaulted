@@ -91,4 +91,6 @@ Sends the next key share to continue the rekey process.
 | --- | --- | --- |
 | [options] | <code>Object</code> | object of options to send to API request |
 | [options.token] | <code>string</code> | the authentication token |
+| options.body | <code>Object</code> | holds the attributes passed as inputs |
+| options.body.key | <code>Object</code> | A single master share key |
 

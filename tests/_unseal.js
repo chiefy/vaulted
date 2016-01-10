@@ -13,10 +13,12 @@ chai.use(helpers.cap);
 describe('seal', function () {
   var newVault = helpers.getEmptyVault();
   var myVault;
+  var myKeys;
 
   before(function () {
     return helpers.getPreparedVault().then(function (vault) {
       myVault = vault;
+      myKeys = helpers.recover().keys;
     });
   });
 
@@ -33,8 +35,15 @@ describe('seal', function () {
 
   describe('#unSeal', function () {
 
-    it('should resolve to binded instance - success', function () {
-      return myVault.unSeal().then(function (self) {
+    it('should resolve to binded instance - success still sealed', function () {
+      return myVault.unSeal({body: {key: myKeys[0]}}).then(function (self) {
+        self.status.should.have.property('sealed');
+        self.status.sealed.should.be.true;
+      });
+    });
+
+    it('should resolve to binded instance - success unsealed', function () {
+      return myVault.unSeal({body: {key: myKeys[1]}}).then(function (self) {
         self.status.should.have.property('sealed');
         self.status.sealed.should.be.false;
       });
@@ -84,7 +93,7 @@ describe('seal', function () {
 
   after(function (done) {
     this.timeout(5000);
-    helpers.isVaultReady(myVault).then(function (status) {
+    helpers.isVaultReady(myVault).then(function () {
       done();
     }).catch(function onError(err) {
       debuglog('Vault NOT Ready: ', err);

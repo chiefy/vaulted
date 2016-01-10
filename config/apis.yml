@@ -27,6 +27,9 @@ v1:
         - name: "key"
           type: "string"
           required: true
+        - name: "reset"
+          type: "bool"
+          required: false
   "sys/mounts/:id":
     get:
       id: false

@@ -5,8 +5,7 @@ var
   helpers = require('./helpers'),
   debuglog = helpers.debuglog,
   chai = helpers.chai,
-  assert = helpers.assert,
-  Vault = require('../lib/vaulted');
+  assert = helpers.assert;
 
 chai.use(helpers.cap);
 
@@ -20,27 +19,28 @@ describe('init', function() {
     });
   });
 
-  it.skip('initialized false', function () {
+  it('initialized false', function () {
     return myVault.getInitStatus().then(function (result) {
         result.initialized.should.be.false;
     });
   });
 
   it('init successful', function () {
-    return myVault.init().then(function (self) {
-        self.should.be.an.instanceof(Vault);
-        self.initialized.should.be.true;
-        self.token.should.not.be.null;
-        self.keys.should.not.be.empty;
+    return myVault.init().then(function (data) {
+      assert.ok(data, 'token and keys should be returned');
+      data.should.have.property('root_token');
+      data.root_token.should.be.a('string');
+      data.should.have.property('keys');
+      data.keys.should.be.a('array');
+      myVault.setToken(data.root_token);
+      helpers.backup(data);
     });
   });
 
   it('init - already initialized', function () {
     return myVault.init().then(function (self) {
-        self.should.be.an.instanceof(Vault);
         self.initialized.should.be.true;
         self.token.should.not.be.null;
-        self.keys.should.not.be.empty;
     });
   });
 

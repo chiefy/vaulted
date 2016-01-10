@@ -11,14 +11,12 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
         * [.api](#module_vaulted..Vaulted+api) : <code>API</code>
         * [.status](#module_vaulted..Vaulted+status) : <code>Object</code>
         * [.token](#module_vaulted..Vaulted+token) : <code>string</code>
-        * [.keys](#module_vaulted..Vaulted+keys) : <code>Array</code>
         * [.auths](#module_vaulted..Vaulted+auths) : <code>Object</code>
         * [.mounts](#module_vaulted..Vaulted+mounts) : <code>Object</code>
         * [.headers](#module_vaulted..Vaulted+headers) : <code>Object</code>
         * [.initialized](#module_vaulted..Vaulted+initialized) : <code>boolean</code>
     * [~prepare()](#module_vaulted..prepare) ⇒ <code>Promise</code>
     * [~setToken(vault_token)](#module_vaulted..setToken) ⇒ <code>Vaulted</code>
-    * [~setKeys(keys)](#module_vaulted..setKeys) ⇒ <code>Vaulted</code>
     * [~setStatus(status)](#module_vaulted..setStatus) ⇒ <code>Vaulted</code>
     * [~validateEndpoint(endpoint, [mountName], [defaultName])](#module_vaulted..validateEndpoint) ⇒ <code>EndPoint</code>
 
@@ -32,7 +30,6 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
     * [.api](#module_vaulted..Vaulted+api) : <code>API</code>
     * [.status](#module_vaulted..Vaulted+status) : <code>Object</code>
     * [.token](#module_vaulted..Vaulted+token) : <code>string</code>
-    * [.keys](#module_vaulted..Vaulted+keys) : <code>Array</code>
     * [.auths](#module_vaulted..Vaulted+auths) : <code>Object</code>
     * [.mounts](#module_vaulted..Vaulted+mounts) : <code>Object</code>
     * [.headers](#module_vaulted..Vaulted+headers) : <code>Object</code>
@@ -58,9 +55,6 @@ Vaulted constructor
 **Kind**: instance property of <code>[Vaulted](#module_vaulted..Vaulted)</code>  
 <a name="module_vaulted..Vaulted+token"></a>
 #### vaulted.token : <code>string</code>
-**Kind**: instance property of <code>[Vaulted](#module_vaulted..Vaulted)</code>  
-<a name="module_vaulted..Vaulted+keys"></a>
-#### vaulted.keys : <code>Array</code>
 **Kind**: instance property of <code>[Vaulted](#module_vaulted..Vaulted)</code>  
 <a name="module_vaulted..Vaulted+auths"></a>
 #### vaulted.auths : <code>Object</code>
@@ -96,21 +90,6 @@ also sets the 'X-Vault-Token' header with token value
 | Param | Type | Description |
 | --- | --- | --- |
 | vault_token | <code>String</code> | the root/master token |
-
-<a name="module_vaulted..setKeys"></a>
-### vaulted~setKeys(keys) ⇒ <code>Vaulted</code>
-Sets the keys to use when sealing and unsealing the vault.
-
-**Kind**: inner method of <code>[vaulted](#module_vaulted)</code>  
-**Returns**: <code>Vaulted</code> - instance of Vaulted  
-**Throws**:
-
-- <code>Error</code> - Vault keys not provided, or is empty list.
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| keys | <code>Array</code> | shares of the master key |
 
 <a name="module_vaulted..setStatus"></a>
 ### vaulted~setStatus(status) ⇒ <code>Vaulted</code>

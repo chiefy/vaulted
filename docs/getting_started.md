@@ -9,37 +9,54 @@ var Vaulted = require('vaulted');
 
 var myVault = new Vaulted({
   vault_host: '127.0.0.1',
-  vault_port: 8200
+  vault_port: 8200,
+  vault_ssl: false
 });
 
-myVault.init()
+var keys;
+
+myVault.prepare()
   .bind(myVault)
-  .then(myVault.init)
-  .then(myVault.unSeal)
+  .then(function () {
+    return myVault.init();
+  }).then(function (data) {
+    myVault.setToken(data.root_token);
+    keys = data.keys;
+  })
+  .then(function () {
+    return myVault.unSeal({
+      body: {
+        key: keys[0]
+      }
+    });
+  })
+  .then(function () {
+    return myVault.unSeal({
+      body: {
+        key: keys[1]
+      }
+    });
+  })
   .then(function () {
     console.log('Vault is now ready!');
   })
   .catch(function onError(err) {
-    console.error('Could not initialize or unseal vault: %s', err.message);
+    console.error('Could not initialize or unseal vault:', err.message, err.error);
   });
 ```
 
-By default the token and keys are in a backup file located in the directory specified by the value of `backup_dir`.
 
 ## Existing Vault
-
-When working with an existing Vault the basic flow depends on if the backup file exists or not.
 
 ```javascript
 var Vaulted = require('vaulted');
 
 var myVault = new Vaulted({
   vault_host: '127.0.0.1',
-  vault_port: 8200
+  vault_port: 8200,
+  vault_ssl: false
 });
 
-// without backup file this step is required otherwise
-// the step below is all that is required.
 myVault.setToken('mytoken');
 
 myVault.prepare()

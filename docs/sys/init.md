@@ -13,7 +13,7 @@ Provides implementation for the Vault Initialization APIs
 Initializes a remote vault
 
 **Kind**: inner method of <code>[init](#module_init)</code>  
-**Resolve**: <code>Vaulted</code> Resolves with current instance of Vaulted after capturing the keys and token  
+**Resolve**: <code>Vaulted</code> Resolves with keys and token or current instance of Vaulted  
 **Reject**: <code>Error</code> An error indicating what went wrong  
 
 | Param | Type | Default | Description |

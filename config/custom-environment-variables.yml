@@ -1,5 +1,4 @@
 debug: DEBUG
-no_global_token: VAULT_NO_GLOBAL_TOKEN
 
 vault_host: VAULT_HOST
 vault_port: VAULT_PORT
@@ -21,4 +20,3 @@ proxy_password: VAULT_PROXY_PASSWORD
 timeout: VAULT_TIMEOUT
 secret_shares: SECRET_SHARES
 secret_threshold: SECRET_THRESHOLD
-backup_dir: VAULT_SAFE

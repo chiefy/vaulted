@@ -2,7 +2,6 @@
 require('../helpers').should;
 
 var
-  _ = require('lodash'),
   helpers = require('../helpers'),
   debuglog = helpers.debuglog,
   chai = helpers.chai,
