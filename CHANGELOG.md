@@ -9,6 +9,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Support for requiring token as input option instead of using global token.
 
 #### Changed
+- Internal refactor and organizing of the code base.
+- Entire code base makes use of `use strict;`
+
+#### Breaking Changes
+- No longer maintains a copy of the list of policies.
+- No longer maintains copy of the master key shares.
+- No longer captures the token and keys as part of `init`.
+- `unSeal` requires a master key share to passed in on a per call basis.
+- Removes configuration option `backup_dir` because the token and keys are not maintained internally so no longer need to backup them up.
+- Removed `no_global_token` option from previous change since the token and keys are never automatically captured.
 
 ## [2.1.1] - 2015-12-31
 #### Changed
