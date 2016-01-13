@@ -15,7 +15,8 @@ Vaulted is a nodejs-based wrapper for the Vault HTTP API.
         * [.mounts](#module_vaulted..Vaulted+mounts) : <code>Object</code>
         * [.headers](#module_vaulted..Vaulted+headers) : <code>Object</code>
         * [.initialized](#module_vaulted..Vaulted+initialized) : <code>boolean</code>
-    * [~prepare()](#module_vaulted..prepare) ⇒ <code>Promise</code>
+    * [~prepare([vault_token])](#module_vaulted..prepare) ⇒ <code>Promise</code>
+    * [~setInitialized()](#module_vaulted..setInitialized) ⇒ <code>Vaulted</code>
     * [~setToken(vault_token)](#module_vaulted..setToken) ⇒ <code>Vaulted</code>
     * [~setStatus(status)](#module_vaulted..setStatus) ⇒ <code>Vaulted</code>
     * [~validateEndpoint(endpoint, [mountName], [defaultName])](#module_vaulted..validateEndpoint) ⇒ <code>EndPoint</code>
@@ -69,12 +70,24 @@ Vaulted constructor
 #### vaulted.initialized : <code>boolean</code>
 **Kind**: instance property of <code>[Vaulted](#module_vaulted..Vaulted)</code>  
 <a name="module_vaulted..prepare"></a>
-### vaulted~prepare() ⇒ <code>Promise</code>
+### vaulted~prepare([vault_token]) ⇒ <code>Promise</code>
 Attempt to load the Vault state.
 
 **Kind**: inner method of <code>[vaulted](#module_vaulted)</code>  
 **Resolve**: <code>Vaulted</code> Resolves with current instance of Vaulted  
 **Reject**: <code>Error</code> An error indicating what went wrong  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [vault_token] | <code>String</code> | an auth token |
+
+<a name="module_vaulted..setInitialized"></a>
+### vaulted~setInitialized() ⇒ <code>Vaulted</code>
+Sets the initialized flag to true to indicated the Vault
+has been intialized.
+
+**Kind**: inner method of <code>[vaulted](#module_vaulted)</code>  
+**Returns**: <code>Vaulted</code> - instance of Vaulted  
 <a name="module_vaulted..setToken"></a>
 ### vaulted~setToken(vault_token) ⇒ <code>Vaulted</code>
 Sets the token to use when accessing the vault,

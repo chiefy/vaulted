@@ -32,6 +32,7 @@ describe('init', function() {
       data.root_token.should.be.a('string');
       data.should.have.property('keys');
       data.keys.should.be.a('array');
+      myVault.initialized.should.be.true;
       myVault.setToken(data.root_token);
       helpers.backup(data);
     });

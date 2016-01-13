@@ -11,11 +11,13 @@ chai.use(helpers.cap);
 
 describe('#seal', function () {
   var newVault = helpers.getEmptyVault();
+  var token;
   var myVault;
 
   before(function() {
     return helpers.getPreparedVault().then(function (vault) {
       myVault = vault;
+      token = helpers.recover().root_token;
     });
   });
 
@@ -30,7 +32,7 @@ describe('#seal', function () {
 
   it('should resolve to binded instance - success', function () {
     var existing = _.cloneDeep(myVault.status);
-    return myVault.seal({token: myVault.token}).then(function (self) {
+    return myVault.seal({token: token}).then(function (self) {
       existing.should.have.property('sealed');
       existing.sealed.should.be.false;
       self.status.should.have.property('sealed');
@@ -40,7 +42,7 @@ describe('#seal', function () {
 
   it('should resolve to binded instance - already sealed', function () {
     var existing = _.cloneDeep(myVault.status);
-    return myVault.seal({token: myVault.token}).then(function (self) {
+    return myVault.seal({token: token}).then(function (self) {
       existing.should.have.property('sealed');
       existing.sealed.should.be.true;
       self.status.should.have.property('sealed');

@@ -43,11 +43,7 @@ helpers.getEmptyVault = function getEmptyVault() {
 helpers.getPreparedVault = function getPreparedVault() {
   var backupData = helpers.recover();
   var myVault = this.getVault();
-
-  if (backupData.root_token) {
-    myVault.setToken(backupData.root_token);
-  }
-  return myVault.prepare();
+  return myVault.prepare(backupData.root_token);
 };
 
 helpers.getReadyVault = function getReadyVault() {
@@ -57,6 +53,9 @@ helpers.getReadyVault = function getReadyVault() {
 helpers.setupVault = function (myVault) {
 
   var backupData = helpers.recover();
+  if (backupData.root_token) {
+    myVault.setToken(backupData.root_token);
+  }
 
   return myVault.prepare().bind(myVault).then(function () {
     if (myVault.initialized && !myVault.status.sealed) {

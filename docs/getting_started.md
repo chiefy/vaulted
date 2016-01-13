@@ -64,3 +64,21 @@ myVault.prepare()
     console.log('Vault is now ready!');
   });
 ```
+
+
+## Existing Vault - Passing a token on a per-call basis
+
+```javascript
+var Vaulted = require('vaulted');
+
+var myVault = new Vaulted({
+  vault_host: '127.0.0.1',
+  vault_port: 8200,
+  vault_ssl: false
+});
+
+myVault.prepare('mytoken')
+  .then(function () {
+    console.log('Vault is now ready!');
+  });
+```
