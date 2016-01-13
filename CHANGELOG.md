@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Changed
 - Internal refactor and organizing of the code base.
 - Entire code base makes use of `use strict;`
+- `prepare` accepts auth token to handle loading Vault state when `setToken` is not used.
 
 #### Breaking Changes
 - No longer maintains a copy of the list of policies.
