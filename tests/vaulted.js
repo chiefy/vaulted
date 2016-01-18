@@ -45,11 +45,6 @@ describe('Vaulted', function () {
         debugflag = vault.config.get('debug');
 
       debugflag.should.equal(options.debug);
-      options = {
-        debug: undefined
-      };
-      // reset debug flag
-      vault.config.util.extendDeep(vault.config, options);
     });
 
     it('should be in the sealed state by default', function () {
@@ -79,6 +74,14 @@ describe('Vaulted', function () {
       vault.token.should.equal('sample.secret');
       vault.headers.should.contain.keys('X-Vault-Token');
     });
+
+    it('verify environment is being pickedup', function () {
+      process.env.VAULT_SSL = false;
+      var vault = new Vault();
+      var vault_ssl = vault.config.get('vault_ssl');
+      vault_ssl.should.be.equal(false);
+    });
+
   });
 
   describe('#methods', function () {
