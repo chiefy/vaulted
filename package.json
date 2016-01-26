@@ -30,7 +30,7 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.0.0",
-    "confab-addons": "kenjones-cisco/confab-addons#master",
+    "confab-addons": "0.1.0",
     "lodash": "^3.10.0",
     "request-promise": "^1.0.2",
     "request-debug": "^0.2.0",
