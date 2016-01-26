@@ -7,6 +7,7 @@ var rename = require('gulp-rename');
 var jshint = require('gulp-jshint');
 var istanbul = require('gulp-istanbul');
 var mocha = require('gulp-mocha');
+var jsdoc = require('gulp-jsdoc3');
 
 
 var SOURCE_CODE = ['lib/**/*.js'];
@@ -43,4 +44,10 @@ gulp.task('docs', function () {
       path.extname = '.md'
     }))
     .pipe(gulp.dest('docs'));
+});
+
+gulp.task('html', function (cb) {
+  var config = require('./jsdocConfig.json');
+  gulp.src(['README.md'].concat(SOURCE_CODE), {read: false})
+    .pipe(jsdoc(config, cb));
 });
