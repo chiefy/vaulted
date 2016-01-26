@@ -1,9 +1,0 @@
-vault_host: 127.0.0.1
-vault_port: 8200
-vault_ssl: true
-
-ssl_ciphers: TLSv1.2
-ssl_verify: true
-
-secret_shares: 3
-secret_threshold: 2
