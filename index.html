@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Documentation Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-api.html">api</a></li><li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-config.html">config</a></li><li><a href="module-cubbyhole.html">cubbyhole</a></li><li><a href="module-endpoint.html">endpoint</a></li><li><a href="module-health.html">health</a></li><li><a href="module-hooks.html">hooks</a></li><li><a href="module-init.html">init</a></li><li><a href="module-internal.html">internal</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-listeners.html">listeners</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-secret.html">secret</a></li><li><a href="module-vaulted.html">vaulted</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-api-API.html">api~API</a></li><li><a href="module-endpoint-Endpoint.html">endpoint~Endpoint</a></li><li><a href="module-hooks-Hooks.html">hooks~Hooks</a></li><li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#ALL_OPTIONS">ALL_OPTIONS</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+		<div class="col-sm-3 col-md-3">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>Vaulted</h1><p><a href="https://travis-ci.org/chiefy/vaulted"><img src="https://travis-ci.org/chiefy/vaulted.svg" alt="Build Status"></a> <a href="https://codeclimate.com/github/chiefy/vaulted"><img src="https://codeclimate.com/github/chiefy/vaulted/badges/gpa.svg" alt="Code Climate"></a> <a href="https://codeclimate.com/github/chiefy/vaulted/coverage"><img src="https://codeclimate.com/github/chiefy/vaulted/badges/coverage.svg" alt="Test Coverage"></a> <a href="http://packagequality.com/#?package=vaulted"><img src="http://npm.packagequality.com/shield/vaulted.svg" alt="Package Quality"></a> <a href="https://gitter.im/chiefy/vaulted?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/chiefy/vaulted"></a></p>
+<p>Vaulted is a nodejs-based wrapper for the <a href="https://vaultproject.io">Vault</a> HTTP API.</p>
+<h3>Installation</h3><pre class="prettyprint source lang-bash"><code>$ npm install vaulted</code></pre><h2>Getting Started</h2><h3>New Vault</h3><p>When starting a new Vault instance the basic flow goes init --&gt; unseal --&gt; any other action.</p>
+<pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+
+var myVault = new Vaulted({
+  vault_host: '127.0.0.1',
+  vault_port: 8200,
+  vault_ssl: false
+});
+
+var keys;
+
+myVault.prepare()
+  .bind(myVault)
+  .then(function () {
+    return myVault.init();
+  }).then(function (data) {
+    myVault.setToken(data.root_token);
+    keys = data.keys;
+  })
+  .then(function () {
+    return myVault.unSeal({
+      body: {
+        key: keys[0]
+      }
+    });
+  })
+  .then(function () {
+    return myVault.unSeal({
+      body: {
+        key: keys[1]
+      }
+    });
+  })
+  .then(function () {
+    console.log('Vault is now ready!');
+  })
+  .catch(function onError(err) {
+    console.error('Could not initialize or unseal vault:', err.message, err.error);
+  });</code></pre><h3>Existing Vault</h3><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+
+var myVault = new Vaulted({
+  vault_host: '127.0.0.1',
+  vault_port: 8200,
+  vault_ssl: false
+});
+
+myVault.setToken('mytoken');
+
+myVault.prepare()
+  .then(function () {
+    console.log('Vault is now ready!');
+  });</code></pre><h3>Existing Vault - Passing a token on a per-call basis</h3><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+
+var myVault = new Vaulted({
+  vault_host: '127.0.0.1',
+  vault_port: 8200,
+  vault_ssl: false
+});
+
+myVault.prepare('mytoken')
+  .then(function () {
+    console.log('Vault is now ready!');
+  });</code></pre><h2>Configuring</h2><p>The available options below can either be passed to the Vaulted constructor, using environment variables, or configuration files.</p>
+<h3>Constructor</h3><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+
+var myVault = new Vaulted({
+  vault_host: '127.0.0.1',
+  vault_port: 8200,
+  vault_ssl: false,
+  timeout: 5000
+});</code></pre><h3>Environment Variables</h3><pre class="prettyprint source lang-bash"><code>$ export VAULT_HOST=127.0.0.1
+$ export VAULT_PORT=8200
+$ export VAULT_SSL=false
+$ export VAULT_TIMEOUT=5000</code></pre><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+
+var myVault = new Vaulted();</code></pre><h3>Configuration File</h3><p>File: <code>config/default.yml</code></p>
+<pre class="prettyprint source lang-yaml"><code>vault_host: 127.0.0.1
+vault_port: 8200
+vault_ssl: true</code></pre><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+
+var myVault = new Vaulted();</code></pre><h3>Available Options</h3><table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Environment Variable</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vault_host</td>
+<td>VAULT_HOST</td>
+<td><code>127.0.0.1</code></td>
+<td>Vault server hostname</td>
+</tr>
+<tr>
+<td>vault_port</td>
+<td>VAULT_PORT</td>
+<td><code>8200</code></td>
+<td>Vault server port</td>
+</tr>
+<tr>
+<td>vault_ssl</td>
+<td>VAULT_SSL</td>
+<td><code>true</code> (enabled)</td>
+<td>Use SSL?</td>
+</tr>
+<tr>
+<td>vault_token</td>
+<td>VAULT_TOKEN</td>
+<td></td>
+<td>Token to use to access the vault</td>
+</tr>
+<tr>
+<td>ssl_ciphers</td>
+<td>VAULT_SSL_CIPHERS</td>
+<td><code>TLSv1.2</code></td>
+<td>The ciphers that will be used when communicating with vault over ssl</td>
+</tr>
+<tr>
+<td>ssl_cert_file</td>
+<td>VAULT_SSL_CERT</td>
+<td></td>
+<td>Path to custom SSL cert file</td>
+</tr>
+<tr>
+<td>ssl_pem_file</td>
+<td>VAULT_SSL_CERT_KEY</td>
+<td></td>
+<td>Path of SSL cert PEM file to use with custom SSL verification</td>
+</tr>
+<tr>
+<td>ssl_pem_passphrase</td>
+<td>VAULT_SSL_CERT_PASSPHRASE</td>
+<td></td>
+<td>Passphrase associated SSL cert PEM file to use with custom SSL verification</td>
+</tr>
+<tr>
+<td>ssl_ca_cert</td>
+<td>VAULT_CACERT</td>
+<td></td>
+<td>CA cert path used for certification verification</td>
+</tr>
+<tr>
+<td>ssl_verify</td>
+<td>VAULT_SSL_VERIFY</td>
+<td><code>true</code></td>
+<td>validate SSL requests?</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>VAULT_TIMEOUT</td>
+<td></td>
+<td>milliseconds to wait for response headers</td>
+</tr>
+<tr>
+<td>proxy_address</td>
+<td>VAULT_PROXY_ADDRESS</td>
+<td></td>
+<td>HTTP Proxy server address</td>
+</tr>
+<tr>
+<td>proxy_password</td>
+<td>VAULT_PROXY_PASSWORD</td>
+<td></td>
+<td>HTTP Proxy user password</td>
+</tr>
+<tr>
+<td>proxy_port</td>
+<td>VAULT_PROXY_PORT</td>
+<td></td>
+<td>HTTP Proxy server port</td>
+</tr>
+<tr>
+<td>proxy_username</td>
+<td>VAULT_PROXY_USERNAME</td>
+<td></td>
+<td>HTTP Proxy server username</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>DEBUG</td>
+<td><code>false</code></td>
+<td>Show verbose messages, network requests?</td>
+</tr>
+<tr>
+<td>secret_shares</td>
+<td>SECRET_SHARES</td>
+<td><code>3</code></td>
+<td>Number of shared secret keys to generate</td>
+</tr>
+<tr>
+<td>secret_threshold</td>
+<td>SECRET_THRESHOLD</td>
+<td><code>2</code></td>
+<td>Threshold at which to unseal vault (must be &lt;= SECRET_SHARES)</td>
+</tr>
+</tbody>
+</table>
+<h3>Running The Express-app Example</h3><p>In order to run the example, you will need to install:</p>
+<ul>
+<li>GNU Make</li>
+<li>Docker (boot2docker)</li>
+<li>Docker-Compose</li>
+</ul>
+<pre class="prettyprint source lang-bash"><code>$ make run-local</code></pre><p>After starting the servers, you can point a tool like POSTman at <code>http://$(boot2docker ip):3000</code>. You can perform read/write/delete operations on secrets:</p>
+<pre class="prettyprint source lang-bash"><code>curl \
+  -X PUT \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{ &quot;hashicorp&quot;: &quot;amazeballs&quot;, &quot;poop&quot;: &quot;stinky&quot; }' \
+  'http://$(boot2docker ip):3000/secret/poop'</code></pre><pre class="prettyprint source lang-json"><code>{&quot;success&quot;:true}</code></pre><pre class="prettyprint source lang-bash"><code>curl \
+  -X GET \
+  'http://$(boot2docker ip):3000/secret/poop'</code></pre><pre class="prettyprint source lang-json"><code>{
+  &quot;lease_id&quot;: &quot;secret/poop/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx&quot;,
+  &quot;renewable&quot;: false,
+  &quot;lease_duration&quot;: 2592000,
+  &quot;data&quot;: {
+    &quot;hashicorp&quot;: &quot;amazeballs&quot;,
+    &quot;poop&quot;: &quot;stinky&quot;
+  },
+  &quot;auth&quot;: null
+}</code></pre><h3>Development</h3><p>Use the <code>docker-compose-test.yml</code> to aid development. PRs are very, very welcome. Please add tests when including new functionality.</p>
+<h3>Running Tests</h3><pre class="prettyprint source lang-bash"><code>$ docker-compose -f docker-compose-test.yml up -d consul vault
+$ docker-compose -f docker-compose-test.yml run vaulted</code></pre><h3>License</h3><p>The MIT License (MIT)</p>
+<p>Copyright (c) 2015-2016 Christopher &quot;Chief&quot; Najewicz</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+<div class="modal fade" id="searchResults">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Search results</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
+	
+		on January 26th 2016, 6:51:50 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+<script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			var id = $( heading ).attr( "id" );
+			return id && id.replace(/\~/g, '-inner-').replace(/\./g, '-static-') || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		SearcherDisplay.init();
+	});
+</script>
+
+</body>
+</html>
