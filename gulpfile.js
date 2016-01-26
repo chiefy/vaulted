@@ -1,13 +1,14 @@
-'use strict'
+'use strict';
 
-var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gulp         = require('gulp');
+var gutil        = require('gulp-util');
 var gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
-var rename = require('gulp-rename');
-var jshint = require('gulp-jshint');
-var istanbul = require('gulp-istanbul');
-var mocha = require('gulp-mocha');
-var jsdoc = require('gulp-jsdoc3');
+var rename       = require('gulp-rename');
+var jshint       = require('gulp-jshint');
+var istanbul     = require('gulp-istanbul');
+var mocha        = require('gulp-mocha');
+var jsdoc        = require('gulp-jsdoc3');
+var deploy       = require('gulp-gh-pages');
 
 
 var SOURCE_CODE = ['lib/**/*.js'];
@@ -38,10 +39,10 @@ gulp.task('docs', function () {
   return gulp.src(SOURCE_CODE)
     .pipe(gulpJsdoc2md())
     .on('error', function (err) {
-      gutil.log(gutil.colors.red('jsdoc2md failed'), err.message)
+      gutil.log(gutil.colors.red('jsdoc2md failed'), err.message);
     })
     .pipe(rename(function (path) {
-      path.extname = '.md'
+      path.extname = '.md';
     }))
     .pipe(gulp.dest('docs'));
 });
@@ -51,3 +52,10 @@ gulp.task('html', function (cb) {
   gulp.src(['README.md'].concat(SOURCE_CODE), {read: false})
     .pipe(jsdoc(config, cb));
 });
+
+gulp.task('deploy', ['html'], function () {
+  return gulp
+    .src('./gen-docs/**/*')
+    .pipe(deploy());
+});
+
