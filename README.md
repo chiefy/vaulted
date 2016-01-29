@@ -4,17 +4,17 @@
 
 Vaulted is a nodejs-based wrapper for the [Vault](https://vaultproject.io) HTTP API.
 
-### Installation
+## Installation
 
 ```bash
 $ npm install vaulted
 ```
 
+
 ## Getting Started
 
-### New Vault
 
-When starting a new Vault instance the basic flow goes init --> unseal --> any other action.
+#### New Vault
 
 ```javascript
 var Vaulted = require('vaulted');
@@ -58,7 +58,7 @@ myVault.prepare()
 ```
 
 
-### Existing Vault
+#### Existing Vault - set token globally
 
 ```javascript
 var Vaulted = require('vaulted');
@@ -78,7 +78,7 @@ myVault.prepare()
 ```
 
 
-### Existing Vault - Passing a token on a per-call basis
+#### Existing Vault - set token per-call
 
 ```javascript
 var Vaulted = require('vaulted');
@@ -95,10 +95,14 @@ myVault.prepare('mytoken')
   });
 ```
 
+
 ## Configuring
+
 The available options below can either be passed to the Vaulted constructor, using environment variables, or configuration files.
 
+
 ### Constructor
+
 ```javascript
 var Vaulted = require('vaulted');
 
@@ -110,7 +114,9 @@ var myVault = new Vaulted({
 });
 ```
 
+
 ### Environment Variables
+
 ```bash
 $ export VAULT_HOST=127.0.0.1
 $ export VAULT_PORT=8200
@@ -124,7 +130,9 @@ var Vaulted = require('vaulted');
 var myVault = new Vaulted();
 ```
 
+
 ### Configuration File
+
 File: `config/default.yml`
 
 ```yaml
@@ -138,6 +146,7 @@ var Vaulted = require('vaulted');
 
 var myVault = new Vaulted();
 ```
+
 
 ### Available Options
 
@@ -162,12 +171,15 @@ debug | DEBUG | `false` | Show verbose messages, network requests?
 secret_shares | SECRET_SHARES | `3` | Number of shared secret keys to generate
 secret_threshold | SECRET_THRESHOLD | `2` | Threshold at which to unseal vault (must be <= SECRET_SHARES)
 
-### Running The Express-app Example
+
+## Example - An Express Application
 
 In order to run the example, you will need to install:
   * GNU Make
-  * Docker (boot2docker)
-  * Docker-Compose
+  * [Docker](https://www.docker.com/) using either of these
+    * [Docker Toolbox](https://www.docker.com/products/docker-toolbox)
+    * [boot2docker](http://boot2docker.io/)
+  * [Docker-Compose](https://docs.docker.com/compose/)
 
 ```bash
 $ make run-local
@@ -205,9 +217,11 @@ curl \
 }
 ```
 
-### Development
+
+## Development
 
 Use the `docker-compose-test.yml` to aid development. PRs are very, very welcome. Please add tests when including new functionality.
+
 
 ### Running Tests
 
@@ -216,7 +230,8 @@ $ docker-compose -f docker-compose-test.yml up -d consul vault
 $ docker-compose -f docker-compose-test.yml run vaulted
 ```
 
-### License
+
+## License
 
 The MIT License (MIT)
 
