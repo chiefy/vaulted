@@ -14,7 +14,8 @@
     "test-watch": "mocha --growl -R spec -w tests/**/*.js",
     "docs": "gulp docs",
     "lint": "gulp lint",
-    "html": "gulp html"
+    "html": "gulp html",
+    "doc-deploy": "gulp deploy"
   },
   "keywords": [
     "vault",
