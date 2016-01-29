@@ -32,14 +32,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api.html">api</a></li><li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-config.html">config</a></li><li><a href="module-cubbyhole.html">cubbyhole</a></li><li><a href="module-endpoint.html">endpoint</a></li><li><a href="module-health.html">health</a></li><li><a href="module-hooks.html">hooks</a></li><li><a href="module-init.html">init</a></li><li><a href="module-internal.html">internal</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-listeners.html">listeners</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-secret.html">secret</a></li><li><a href="module-vaulted.html">vaulted</a></li>
+					<li><a href="module-api.html">api</a></li><li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_cubbyhole.html">backend/cubbyhole</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-backend_secret.html">backend/secret</a></li><li><a href="module-health.html">health</a></li><li><a href="module-init.html">init</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-vaulted.html">vaulted</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api-API.html">api~API</a></li><li><a href="module-endpoint-Endpoint.html">endpoint~Endpoint</a></li><li><a href="module-hooks-Hooks.html">hooks~Hooks</a></li><li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
+					<li><a href="module-api-API.html">api~API</a></li><li><a href="module-endpoint-Endpoint.html">endpoint~Endpoint</a></li><li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
 				</ul>
 			</li>
 			
@@ -82,7 +82,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="module-endpoint.html">endpoint</a>~</span>
+            <span class="ancestors"><a href="module-endpoint.html">module:endpoint</a>~</span>
         
         Endpoint
         </h2>
@@ -97,16 +97,12 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Endpoint"><span class="type-signature"></span>new Endpoint(options)</h4>
+    <h4 class="name" id="Endpoint"><span class="type-signature"></span>new Endpoint()</h4>
     
     
 </dt>
 <dd>
 
-    
-    <div class="description">
-        <p>Endpoint constructor</p>
-    </div>
     
 
     
@@ -117,49 +113,6 @@
     
         <h5>Parameters:</h5>
         
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>object of options to configure the Endpoint</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
 
 <table class="params table table-striped">
     <thead>
@@ -187,7 +140,7 @@
 
         <tr>
             
-                <td class="name"><code>name</code></td>
+                <td class="name"><code>options.name</code></td>
             
 
             <td class="type">
@@ -223,7 +176,7 @@
 
         <tr>
             
-                <td class="name"><code>base_url</code></td>
+                <td class="name"><code>options.base_url</code></td>
             
 
             <td class="type">
@@ -259,7 +212,7 @@
 
         <tr>
             
-                <td class="name"><code>verbs</code></td>
+                <td class="name"><code>options.verbs</code></td>
             
 
             <td class="type">
@@ -295,7 +248,7 @@
 
         <tr>
             
-                <td class="name"><code>defaults</code></td>
+                <td class="name"><code>options.defaults</code></td>
             
 
             <td class="type">
@@ -329,13 +282,6 @@
             
 
             <td class="description last"><p>the default request options</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -985,7 +931,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on January 26th 2016, 6:51:51 pm
+		on January 28th 2016, 10:22:39 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

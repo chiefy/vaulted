@@ -32,21 +32,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api.html">api</a></li><li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-config.html">config</a></li><li><a href="module-cubbyhole.html">cubbyhole</a></li><li><a href="module-endpoint.html">endpoint</a></li><li><a href="module-health.html">health</a></li><li><a href="module-hooks.html">hooks</a></li><li><a href="module-init.html">init</a></li><li><a href="module-internal.html">internal</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-listeners.html">listeners</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-secret.html">secret</a></li><li><a href="module-vaulted.html">vaulted</a></li>
+					<li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_cubbyhole.html">backend/cubbyhole</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-backend_secret.html">backend/secret</a></li><li><a href="module-health.html">health</a></li><li><a href="module-init.html">init</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-vaulted.html">vaulted</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api-API.html">api~API</a></li><li><a href="module-endpoint-Endpoint.html">endpoint~Endpoint</a></li><li><a href="module-hooks-Hooks.html">hooks~Hooks</a></li><li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="global.html#ALL_OPTIONS">ALL_OPTIONS</a></li>
+					<li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
 				</ul>
 			</li>
 			
@@ -99,8 +92,7 @@
     <section class="readme-section">
         <article><h1>Vaulted</h1><p><a href="https://travis-ci.org/chiefy/vaulted"><img src="https://travis-ci.org/chiefy/vaulted.svg" alt="Build Status"></a> <a href="https://codeclimate.com/github/chiefy/vaulted"><img src="https://codeclimate.com/github/chiefy/vaulted/badges/gpa.svg" alt="Code Climate"></a> <a href="https://codeclimate.com/github/chiefy/vaulted/coverage"><img src="https://codeclimate.com/github/chiefy/vaulted/badges/coverage.svg" alt="Test Coverage"></a> <a href="http://packagequality.com/#?package=vaulted"><img src="http://npm.packagequality.com/shield/vaulted.svg" alt="Package Quality"></a> <a href="https://gitter.im/chiefy/vaulted?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/chiefy/vaulted"></a></p>
 <p>Vaulted is a nodejs-based wrapper for the <a href="https://vaultproject.io">Vault</a> HTTP API.</p>
-<h3>Installation</h3><pre class="prettyprint source lang-bash"><code>$ npm install vaulted</code></pre><h2>Getting Started</h2><h3>New Vault</h3><p>When starting a new Vault instance the basic flow goes init --&gt; unseal --&gt; any other action.</p>
-<pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+<h2>Installation</h2><pre class="prettyprint source lang-bash"><code>$ npm install vaulted</code></pre><h2>Getting Started</h2><h4>New Vault</h4><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
 
 var myVault = new Vaulted({
   vault_host: '127.0.0.1',
@@ -137,7 +129,7 @@ myVault.prepare()
   })
   .catch(function onError(err) {
     console.error('Could not initialize or unseal vault:', err.message, err.error);
-  });</code></pre><h3>Existing Vault</h3><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+  });</code></pre><h4>Existing Vault - set token globally</h4><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
 
 var myVault = new Vaulted({
   vault_host: '127.0.0.1',
@@ -150,7 +142,7 @@ myVault.setToken('mytoken');
 myVault.prepare()
   .then(function () {
     console.log('Vault is now ready!');
-  });</code></pre><h3>Existing Vault - Passing a token on a per-call basis</h3><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
+  });</code></pre><h4>Existing Vault - set token per-call</h4><pre class="prettyprint source lang-javascript"><code>var Vaulted = require('vaulted');
 
 var myVault = new Vaulted({
   vault_host: '127.0.0.1',
@@ -299,11 +291,15 @@ var myVault = new Vaulted();</code></pre><h3>Available Options</h3><table>
 </tr>
 </tbody>
 </table>
-<h3>Running The Express-app Example</h3><p>In order to run the example, you will need to install:</p>
+<h2>Example - An Express Application</h2><p>In order to run the example, you will need to install:</p>
 <ul>
 <li>GNU Make</li>
-<li>Docker (boot2docker)</li>
-<li>Docker-Compose</li>
+<li><a href="https://www.docker.com/">Docker</a> using either of these<ul>
+<li><a href="https://www.docker.com/products/docker-toolbox">Docker Toolbox</a></li>
+<li><a href="http://boot2docker.io/">boot2docker</a></li>
+</ul>
+</li>
+<li><a href="https://docs.docker.com/compose/">Docker-Compose</a></li>
 </ul>
 <pre class="prettyprint source lang-bash"><code>$ make run-local</code></pre><p>After starting the servers, you can point a tool like POSTman at <code>http://$(boot2docker ip):3000</code>. You can perform read/write/delete operations on secrets:</p>
 <pre class="prettyprint source lang-bash"><code>curl \
@@ -321,9 +317,9 @@ var myVault = new Vaulted();</code></pre><h3>Available Options</h3><table>
     &quot;poop&quot;: &quot;stinky&quot;
   },
   &quot;auth&quot;: null
-}</code></pre><h3>Development</h3><p>Use the <code>docker-compose-test.yml</code> to aid development. PRs are very, very welcome. Please add tests when including new functionality.</p>
+}</code></pre><h2>Development</h2><p>Use the <code>docker-compose-test.yml</code> to aid development. PRs are very, very welcome. Please add tests when including new functionality.</p>
 <h3>Running Tests</h3><pre class="prettyprint source lang-bash"><code>$ docker-compose -f docker-compose-test.yml up -d consul vault
-$ docker-compose -f docker-compose-test.yml run vaulted</code></pre><h3>License</h3><p>The MIT License (MIT)</p>
+$ docker-compose -f docker-compose-test.yml run vaulted</code></pre><h2>License</h2><p>The MIT License (MIT)</p>
 <p>Copyright (c) 2015-2016 Christopher &quot;Chief&quot; Najewicz</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the &quot;Software&quot;), to deal
@@ -383,7 +379,7 @@ THE SOFTWARE.</p></article>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on January 26th 2016, 6:51:50 pm
+		on January 28th 2016, 11:10:53 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

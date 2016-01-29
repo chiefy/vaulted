@@ -32,21 +32,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api.html">api</a></li><li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-config.html">config</a></li><li><a href="module-cubbyhole.html">cubbyhole</a></li><li><a href="module-endpoint.html">endpoint</a></li><li><a href="module-health.html">health</a></li><li><a href="module-hooks.html">hooks</a></li><li><a href="module-init.html">init</a></li><li><a href="module-internal.html">internal</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-listeners.html">listeners</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-secret.html">secret</a></li><li><a href="module-vaulted.html">vaulted</a></li>
+					<li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_cubbyhole.html">backend/cubbyhole</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-backend_secret.html">backend/secret</a></li><li><a href="module-health.html">health</a></li><li><a href="module-init.html">init</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-vaulted.html">vaulted</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api-API.html">api~API</a></li><li><a href="module-endpoint-Endpoint.html">endpoint~Endpoint</a></li><li><a href="module-hooks-Hooks.html">hooks~Hooks</a></li><li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="global.html#ALL_OPTIONS">ALL_OPTIONS</a></li>
+					<li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
 				</ul>
 			</li>
 			
@@ -165,7 +158,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~disableAudit"><span class="type-signature">&lt;inner> </span>disableAudit(options)</h4>
+    <h4 class="name" id="~disableAudit"><span class="type-signature">&lt;inner> </span>disableAudit()</h4>
     
     
 </dt>
@@ -196,49 +189,6 @@
         <th>Type</th>
 
         
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
         <th>Argument</th>
         
 
@@ -253,7 +203,7 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -285,7 +235,7 @@
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -313,13 +263,6 @@
             
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -407,7 +350,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~enableAudit"><span class="type-signature">&lt;inner> </span>enableAudit(options)</h4>
+    <h4 class="name" id="~enableAudit"><span class="type-signature">&lt;inner> </span>enableAudit()</h4>
     
     
 </dt>
@@ -438,49 +381,6 @@
         <th>Type</th>
 
         
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
         <th>Argument</th>
         
 
@@ -495,7 +395,7 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -527,60 +427,7 @@
 
         <tr>
             
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
+                <td class="name"><code>options.body.type</code></td>
             
 
             <td class="type">
@@ -612,7 +459,7 @@
 
         <tr>
             
-                <td class="name"><code>description</code></td>
+                <td class="name"><code>options.body.description</code></td>
             
 
             <td class="type">
@@ -646,7 +493,7 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>options.body.options</code></td>
             
 
             <td class="type">
@@ -677,17 +524,10 @@
         </tr>
 
     
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -715,13 +555,6 @@
             
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -809,7 +642,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~enableFileAudit"><span class="type-signature">&lt;inner> </span>enableFileAudit(options)</h4>
+    <h4 class="name" id="~enableFileAudit"><span class="type-signature">&lt;inner> </span>enableFileAudit()</h4>
     
     
 </dt>
@@ -840,53 +673,12 @@
         <th>Type</th>
 
         
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
         <th>Argument</th>
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -897,7 +689,7 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -921,6 +713,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>unique identifier for the file audit mount</p></td>
         </tr>
@@ -929,62 +725,7 @@
 
         <tr>
             
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>options.body.path</code></td>
             
 
             <td class="type">
@@ -1020,7 +761,7 @@
 
         <tr>
             
-                <td class="name"><code>description</code></td>
+                <td class="name"><code>options.body.description</code></td>
             
 
             <td class="type">
@@ -1058,7 +799,7 @@
 
         <tr>
             
-                <td class="name"><code>log_raw</code></td>
+                <td class="name"><code>options.body.log_raw</code></td>
             
 
             <td class="type">
@@ -1095,17 +836,10 @@
         </tr>
 
     
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -1131,15 +865,12 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -1227,7 +958,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~enableSyslogAudit"><span class="type-signature">&lt;inner> </span>enableSyslogAudit(options)</h4>
+    <h4 class="name" id="~enableSyslogAudit"><span class="type-signature">&lt;inner> </span>enableSyslogAudit()</h4>
     
     
 </dt>
@@ -1258,53 +989,12 @@
         <th>Type</th>
 
         
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
         <th>Argument</th>
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -1315,7 +1005,7 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -1339,6 +1029,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>unique identifier for the syslog audit mount</p></td>
         </tr>
@@ -1347,62 +1041,7 @@
 
         <tr>
             
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>description</code></td>
+                <td class="name"><code>options.body.description</code></td>
             
 
             <td class="type">
@@ -1440,7 +1079,7 @@
 
         <tr>
             
-                <td class="name"><code>facility</code></td>
+                <td class="name"><code>options.body.facility</code></td>
             
 
             <td class="type">
@@ -1480,7 +1119,7 @@
 
         <tr>
             
-                <td class="name"><code>tag</code></td>
+                <td class="name"><code>options.body.tag</code></td>
             
 
             <td class="type">
@@ -1520,7 +1159,7 @@
 
         <tr>
             
-                <td class="name"><code>log_raw</code></td>
+                <td class="name"><code>options.body.log_raw</code></td>
             
 
             <td class="type">
@@ -1557,17 +1196,10 @@
         </tr>
 
     
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -1593,15 +1225,12 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -1689,7 +1318,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~getAuditMounts"><span class="type-signature">&lt;inner> </span>getAuditMounts(<span class="optional">options</span>)</h4>
+    <h4 class="name" id="~getAuditMounts"><span class="type-signature">&lt;inner> </span>getAuditMounts()</h4>
     
     
 </dt>
@@ -1734,62 +1363,7 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -1817,13 +1391,6 @@
             
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -1955,7 +1522,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on January 26th 2016, 6:51:50 pm
+		on January 28th 2016, 11:10:53 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

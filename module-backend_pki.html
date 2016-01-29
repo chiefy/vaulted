@@ -32,21 +32,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api.html">api</a></li><li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-config.html">config</a></li><li><a href="module-cubbyhole.html">cubbyhole</a></li><li><a href="module-endpoint.html">endpoint</a></li><li><a href="module-health.html">health</a></li><li><a href="module-hooks.html">hooks</a></li><li><a href="module-init.html">init</a></li><li><a href="module-internal.html">internal</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-listeners.html">listeners</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-secret.html">secret</a></li><li><a href="module-vaulted.html">vaulted</a></li>
+					<li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_cubbyhole.html">backend/cubbyhole</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-backend_secret.html">backend/secret</a></li><li><a href="module-health.html">health</a></li><li><a href="module-init.html">init</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-vaulted.html">vaulted</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-api-API.html">api~API</a></li><li><a href="module-endpoint-Endpoint.html">endpoint~Endpoint</a></li><li><a href="module-hooks-Hooks.html">hooks~Hooks</a></li><li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="global.html#ALL_OPTIONS">ALL_OPTIONS</a></li>
+					<li><a href="module-vaulted-Vaulted.html">vaulted~Vaulted</a></li>
 				</ul>
 			</li>
 			
@@ -165,7 +158,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~createCertRole"><span class="type-signature">&lt;inner> </span>createCertRole(options, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~createCertRole"><span class="type-signature">&lt;inner> </span>createCertRole(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -212,64 +205,7 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -293,6 +229,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>role name</p></td>
         </tr>
@@ -301,62 +241,7 @@
 
         <tr>
             
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>ttl</code></td>
+                <td class="name"><code>options.body.ttl</code></td>
             
 
             <td class="type">
@@ -394,7 +279,7 @@
 
         <tr>
             
-                <td class="name"><code>max_ttl</code></td>
+                <td class="name"><code>options.body.max_ttl</code></td>
             
 
             <td class="type">
@@ -432,7 +317,7 @@
 
         <tr>
             
-                <td class="name"><code>allow_localhost</code></td>
+                <td class="name"><code>options.body.allow_localhost</code></td>
             
 
             <td class="type">
@@ -472,7 +357,7 @@
 
         <tr>
             
-                <td class="name"><code>allowed_domains</code></td>
+                <td class="name"><code>options.body.allowed_domains</code></td>
             
 
             <td class="type">
@@ -510,7 +395,7 @@
 
         <tr>
             
-                <td class="name"><code>allow_bare_domains</code></td>
+                <td class="name"><code>options.body.allow_bare_domains</code></td>
             
 
             <td class="type">
@@ -551,7 +436,7 @@ matching the value of the actual domains themselves</p></td>
 
         <tr>
             
-                <td class="name"><code>allow_subdomains</code></td>
+                <td class="name"><code>options.body.allow_subdomains</code></td>
             
 
             <td class="type">
@@ -592,7 +477,7 @@ with CNs that are subdomains of the CNs allowed by the other role options.</p></
 
         <tr>
             
-                <td class="name"><code>allow_any_name</code></td>
+                <td class="name"><code>options.body.allow_any_name</code></td>
             
 
             <td class="type">
@@ -632,7 +517,7 @@ with CNs that are subdomains of the CNs allowed by the other role options.</p></
 
         <tr>
             
-                <td class="name"><code>enforce_hostnames</code></td>
+                <td class="name"><code>options.body.enforce_hostnames</code></td>
             
 
             <td class="type">
@@ -673,7 +558,7 @@ for CNs, DNS SANs, and the host part of email addresses</p></td>
 
         <tr>
             
-                <td class="name"><code>allow_ip_sans</code></td>
+                <td class="name"><code>options.body.allow_ip_sans</code></td>
             
 
             <td class="type">
@@ -713,7 +598,7 @@ for CNs, DNS SANs, and the host part of email addresses</p></td>
 
         <tr>
             
-                <td class="name"><code>server_flag</code></td>
+                <td class="name"><code>options.body.server_flag</code></td>
             
 
             <td class="type">
@@ -753,7 +638,7 @@ for CNs, DNS SANs, and the host part of email addresses</p></td>
 
         <tr>
             
-                <td class="name"><code>client_flag</code></td>
+                <td class="name"><code>options.body.client_flag</code></td>
             
 
             <td class="type">
@@ -793,7 +678,7 @@ for CNs, DNS SANs, and the host part of email addresses</p></td>
 
         <tr>
             
-                <td class="name"><code>code_signing_flag</code></td>
+                <td class="name"><code>options.body.code_signing_flag</code></td>
             
 
             <td class="type">
@@ -834,7 +719,7 @@ signing use</p></td>
 
         <tr>
             
-                <td class="name"><code>email_protection_flag</code></td>
+                <td class="name"><code>options.body.email_protection_flag</code></td>
             
 
             <td class="type">
@@ -875,7 +760,7 @@ protection use</p></td>
 
         <tr>
             
-                <td class="name"><code>key_type</code></td>
+                <td class="name"><code>options.body.key_type</code></td>
             
 
             <td class="type">
@@ -915,7 +800,7 @@ protection use</p></td>
 
         <tr>
             
-                <td class="name"><code>key_bits</code></td>
+                <td class="name"><code>options.body.key_bits</code></td>
             
 
             <td class="type">
@@ -955,7 +840,7 @@ protection use</p></td>
 
         <tr>
             
-                <td class="name"><code>use_csr_common_name</code></td>
+                <td class="name"><code>options.body.use_csr_common_name</code></td>
             
 
             <td class="type">
@@ -993,17 +878,10 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
         </tr>
 
     
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -1029,15 +907,12 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -1165,7 +1040,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~deleteCertRole"><span class="type-signature">&lt;inner> </span>deleteCertRole(options, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~deleteCertRole"><span class="type-signature">&lt;inner> </span>deleteCertRole(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -1212,64 +1087,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -1293,6 +1111,10 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>role name</p></td>
         </tr>
@@ -1301,7 +1123,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -1327,15 +1149,12 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -1510,66 +1329,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>common_name</code></td>
+                <td class="name"><code>options.body.common_name</code></td>
             
 
             <td class="type">
@@ -1605,7 +1365,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>alt_names</code></td>
+                <td class="name"><code>options.body.alt_names</code></td>
             
 
             <td class="type">
@@ -1643,7 +1403,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ip_sans</code></td>
+                <td class="name"><code>options.body.ip_sans</code></td>
             
 
             <td class="type">
@@ -1681,7 +1441,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -1721,7 +1481,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_type</code></td>
+                <td class="name"><code>options.body.key_type</code></td>
             
 
             <td class="type">
@@ -1761,7 +1521,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_bits</code></td>
+                <td class="name"><code>options.body.key_bits</code></td>
             
 
             <td class="type">
@@ -1795,13 +1555,6 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             <td class="description last"><p>The number of bits to use</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -2014,66 +1767,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>common_name</code></td>
+                <td class="name"><code>options.body.common_name</code></td>
             
 
             <td class="type">
@@ -2109,7 +1803,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>alt_names</code></td>
+                <td class="name"><code>options.body.alt_names</code></td>
             
 
             <td class="type">
@@ -2147,7 +1841,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ip_sans</code></td>
+                <td class="name"><code>options.body.ip_sans</code></td>
             
 
             <td class="type">
@@ -2185,7 +1879,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -2225,7 +1919,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_type</code></td>
+                <td class="name"><code>options.body.key_type</code></td>
             
 
             <td class="type">
@@ -2265,7 +1959,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_bits</code></td>
+                <td class="name"><code>options.body.key_bits</code></td>
             
 
             <td class="type">
@@ -2299,13 +1993,6 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             <td class="description last"><p>The number of bits to use</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -2518,66 +2205,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>common_name</code></td>
+                <td class="name"><code>options.body.common_name</code></td>
             
 
             <td class="type">
@@ -2613,7 +2241,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>alt_names</code></td>
+                <td class="name"><code>options.body.alt_names</code></td>
             
 
             <td class="type">
@@ -2651,7 +2279,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ip_sans</code></td>
+                <td class="name"><code>options.body.ip_sans</code></td>
             
 
             <td class="type">
@@ -2689,7 +2317,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ttl</code></td>
+                <td class="name"><code>options.body.ttl</code></td>
             
 
             <td class="type">
@@ -2727,7 +2355,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -2767,7 +2395,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_type</code></td>
+                <td class="name"><code>options.body.key_type</code></td>
             
 
             <td class="type">
@@ -2807,7 +2435,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_bits</code></td>
+                <td class="name"><code>options.body.key_bits</code></td>
             
 
             <td class="type">
@@ -2847,7 +2475,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>max_path_length</code></td>
+                <td class="name"><code>options.body.max_path_length</code></td>
             
 
             <td class="type">
@@ -2881,13 +2509,6 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             <td class="description last"><p>the maximum path length to encode in the generated certificate</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -3100,66 +2721,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>common_name</code></td>
+                <td class="name"><code>options.body.common_name</code></td>
             
 
             <td class="type">
@@ -3195,7 +2757,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>alt_names</code></td>
+                <td class="name"><code>options.body.alt_names</code></td>
             
 
             <td class="type">
@@ -3233,7 +2795,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ip_sans</code></td>
+                <td class="name"><code>options.body.ip_sans</code></td>
             
 
             <td class="type">
@@ -3271,7 +2833,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ttl</code></td>
+                <td class="name"><code>options.body.ttl</code></td>
             
 
             <td class="type">
@@ -3309,7 +2871,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -3349,7 +2911,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_type</code></td>
+                <td class="name"><code>options.body.key_type</code></td>
             
 
             <td class="type">
@@ -3389,7 +2951,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>key_bits</code></td>
+                <td class="name"><code>options.body.key_bits</code></td>
             
 
             <td class="type">
@@ -3429,7 +2991,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>max_path_length</code></td>
+                <td class="name"><code>options.body.max_path_length</code></td>
             
 
             <td class="type">
@@ -3463,13 +3025,6 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             <td class="description last"><p>the maximum path length to encode in the generated certificate</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -4307,7 +3862,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCertRole"><span class="type-signature">&lt;inner> </span>getCertRole(options, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCertRole"><span class="type-signature">&lt;inner> </span>getCertRole(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -4354,64 +3909,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -4435,6 +3933,10 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>role name</p></td>
         </tr>
@@ -4443,7 +3945,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -4469,15 +3971,12 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -4605,7 +4104,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCertSerial"><span class="type-signature">&lt;inner> </span>getCertSerial(options, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCertSerial"><span class="type-signature">&lt;inner> </span>getCertSerial(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -4652,13 +4151,13 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
 
@@ -4681,57 +4180,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
                 </td>
             
 
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
             <td class="description last"><p>certificate serial number</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -4859,7 +4308,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getConfigCrl"><span class="type-signature">&lt;inner> </span>getConfigCrl(<span class="optional">options</span>, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getConfigCrl"><span class="type-signature">&lt;inner> </span>getConfigCrl(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -4906,66 +4355,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -4991,15 +4381,12 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -5127,7 +4514,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getConfigUrls"><span class="type-signature">&lt;inner> </span>getConfigUrls(<span class="optional">options</span>, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getConfigUrls"><span class="type-signature">&lt;inner> </span>getConfigUrls(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -5174,66 +4561,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -5259,15 +4587,12 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -5731,7 +5056,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCrlRotate"><span class="type-signature">&lt;inner> </span>getCrlRotate(<span class="optional">options</span>, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCrlRotate"><span class="type-signature">&lt;inner> </span>getCrlRotate(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -5778,66 +5103,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -5863,15 +5129,12 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -6046,66 +5309,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>common_name</code></td>
+                <td class="name"><code>options.body.common_name</code></td>
             
 
             <td class="type">
@@ -6141,7 +5345,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>alt_names</code></td>
+                <td class="name"><code>options.body.alt_names</code></td>
             
 
             <td class="type">
@@ -6179,7 +5383,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ip_sans</code></td>
+                <td class="name"><code>options.body.ip_sans</code></td>
             
 
             <td class="type">
@@ -6217,7 +5421,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>ttl</code></td>
+                <td class="name"><code>options.body.ttl</code></td>
             
 
             <td class="type">
@@ -6255,7 +5459,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -6289,13 +5493,6 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 
             <td class="description last"><p>Format for returned data</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -6508,13 +5705,13 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
+                <td class="name"><code>options.body.serial_number</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
 
@@ -6537,57 +5734,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
                 </td>
             
 
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>serial_number</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
             <td class="description last"><p>serial number of the certificate to revoke</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -6801,13 +5948,13 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
+                <td class="name"><code>options.body.pem_bundle</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
 
@@ -6830,57 +5977,7 @@ CA certificate and its private key, concatenated</p>
                 </td>
             
 
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>pem_bundle</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
             <td class="description last"><p>The key and certificate concatenated in PEM format</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -7093,13 +6190,13 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
+                <td class="name"><code>options.body.expiry</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
 
@@ -7122,57 +6219,7 @@ CA certificate and its private key, concatenated</p>
                 </td>
             
 
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>expiry</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
             <td class="description last"><p>The time until expiration</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -7385,13 +6432,13 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
+                <td class="name"><code>options.body.issuing_certificates</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
 
@@ -7400,6 +6447,8 @@ CA certificate and its private key, concatenated</p>
 
             
                 <td class="attributes">
+                
+                    &lt;optional><br>
                 
 
                 
@@ -7414,61 +6463,6 @@ CA certificate and its private key, concatenated</p>
                 </td>
             
 
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>issuing_certificates</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
             <td class="description last"><p>URL values for the Issuing Certificate field</p></td>
         </tr>
 
@@ -7476,7 +6470,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>crl_distribution_points</code></td>
+                <td class="name"><code>options.body.crl_distribution_points</code></td>
             
 
             <td class="type">
@@ -7501,6 +6495,10 @@ CA certificate and its private key, concatenated</p>
                 </td>
             
 
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>URL values for the CRL Distribution Points field</p></td>
@@ -7510,7 +6508,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>ocsp_servers</code></td>
+                <td class="name"><code>options.body.ocsp_servers</code></td>
             
 
             <td class="type">
@@ -7536,15 +6534,12 @@ CA certificate and its private key, concatenated</p>
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>URL values for the OCSP Servers field</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -7757,13 +6752,13 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
+                <td class="name"><code>options.body.certificate</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
 
@@ -7786,57 +6781,7 @@ CA certificate and its private key, concatenated</p>
                 </td>
             
 
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>certificate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
             <td class="description last"><p>The certificate in PEM format</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -8002,7 +6947,7 @@ CA certificate and its private key, concatenated</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="~signCertificate"><span class="type-signature">&lt;inner> </span>signCertificate(options, <span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~signCertificate"><span class="type-signature">&lt;inner> </span>signCertificate(<span class="optional">mountName</span>)</h4>
     
     
 </dt>
@@ -8049,64 +6994,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>object of options to send to API request</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>options.id</code></td>
             
 
             <td class="type">
@@ -8130,6 +7018,10 @@ CA certificate and its private key, concatenated</p>
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>role name</p></td>
         </tr>
@@ -8138,62 +7030,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>csr</code></td>
+                <td class="name"><code>options.body.csr</code></td>
             
 
             <td class="type">
@@ -8229,7 +7066,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>common_name</code></td>
+                <td class="name"><code>options.body.common_name</code></td>
             
 
             <td class="type">
@@ -8265,7 +7102,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>alt_names</code></td>
+                <td class="name"><code>options.body.alt_names</code></td>
             
 
             <td class="type">
@@ -8303,7 +7140,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>ip_sans</code></td>
+                <td class="name"><code>options.body.ip_sans</code></td>
             
 
             <td class="type">
@@ -8341,7 +7178,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>ttl</code></td>
+                <td class="name"><code>options.body.ttl</code></td>
             
 
             <td class="type">
@@ -8379,7 +7216,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -8416,17 +7253,10 @@ CA certificate and its private key, concatenated</p>
         </tr>
 
     
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -8452,15 +7282,12 @@ CA certificate and its private key, concatenated</p>
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>the authentication token</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -8635,66 +7462,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>csr</code></td>
+                <td class="name"><code>options.body.csr</code></td>
             
 
             <td class="type">
@@ -8730,7 +7498,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>ttl</code></td>
+                <td class="name"><code>options.body.ttl</code></td>
             
 
             <td class="type">
@@ -8768,7 +7536,7 @@ CA certificate and its private key, concatenated</p>
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -8802,13 +7570,6 @@ CA certificate and its private key, concatenated</p>
             
 
             <td class="description last"><p>Format for returned data</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -9022,66 +7783,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>options.body</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>holds the attributes passed as inputs</p>
-                <h6 class="method-params-label method-subparams-label">Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>csr</code></td>
+                <td class="name"><code>options.body.csr</code></td>
             
 
             <td class="type">
@@ -9117,7 +7819,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>common_name</code></td>
+                <td class="name"><code>options.body.common_name</code></td>
             
 
             <td class="type">
@@ -9153,7 +7855,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>alt_names</code></td>
+                <td class="name"><code>options.body.alt_names</code></td>
             
 
             <td class="type">
@@ -9191,7 +7893,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>ip_sans</code></td>
+                <td class="name"><code>options.body.ip_sans</code></td>
             
 
             <td class="type">
@@ -9229,7 +7931,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>ttl</code></td>
+                <td class="name"><code>options.body.ttl</code></td>
             
 
             <td class="type">
@@ -9267,7 +7969,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>format</code></td>
+                <td class="name"><code>options.body.format</code></td>
             
 
             <td class="type">
@@ -9307,7 +8009,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>max_path_length</code></td>
+                <td class="name"><code>options.body.max_path_length</code></td>
             
 
             <td class="type">
@@ -9347,7 +8049,7 @@ for acting as an intermediate CA</p>
 
         <tr>
             
-                <td class="name"><code>use_csr_values</code></td>
+                <td class="name"><code>options.body.use_csr_values</code></td>
             
 
             <td class="type">
@@ -9383,13 +8085,6 @@ will be preserved from the CSR rather than using the values provided in the othe
 2) Any key usages (for instance, non-repudiation) requested in the CSR will be added to the basic
 set of key usages used for CA certs signed by this path;
 3) Extensions requested in the CSR will be copied into the issued certificate</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
         </tr>
 
     
@@ -9599,7 +8294,7 @@ set of key usages used for CA certs signed by this path;
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on January 26th 2016, 6:51:51 pm
+		on January 28th 2016, 11:10:54 pm
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
