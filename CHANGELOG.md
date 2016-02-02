@@ -3,10 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
+
+## [3.0.0] - 2016-02-03
 #### Added
 - Gracefully handle mounts or paths that are prefixed with '/'.
 - Support policies as javascript objects (automatically converted to JSON string)
 - Support for requiring token as input option instead of using global token.
+- Published all documentation to https://chiefy.github.io/vaulted
 
 #### Changed
 - Internal refactor and organizing of the code base.
@@ -106,7 +109,8 @@ of the vault.
 - This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
 - Initial project release. Supporting small subset of Vault's HTTP API
 
-[unreleased]: https://github.com/chiefy/vaulted/compare/v2.1.1...master
+[unreleased]: https://github.com/chiefy/vaulted/compare/v3.0.0...master
+[3.0.0]: https://github.com/chiefy/vaulted/compare/v2.1.1...v3.0.0
 [2.1.1]: https://github.com/chiefy/vaulted/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/chiefy/vaulted/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/chiefy/vaulted/compare/v1.1.0...v2.0.0
