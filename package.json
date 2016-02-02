@@ -13,7 +13,9 @@
     "coverage": "istanbul cover _mocha -- tests/**",
     "test-watch": "mocha --growl -R spec -w tests/**/*.js",
     "docs": "gulp docs",
-    "lint": "gulp lint"
+    "lint": "gulp lint",
+    "html": "gulp html",
+    "doc-deploy": "gulp deploy"
   },
   "keywords": [
     "vault",
@@ -23,10 +25,12 @@
     "hashicorp"
   ],
   "author": "Christopher 'Chief' Najewicz <chief@beefdisciple.com>",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Kenny Jones",
       "email": "kenjones@cisco.com"
-    }],
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.0.0",
@@ -37,18 +41,18 @@
     "js-yaml": "^3.4.6"
   },
   "devDependencies": {
-    "jshint": "^2.8.0",
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
-    "istanbul": "^0.4.1",
-    "mocha": "^2.2.5",
     "gulp": "^3.9.0",
-    "gulp-jsdoc-to-markdown": "^1.2.0",
-    "gulp-util": "^3.0.7",
-    "gulp-rename": "^1.2.2",
-    "gulp-jshint": "^2.0.0",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-istanbul": "^0.10.3",
-    "gulp-mocha": "^2.2.0"
+    "gulp-jsdoc3": "^0.1.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "istanbul": "^0.4.1",
+    "jshint": "^2.8.0",
+    "mocha": "^2.2.5"
   },
   "repository": "https://github.com/chiefy/vaulted"
 }
+
