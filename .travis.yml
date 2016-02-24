@@ -8,8 +8,8 @@ services:
   - docker
 
 before_install:
-  - docker pull kenjones/authstore-consul
-  - docker pull kenjones/authstore-vault
+  - docker pull kenjones/authstore-consul:0.5.2
+  - docker pull kenjones/authstore-vault:0.4.1
   - docker pull kenjones/nodejs-mocha
   - docker-compose -f docker-compose-test.yml up -d vault
 
@@ -38,4 +38,3 @@ notifications:
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: false     # default: false
-
