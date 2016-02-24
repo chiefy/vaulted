@@ -1,6 +1,6 @@
 consul:
   container_name: consul
-  image: kenjones/authstore-consul
+  image: kenjones/authstore-consul:0.5.2
   ports:
     - "8301"
     - "8302"
@@ -10,7 +10,7 @@ consul:
 
 vault:
   container_name: vault
-  image: kenjones/authstore-vault
+  image: kenjones/authstore-vault:0.4.1
   links:
     - consul:consul
   cap_add:

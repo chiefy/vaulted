@@ -36,7 +36,7 @@
     "bluebird": "^3.0.0",
     "confab-addons": "0.1.0",
     "lodash": "^3.10.0",
-    "request-promise": "^1.0.2",
+    "request-promise": "^2.0.1",
     "request-debug": "^0.2.0",
     "js-yaml": "^3.4.6"
   },
@@ -55,4 +55,3 @@
   },
   "repository": "https://github.com/chiefy/vaulted"
 }
-
