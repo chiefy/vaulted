@@ -193,8 +193,8 @@ After starting the servers, you can point a tool like POSTman at `http://$(boot2
 curl \
   -X PUT \
   -H "Content-Type: application/json" \
-  -d '{ "hashicorp": "amazeballs", "poop": "stinky" }' \
-  'http://$(boot2docker ip):3000/secret/poop'
+  -d '{ "hashicorp": "amazeballs", "value": "s3cr37" }' \
+  'http://$(boot2docker ip):3000/secret/value'
 ```
 
 ```json
@@ -204,17 +204,17 @@ curl \
 ```bash
 curl \
   -X GET \
-  'http://$(boot2docker ip):3000/secret/poop'
+  'http://$(boot2docker ip):3000/secret/value'
 ```
 
 ```json
 {
-  "lease_id": "secret/poop/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+  "lease_id": "secret/value/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
   "renewable": false,
   "lease_duration": 2592000,
   "data": {
     "hashicorp": "amazeballs",
-    "poop": "stinky"
+    "value": "s3cr37"
   },
   "auth": null
 }
