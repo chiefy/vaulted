@@ -306,16 +306,16 @@ var myVault = new Vaulted();</code></pre><h3>Available Options</h3><table>
 <pre class="prettyprint source lang-bash"><code>curl \
   -X PUT \
   -H &quot;Content-Type: application/json&quot; \
-  -d '{ &quot;hashicorp&quot;: &quot;amazeballs&quot;, &quot;poop&quot;: &quot;stinky&quot; }' \
-  'http://$(boot2docker ip):3000/secret/poop'</code></pre><pre class="prettyprint source lang-json"><code>{&quot;success&quot;:true}</code></pre><pre class="prettyprint source lang-bash"><code>curl \
+  -d '{ &quot;hashicorp&quot;: &quot;amazeballs&quot;, &quot;value&quot;: &quot;s3cr37&quot; }' \
+  'http://$(boot2docker ip):3000/secret/value'</code></pre><pre class="prettyprint source lang-json"><code>{&quot;success&quot;:true}</code></pre><pre class="prettyprint source lang-bash"><code>curl \
   -X GET \
-  'http://$(boot2docker ip):3000/secret/poop'</code></pre><pre class="prettyprint source lang-json"><code>{
-  &quot;lease_id&quot;: &quot;secret/poop/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx&quot;,
+  'http://$(boot2docker ip):3000/secret/value'</code></pre><pre class="prettyprint source lang-json"><code>{
+  &quot;lease_id&quot;: &quot;secret/value/xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx&quot;,
   &quot;renewable&quot;: false,
   &quot;lease_duration&quot;: 2592000,
   &quot;data&quot;: {
     &quot;hashicorp&quot;: &quot;amazeballs&quot;,
-    &quot;poop&quot;: &quot;stinky&quot;
+    &quot;value&quot;: &quot;s3cr37&quot;
   },
   &quot;auth&quot;: null
 }</code></pre><h2>Development</h2><p>Use the <code>docker-compose-test.yml</code> to aid development. PRs are very, very welcome. Please add tests when including new functionality.</p>
