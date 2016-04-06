@@ -61,6 +61,8 @@ describe('keys', function () {
         status.progress.should.be.exist;
         status.should.have.property('required');
         status.required.should.be.exist;
+        status.should.have.property('nonce');
+        status.nonce.should.be.exist;
       });
     });
 
@@ -85,15 +87,34 @@ describe('keys', function () {
     });
 
     it('should resolve with instance of binded Vault - complete false', function () {
-      return myVault.updateRekey({body: {key: myKeys[0]}}).then(function (data) {
-        data.complete.should.be.false;
-      });
+
+      return myVault.getRekeyStatus()
+        .then(function(status) {
+          return myVault.updateRekey({
+            body: {
+              key: myKeys[0],
+              nonce: status.nonce
+            }
+          }).then(function (data) {
+            data.complete.should.be.false;
+          });
+        });
+
     });
 
     it('should resolve with instance of binded Vault - complete true', function () {
-      return myVault.updateRekey({body: {key: myKeys[1]}}).then(function (data) {
-        data.complete.should.be.true;
-      });
+
+      return myVault.getRekeyStatus()
+        .then(function(status) {
+          return myVault.updateRekey({
+            body: {
+              key: myKeys[1],
+              nonce: status.nonce
+            }
+          }).then(function (data) {
+            data.complete.should.be.true;
+          });
+        });
     });
 
   });
