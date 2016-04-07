@@ -1,6 +1,6 @@
 {
   "name": "vaulted",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A nodejs wrapper library for using HashiCorp's Vault",
   "main": "./lib/vaulted.js",
   "files": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "npm rebuild && node ./lib/vaulted.js",
-    "test": "mocha -R spec tests/**",
+    "test": "make test",
     "coverage": "istanbul cover _mocha -- tests/**",
     "test-watch": "mocha --growl -R spec -w tests/**/*.js",
     "docs": "gulp docs",

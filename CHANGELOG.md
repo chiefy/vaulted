@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+## [3.0.1] - 2016-04-07
+
+#### Changed
+- Update lodash dep to latest
+- Add `nonce` param to `sys/rekey/update` endpoint
+- Updated `authstore/consul` and `authstore/vault` images in `docker-compose.yml` to latest versions
+- Fixed revoke-prefix token endpoint test
+
+
 ## [3.0.0] - 2016-02-03
 #### Added
 - Gracefully handle mounts or paths that are prefixed with '/'.
