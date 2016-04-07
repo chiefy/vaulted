@@ -92,7 +92,7 @@ describe('audit', function () {
         err.should.have.property('statusCode');
         err.statusCode.should.be.equal(400);
         err.should.have.property('error');
-        err.error.errors.should.include('path is required');
+        err.error.errors.should.include('file_path is required');
       });
     });
 

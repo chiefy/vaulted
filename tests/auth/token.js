@@ -19,7 +19,6 @@ describe('auth/tokens', function () {
     return helpers.getReadyVault().then(function (vault) {
       myVault = vault;
     });
-
   });
 
   describe('#createToken', function () {
@@ -354,7 +353,7 @@ describe('auth/tokens', function () {
           debuglog('child token: ', childtoken);
 
           return myVault.revokeTokenPrefix({
-            id: 'token/'
+            id: 'token'
           }).should.be.fulfilled;
 
         });

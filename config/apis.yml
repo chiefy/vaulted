@@ -173,6 +173,9 @@ v1:
         - name: "key"
           type: "string"
           required: true
+        - name: "nonce"
+          type: "string"
+          required: true
   "cubbyhole/:id":
     get:
       id: true
