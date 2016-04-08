@@ -9,9 +9,9 @@
   ],
   "scripts": {
     "start": "npm rebuild && node ./lib/vaulted.js",
-    "test": "make test",
+    "test": "make test-local",
+    "test-docker": "make test-docker",
     "coverage": "istanbul cover _mocha -- tests/**",
-    "test-watch": "mocha --growl -R spec -w tests/**/*.js",
     "docs": "gulp docs",
     "lint": "gulp lint",
     "html": "gulp html",
@@ -51,7 +51,8 @@
     "gulp-mocha": "^2.2.0",
     "istanbul": "^0.4.1",
     "jshint": "^2.8.0",
-    "mocha": "^2.2.5"
+    "mocha": "^2.4.5"
   },
   "repository": "https://github.com/chiefy/vaulted"
 }
+

@@ -24,7 +24,7 @@ vaulted:
   image: kenjones/nodejs-mocha
   links:
     - vault
-  command: ./test.sh
+  command: ./scripts/test.sh
   environment:
     - VAULT_HOST=vault
     - VAULT_PORT=8200
@@ -37,3 +37,4 @@ vaulted:
     - ALLOW_CONFIG_MUTATIONS=true
   volumes:
     - .:/app
+

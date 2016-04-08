@@ -1,0 +1,21 @@
+consul:
+  container_name: consul
+  image: kenjones/authstore-consul:0.6.4
+  ports:
+    - "8301"
+    - "8302"
+    - "8400"
+    - "8500"
+    - "8600"
+
+vault:
+  container_name: vault
+  image: kenjones/authstore-vault:0.5.2
+  links:
+    - consul
+  cap_add:
+    - IPC_LOCK
+  ports:
+    - "8200:8200"
+    - "8500:8500"
+

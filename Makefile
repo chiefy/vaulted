@@ -1,20 +1,41 @@
 VERSION := $(shell jq .version package.json)
 DOCKER_MACHINE_HOST := "docker-host"
-DOCKER_COMPOSE_TEST := "docker-compose-test.yml"
 DOCKER_MACHINE_IP := $(shell docker-machine ip $(DOCKER_MACHINE_HOST))
+TEST_ENV := docker
 
-.PHONY: clean build stop-local test
+.PHONY: clean build stop-local test start-vault stop-vault mocha-watch
 
 node_modules:
 	@npm install
 
-test: node_modules
-	@docker-compose -f $(DOCKER_COMPOSE_TEST) up
+docker-compose.yml:
+	@cp compose-templates/test-$(TEST_ENV).yml $@
 
-logs:
-	@docker-compose -f $(DOCKER_COMPOSE_TEST) logs
+logs: docker-compose.yml
+	@docker-compose logs
 
-stop-local:
-	@docker-compose -f $(DOCKER_COMPOSE_TEST) stop && \
-	docker-compose -f $(DOCKER_COMPOSE_TEST) rm -fv
+stop-vault: docker-compose.yml
+	@docker-compose stop && docker-compose rm -fv
 
+start-vault: docker-compose.yml
+	@docker-compose up -d
+
+test-docker: docker-compose.yml stop-vault node_modules
+	@docker-compose up
+
+test-local: TEST_ENV=local
+test-local: node_modules stop-vault start-vault
+	@sleep 5 && \
+	VAULT_HOST=$(DOCKER_MACHINE_IP) \
+	VAULT_SSL=false \
+	NODE_ENV=test \
+	DEBUG=false \
+	TEST_CONSUL_HOST=$(DOCKER_MACHINE_IP) \
+	CONSUL_HOST=$(DOCKER_MACHINE_IP) \
+	TEST_SYSLOG=true \
+	ALLOW_CONFIG_MUTATIONS=true \
+	_mocha --growl -R spec tests/**
+
+
+clean:
+	@rm -rf docker-compose.yml node_modules
