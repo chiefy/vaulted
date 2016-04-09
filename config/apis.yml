@@ -104,6 +104,13 @@ v1:
         - name: "options"
           type: "object"
           required: false
+  "sys/audit-hash/:id":
+    post:
+      id: true
+      params:
+        - name: "input"
+          type: "string"
+          required: true
   "sys/renew/:id":
     put:
       id: true
@@ -186,3 +193,4 @@ v1:
     delete:
       id: true
       params: []
+
