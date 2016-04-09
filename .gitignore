@@ -5,3 +5,4 @@ node_modules
 .vagrant/
 gen-docs
 npm-debug.log
+docker-compose.yml
