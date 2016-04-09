@@ -11,12 +11,12 @@ before_install:
   - docker pull kenjones/authstore-consul:0.6.4
   - docker pull kenjones/authstore-vault:0.5.2
   - docker pull kenjones/nodejs-mocha
-  - docker-compose -f docker-compose-test.yml up -d vault
+  - docker-compose -f ./compose-template/test-docker.yml up -d vault
 
 script:
   - mkdir -p $(pwd)/coverage
   - chmod 777 $(pwd)/coverage
-  - docker-compose -f docker-compose-test.yml run -e TRAVIS_JOB_ID=$TRAVIS_JOB_ID vaulted
+  - docker-compose -f ./compose-template/test-docker.yml run -e TRAVIS_JOB_ID=$TRAVIS_JOB_ID vaulted
 
 addons:
   code_climate:
@@ -28,8 +28,8 @@ after_script:
   - docker rm $(docker ps -q -f status=exited)
   - docker logs consul
   - docker logs vault
-  - docker-compose -f docker-compose-test.yml stop
-  - docker-compose -f docker-compose-test.yml rm -f
+  - docker-compose -f ./compose-template/test-docker.yml stop
+  - docker-compose -f ./compose-template/test-docker.yml rm -f
 
 notifications:
   webhooks:
@@ -38,3 +38,4 @@ notifications:
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: false     # default: false
+
