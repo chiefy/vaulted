@@ -11,16 +11,16 @@ var
 chai.use(helpers.cap);
 var SYSLOG_TESTING_ENABLED = os.platform() !== 'win32' && helpers.isTrue(process.env.TEST_SYSLOG);
 
-
 describe('audit', function () {
   var newVault = helpers.getEmptyVault();
   var myVault;
 
-  before(function () {
-    return helpers.getReadyVault().then(function (vault) {
-      myVault = vault;
-    });
-
+  before(function (done) {
+    return helpers.getReadyVault()
+      .then(function (vault) {
+        myVault = vault;
+        done();
+      });
   });
 
   describe('#enableAudit', function () {
@@ -291,4 +291,55 @@ describe('audit', function () {
 
   });
 
+  describe('#getAuditHash', function () {
+
+    before(function(done) {
+      myVault.enableAudit({
+          id: 'other',
+          body: {
+            type: 'file',
+            options: {
+              'path': '/tmp/vault'
+            }
+          }
+      }).then(done);
+    });
+
+    it('should throw an error when audit path is not mounted', function() {
+      return myVault.getAuditHash({
+        id: 'something',
+        body: {
+          input:'hi'
+        }
+      }).should.be.rejected;
+    });
+
+    it('should throw an error when id parameter is not present', function() {
+      return myVault.getAuditHash({}).should.be.rejectedWith(/requires an id/);
+    });
+
+    it('should throw an error when input parameter is not present', function() {
+      return myVault.getAuditHash({
+          id: 'other'
+      }).should.be.rejectedWith(/Missing required input input/);
+    });
+
+    it('should hash a string when provided a valid audit backend', function() {
+      return myVault.getAuditHash({
+        id: 'other',
+        body: {
+          input: 'hi mom'
+        }
+      })
+      .then(function(hash) {
+        expect(hash).to.be.defined;
+        hash.should.have.property('hash');
+        expect(hash.hash).to.be.defined;
+        hash.hash.should.be.a('string');
+      });
+    });
+
+  });
+
 });
+
