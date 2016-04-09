@@ -1,6 +1,6 @@
 VERSION := $(shell jq .version package.json)
 DOCKER_MACHINE_HOST := "docker-host"
-DOCKER_MACHINE_IP := $(shell docker-machine ip $(DOCKER_MACHINE_HOST))
+DOCKER_MACHINE_IP := $(shell docker-machine ip $(DOCKER_MACHINE_HOST) 2> /dev/null)
 TEST_ENV := docker
 
 .PHONY: clean build stop-local test start-vault stop-vault mocha-watch
