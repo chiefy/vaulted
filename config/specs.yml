@@ -99,6 +99,37 @@ v1:
           - name: "user_id"
             type: "string"
             required: true
+  github:
+    "auth/%s/login":
+      post:
+        id: false
+        params:
+          - name: "token"
+            type: "string"
+            required: true
+    "auth/%s/map/teams/:id":
+      post:
+        id: true
+        params:
+          - name: "value"
+            type: "string"
+            required: true
+    "auth/%s/config":
+      post:
+        id: false
+        params:
+          - name: "organization"
+            type: "string"
+            required: true
+          - name: "base_url"
+            type: "string"
+            required: false
+          - name: "max_ttl"
+            type: "string"
+            required: false
+          - name: "ttl"
+            type: "string"
+            required: false
   secret:
     "%s/:id":
       get:
@@ -467,3 +498,4 @@ v1:
           - name: "format"
             type: "string"
             required: false
+
