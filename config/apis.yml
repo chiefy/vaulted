@@ -46,6 +46,22 @@ v1:
         - name: "description"
           type: "string"
           required: false
+        - name: "config"
+          type: "object"
+          required: false
+  "sys/mounts/:id/tune":
+    get:
+      id: true
+      params: []
+    post:
+      id: true
+      params:
+        - name: "default_lease_ttl"
+          type: "string"
+          required: false
+        - name: "max_lease_ttl"
+          type: "string"
+          required: false
   sys/remount:
     post:
       id: false

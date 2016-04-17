@@ -82,7 +82,30 @@ describe('mounts', function () {
       }).should.be.rejectedWith(/Missing required input/);
     });
 
-    it('should resolve to updated list of mounts', function () {
+    it('should use the options object when provided', function (done) {
+      myVault.createMount({
+        id: 'options',
+        body: {
+          type: 'generic',
+          config: {
+            'max_lease_ttl': '5m',
+            'default_lease_ttl': '2m'
+          }
+        }
+      }).then(function (mounts) {
+        mounts.should.not.be.empty;
+        mounts.should.contain.keys('options/');
+
+        var foundMount = mounts['options/'];
+        foundMount.should.contain.keys('config');
+        foundMount.config.should.have.all.keys('default_lease_ttl', 'max_lease_ttl');
+        foundMount.config.default_lease_ttl.should.equal(2 * 60);
+        foundMount.config.max_lease_ttl.should.equal(5 * 60);
+        done();
+      })
+    });
+
+    it('should resolve to updated list of mounts', function (done) {
       var existingMounts = _.cloneDeep(myVault.mounts);
       return myVault.createMount({
         id: 'other',
@@ -95,6 +118,7 @@ describe('mounts', function () {
         mounts.should.not.be.empty;
         existingMounts.should.not.contain.keys('other/');
         mounts.should.contain.keys('other/');
+        done();
       });
     });
 
