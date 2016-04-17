@@ -1,9 +1,16 @@
 VERSION := $(shell jq .version package.json)
-DOCKER_MACHINE_HOST := "docker-host"
-DOCKER_MACHINE_IP := $(shell docker-machine ip $(DOCKER_MACHINE_HOST) 2> /dev/null)
-TEST_ENV := docker
+DOCKER_MACHINE_HOST = "docker-host"
+DOCKER_MACHINE_IP = $(shell docker-machine ip $(DOCKER_MACHINE_HOST) 2> /dev/null)
+TEST_ENV = docker
+
+ifeq "$(DOCKER_MACHINE_IP)" ""
+	DOCKER_MACHINE_IP = "127.0.0.1"
+endif
 
 .PHONY: clean build stop-local test start-vault stop-vault mocha-watch
+
+blah:
+	@echo "ip: $(DOCKER_MACHINE_IP)"
 
 node_modules:
 	@npm install
@@ -26,6 +33,7 @@ test-docker: docker-compose.yml stop-vault node_modules
 test-local: TEST_ENV=local
 test-local: node_modules stop-vault start-vault
 	@sleep 5 && \
+	echo $(DOCKER_MACHINE_IP) && \
 	VAULT_HOST=$(DOCKER_MACHINE_IP) \
 	VAULT_SSL=false \
 	NODE_ENV=test \
@@ -34,8 +42,7 @@ test-local: node_modules stop-vault start-vault
 	CONSUL_HOST=$(DOCKER_MACHINE_IP) \
 	TEST_SYSLOG=true \
 	ALLOW_CONFIG_MUTATIONS=true \
-	_mocha --growl -R spec tests/**
-
+	./node_modules/.bin/_mocha --growl -R spec tests/**
 
 clean:
 	@rm -rf docker-compose.yml node_modules
