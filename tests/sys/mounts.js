@@ -227,4 +227,85 @@ describe('mounts', function () {
 
   });
 
+  describe('#tuneMount', function () {
+    var tuneMount;
+
+    beforeEach(function (done) {
+      myVault.createMount({
+        id: 'tunemount',
+        body: {
+          type: 'generic'
+        }
+      }).then(function(mounts) {
+        tuneMount = mounts['tunemount/'];
+        done();
+      })
+    });
+
+    afterEach(function (done) {
+      myVault.deleteMount({
+        id: 'tunemount'
+      }).then(function() {
+        done();
+      })
+    });
+
+    it('should reject with an Error if not initialized or unsealed', function () {
+      newVault.tuneMount({
+        id: 'something'
+      }).should.be.rejectedWith(/Vault has not been initialized/);
+    });
+
+    it('should be rejected when the mount does not exist', function () {
+      myVault.tuneMount({
+        id: 'somethingwhichdoesntexist'
+      }).should.be.rejected;
+    });
+
+    it('should return a promise which resolves to the mount with newly tuned config', function (done) {
+      myVault.tuneMount({
+        id: 'tunemount',
+        body: {
+          default_lease_ttl: '10m',
+          max_lease_ttl: '20m'
+        }
+      }).then(function(mount) {
+        mount.should.exist;
+        mount.should.have.property('config');
+        var config = mount.config;
+        config.should.have.keys('default_lease_ttl','max_lease_ttl');
+        config.default_lease_ttl.should.equal(10 * 60);
+        config.max_lease_ttl.should.equal(20 * 60);
+        done();
+      });
+    });
+
+    it('should default to 0 when params are not sent to tune', function(done) {
+      myVault.tuneMount({
+        id: 'tunemount',
+        body: {}
+      }).then(function(mount) {
+        mount.should.exist;
+        mount.should.have.keys('config', 'description', 'type');
+        mount.config.should.be.a('Object');
+        var config = mount.config;
+        config.should.have.keys('default_lease_ttl','max_lease_ttl');
+        config.default_lease_ttl.should.equal(0);
+        config.max_lease_ttl.should.equal(0);
+        done();
+      });
+    });
+
+    it('should reject when invalid values are sent for TTLs', function () {
+      myVault.tuneMount({
+        id: 'tunemount',
+        body: {
+          default_lease_ttl: 6000,
+          max_lease_ttl: 4000
+        }
+      }).should.be.rejected;
+    });
+
+  });
+
 });
