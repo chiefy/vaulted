@@ -227,6 +227,59 @@ describe('mounts', function () {
 
   });
 
+  describe('#getMountTune', function() {
+    var tuneMount;
+
+    before(function (done) {
+      myVault.createMount({
+        id: 'tunemount',
+        body: {
+          type: 'generic'
+        }
+      }).then(function(mounts) {
+        tuneMount = mounts['tunemount/'];
+        done();
+      })
+    });
+
+    after(function (done) {
+      myVault.deleteMount({
+        id: 'tunemount'
+      }).then(function() {
+        tuneMount = null;
+        done();
+      })
+    });
+
+    it('should reject with an Error if not initialized or unsealed', function () {
+      newVault.getMountTune({
+        id: 'something'
+      }).should.be.rejectedWith(/Vault has not been initialized/);
+    });
+
+    it('should reject when no mount id is given', function () {
+      myVault.getMountTune().should.be.rejected;
+    });
+
+    it('should reject when invalid mount id is given', function () {
+      myVault.getMountTune({
+        id: 'idontexist'
+      }).should.be.rejected;
+    });
+
+    it('should return the tune config', function (done) {
+      myVault.getMountTune({
+        id: 'tunemount'
+      }).then(function(config) {
+        config.should.exist;
+        config.should.be.an.instanceof(Object);
+        config.should.have.keys('default_lease_ttl', 'max_lease_ttl');
+        done();
+      });
+    });
+
+  });
+
   describe('#tuneMount', function () {
     var tuneMount;
 
@@ -287,8 +340,8 @@ describe('mounts', function () {
       }).then(function(mount) {
         mount.should.exist;
         mount.should.have.keys('config', 'description', 'type');
-        mount.config.should.be.a('Object');
-        var config = mount.config;
+        mount.config.should.be.an.instanceof(Object);
+        var config = mount.config
         config.should.have.keys('default_lease_ttl','max_lease_ttl');
         config.default_lease_ttl.should.equal(0);
         config.max_lease_ttl.should.equal(0);
