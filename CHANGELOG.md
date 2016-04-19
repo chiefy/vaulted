@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
+#### Added
+- Support for sys/mounts/:id/tune to allow fine-grained control of secret TTLs
+- Support for 'config' options when creating backend mount
+- Support for audit-hash
 
 ## [3.0.1] - 2016-04-07
 
