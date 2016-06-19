@@ -9,7 +9,7 @@ services:
 
 before_install:
   - docker pull kenjones/authstore-consul:0.6.4
-  - docker pull kenjones/authstore-vault:0.5.2
+  - docker pull kenjones/authstore-vault:0.6.0
   - docker pull kenjones/nodejs-mocha
   - make docker-compose.yml
   - docker-compose up -d vault

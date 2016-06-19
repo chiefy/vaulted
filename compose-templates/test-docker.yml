@@ -10,7 +10,7 @@ consul:
 
 vault:
   container_name: vault
-  image: kenjones/authstore-vault:0.5.2
+  image: kenjones/authstore-vault:0.6.0
   links:
     - consul
   cap_add:

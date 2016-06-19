@@ -1,16 +1,17 @@
 VERSION := $(shell jq .version package.json)
-DOCKER_MACHINE_HOST = "docker-host"
-DOCKER_MACHINE_IP = $(shell docker-machine ip $(DOCKER_MACHINE_HOST) 2> /dev/null)
-TEST_ENV = docker
 
-ifeq "$(DOCKER_MACHINE_IP)" ""
-	DOCKER_MACHINE_IP = "127.0.0.1"
+ifeq "" "$(DOCKER_MACHINE_HOST)"
+	DOCKER_MACHINE_HOST := default
+endif
+
+DOCKER_MACHINE_IP := $(shell docker-machine ip $(DOCKER_MACHINE_HOST) 2> /dev/null)
+TEST_ENV := docker
+
+ifeq "" "$(DOCKER_MACHINE_IP)"
+	DOCKER_MACHINE_IP := "127.0.0.1"
 endif
 
 .PHONY: clean build stop-local test start-vault stop-vault mocha-watch
-
-blah:
-	@echo "ip: $(DOCKER_MACHINE_IP)"
 
 node_modules:
 	@npm install

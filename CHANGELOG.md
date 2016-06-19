@@ -3,13 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
+
+## [3.1.0] - 2016-06-17
 #### Added
 - Support for sys/mounts/:id/tune to allow fine-grained control of secret TTLs
 - Support for 'config' options when creating backend mount
 - Support for audit-hash
+- Supports Vault 0.5.x and 0.6.0
 
 ## [3.0.1] - 2016-04-07
-
 #### Changed
 - Update lodash dep to latest
 - Add `nonce` param to `sys/rekey/update` endpoint
