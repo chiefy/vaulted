@@ -1,10 +1,10 @@
 VERSION := $(shell jq .version package.json)
 
-ifeq "" "$(DOCKER_MACHINE_HOST)"
-	DOCKER_MACHINE_HOST := default
+ifeq "" "$(DOCKER_MACHINE_NAME)"
+	DOCKER_MACHINE_NAME := default
 endif
 
-DOCKER_MACHINE_IP := $(shell docker-machine ip $(DOCKER_MACHINE_HOST) 2> /dev/null)
+DOCKER_MACHINE_IP := $(shell docker-machine ip $(DOCKER_MACHINE_NAME) 2> /dev/null)
 TEST_ENV := docker
 
 ifeq "" "$(DOCKER_MACHINE_IP)"
