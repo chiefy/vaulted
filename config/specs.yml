@@ -467,3 +467,99 @@ v1:
           - name: "format"
             type: "string"
             required: false
+  transit:
+      "%s/keys/:id":
+        get:
+          id: true
+          params: []
+        post:
+          id: true
+          params:
+            - name: "derived"
+              type: "bool"
+              required: false
+            - name: "convergent_encryption"
+              type: "bool"
+              required: false
+        delete:
+          id: true
+          params: []
+      "%s/keys/:id/config":
+        post:
+          id: true
+          params:
+            - name: "min_decryption_version"
+              type: "number"
+              required: false
+            - name: "deletion_allowed"
+              type: "bool"
+              required: false
+      "%s/keys/:id/rotate":
+        post:
+          id: true
+          params: []
+      "%s/encrypt/:id":
+        post:
+          id: true
+          params:
+            - name: "plaintext"
+              type: "string"
+              required: true
+            - name: "context"
+              type: "string"
+              required: false
+            - name: "nonce"
+              type: "string"
+              required: false
+      "%s/decrypt/:id":
+        post:
+          id: true
+          params:
+            - name: "ciphertext"
+              type: "string"
+              required: true
+            - name: "context"
+              type: "string"
+              required: false
+            - name: "nonce"
+              type: "string"
+              required: false
+      "%s/rewrap/:id":
+        post:
+          id: true
+          params:
+            - name: "ciphertext"
+              type: "string"
+              required: true
+            - name: "context"
+              type: "string"
+              required: false
+            - name: "nonce"
+              type: "string"
+              required: false
+      "%s/datakey/plaintext/:id":
+        post:
+          id: true
+          params:
+            - name: "context"
+              type: "string"
+              required: false
+            - name: "nonce"
+              type: "string"
+              required: false
+            - name: "bits"
+              type: "number"
+              required: false
+      "%s/datakey/wrapped/:id":
+        post:
+          id: true
+          params:
+            - name: "context"
+              type: "string"
+              required: false
+            - name: "nonce"
+              type: "string"
+              required: false
+            - name: "bits"
+              type: "number"
+              required: false
