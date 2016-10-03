@@ -37,6 +37,15 @@ describe('transit', function () {
     });
   });
 
+  describe('Mount transit endpoint', function () {
+
+    it('should mount the transit endpoint', function () {
+      return helpers.getReadyVault().then(function (vault) {
+        expect(vault.mounts).to.have.property('transit/');
+      });
+    });
+  });
+
   describe('#setTransitKey', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
