@@ -42,6 +42,14 @@ describe('transit', function () {
     it('should mount the transit endpoint', function () {
       return helpers.getReadyVault().then(function (vault) {
         expect(vault.mounts).to.have.property('transit/');
+        expect(vault.api.endpoints).to.have.property('transit/keys/:id');
+        expect(vault.api.endpoints).to.have.property('transit/keys/:id/config');
+        expect(vault.api.endpoints).to.have.property('transit/keys/:id/rotate');
+        expect(vault.api.endpoints).to.have.property('transit/encrypt/:id');
+        expect(vault.api.endpoints).to.have.property('transit/decrypt/:id');
+        expect(vault.api.endpoints).to.have.property('transit/rewrap/:id');
+        expect(vault.api.endpoints).to.have.property('transit/datakey/plaintext/:id');
+        expect(vault.api.endpoints).to.have.property('transit/datakey/wrapped/:id');
       });
     });
   });
