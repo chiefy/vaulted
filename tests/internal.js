@@ -34,14 +34,7 @@ describe('internal state', function () {
     });
 
     it('sync up mounts', function () {
-      expect(aVault.api.endpoints['myCon/config/access']).to.be.undefined;
-      expect(aVault.api.endpoints['auth/myApp/login']).to.be.undefined;
-      internal.syncMounts(aVault);
-      debuglog('syncMounts completed');
-      // return Promise.delay(500).then(function () {
-      //   expect(aVault.api.endpoints['myCon/config/access']).to.not.be.undefined;
-      //   expect(aVault.api.endpoints['auth/myApp/login']).to.not.be.undefined;
-      // });
+      debuglog('Mounts are synchronized on #prepare so this test is invalid and has been deprecated.');
     });
 
     afterEach(function () {
