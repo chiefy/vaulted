@@ -1,6 +1,6 @@
 {
   "name": "vaulted",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "A nodejs wrapper library for using HashiCorp's Vault",
   "main": "./lib/vaulted.js",
   "files": [
@@ -12,7 +12,6 @@
     "test": "make test-local",
     "test-docker": "make test-docker",
     "coverage": "istanbul cover _mocha -- tests/**",
-    "docs": "gulp docs",
     "lint": "gulp lint",
     "html": "gulp html",
     "doc-deploy": "gulp deploy"
@@ -29,6 +28,10 @@
     {
       "name": "Kenny Jones",
       "email": "kenjones@cisco.com"
+    },
+    {
+      "name": "Dave Greene",
+      "email": "davepgreene@gmail.com"
     }
   ],
   "license": "MIT",

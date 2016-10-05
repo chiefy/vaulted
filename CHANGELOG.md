@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+## [3.2.0] - 2016-10-05
+#### Added
+- Support for transit backend (thanks David)
+- `prepare` now syncs existing mounts on pre-existing vault instance
+
+#### Changed
+- Makefile uses `DOCKER_MACHINE_NAME` instead of `DOCKER_MACHINE_HOST` (thanks David)
+- Fixed issue with trailing slashes on mounts
+
+
 ## [3.1.0] - 2016-06-17
 #### Added
 - Support for sys/mounts/:id/tune to allow fine-grained control of secret TTLs
