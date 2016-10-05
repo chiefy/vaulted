@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
 	<title>Documentation Module: backend/pki</title>
 
 	<!--[if lt IE 9]>
@@ -32,7 +33,7 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_cubbyhole.html">backend/cubbyhole</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-backend_secret.html">backend/secret</a></li><li><a href="module-health.html">health</a></li><li><a href="module-init.html">init</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-vaulted.html">vaulted</a></li>
+					<li><a href="module-audit.html">audit</a></li><li><a href="module-auth.html">auth</a></li><li><a href="module-auth_appid.html">auth/appid</a></li><li><a href="module-auth_token.html">auth/token</a></li><li><a href="module-backend_consul.html">backend/consul</a></li><li><a href="module-backend_cubbyhole.html">backend/cubbyhole</a></li><li><a href="module-backend_pki.html">backend/pki</a></li><li><a href="module-backend_secret.html">backend/secret</a></li><li><a href="module-backend_transit.html">backend/transit</a></li><li><a href="module-health.html">health</a></li><li><a href="module-init.html">init</a></li><li><a href="module-keys.html">keys</a></li><li><a href="module-leader.html">leader</a></li><li><a href="module-leases.html">leases</a></li><li><a href="module-mounts.html">mounts</a></li><li><a href="module-policy.html">policy</a></li><li><a href="module-seal.html">seal</a></li><li><a href="module-vaulted.html">vaulted</a></li>
 				</ul>
 			</li>
 			
@@ -44,16 +45,18 @@
 			</li>
 			
 		</ul>
-		<div class="col-sm-3 col-md-3">
-            <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        
 	</div>
 
 </div>
@@ -158,7 +161,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~createCertRole"><span class="type-signature">&lt;inner> </span>createCertRole(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~createCertRole"><span class="type-signature">&lt;inner> </span>createCertRole( [mountName])</h4>
     
     
 </dt>
@@ -1040,7 +1043,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~deleteCertRole"><span class="type-signature">&lt;inner> </span>deleteCertRole(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~deleteCertRole"><span class="type-signature">&lt;inner> </span>deleteCertRole( [mountName])</h4>
     
     
 </dt>
@@ -1282,7 +1285,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~genIntermediatesExported"><span class="type-signature">&lt;inner> </span>genIntermediatesExported(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~genIntermediatesExported"><span class="type-signature">&lt;inner> </span>genIntermediatesExported( [mountName])</h4>
     
     
 </dt>
@@ -1720,7 +1723,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~genIntermediatesInternal"><span class="type-signature">&lt;inner> </span>genIntermediatesInternal(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~genIntermediatesInternal"><span class="type-signature">&lt;inner> </span>genIntermediatesInternal( [mountName])</h4>
     
     
 </dt>
@@ -2158,7 +2161,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~genRootExported"><span class="type-signature">&lt;inner> </span>genRootExported(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~genRootExported"><span class="type-signature">&lt;inner> </span>genRootExported( [mountName])</h4>
     
     
 </dt>
@@ -2674,7 +2677,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~genRootInternal"><span class="type-signature">&lt;inner> </span>genRootInternal(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~genRootInternal"><span class="type-signature">&lt;inner> </span>genRootInternal( [mountName])</h4>
     
     
 </dt>
@@ -3190,7 +3193,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCaDer"><span class="type-signature">&lt;inner> </span>getCaDer(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCaDer"><span class="type-signature">&lt;inner> </span>getCaDer( [mountName])</h4>
     
     
 </dt>
@@ -3358,7 +3361,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCaPem"><span class="type-signature">&lt;inner> </span>getCaPem(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCaPem"><span class="type-signature">&lt;inner> </span>getCaPem( [mountName])</h4>
     
     
 </dt>
@@ -3526,7 +3529,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCertCa"><span class="type-signature">&lt;inner> </span>getCertCa(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCertCa"><span class="type-signature">&lt;inner> </span>getCertCa( [mountName])</h4>
     
     
 </dt>
@@ -3694,7 +3697,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCertCrl"><span class="type-signature">&lt;inner> </span>getCertCrl(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCertCrl"><span class="type-signature">&lt;inner> </span>getCertCrl( [mountName])</h4>
     
     
 </dt>
@@ -3862,7 +3865,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCertRole"><span class="type-signature">&lt;inner> </span>getCertRole(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCertRole"><span class="type-signature">&lt;inner> </span>getCertRole( [mountName])</h4>
     
     
 </dt>
@@ -4104,7 +4107,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCertSerial"><span class="type-signature">&lt;inner> </span>getCertSerial(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCertSerial"><span class="type-signature">&lt;inner> </span>getCertSerial( [mountName])</h4>
     
     
 </dt>
@@ -4308,7 +4311,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getConfigCrl"><span class="type-signature">&lt;inner> </span>getConfigCrl(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getConfigCrl"><span class="type-signature">&lt;inner> </span>getConfigCrl( [mountName])</h4>
     
     
 </dt>
@@ -4514,7 +4517,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getConfigUrls"><span class="type-signature">&lt;inner> </span>getConfigUrls(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getConfigUrls"><span class="type-signature">&lt;inner> </span>getConfigUrls( [mountName])</h4>
     
     
 </dt>
@@ -4720,7 +4723,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCrlDer"><span class="type-signature">&lt;inner> </span>getCrlDer(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCrlDer"><span class="type-signature">&lt;inner> </span>getCrlDer( [mountName])</h4>
     
     
 </dt>
@@ -4888,7 +4891,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCrlPem"><span class="type-signature">&lt;inner> </span>getCrlPem(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCrlPem"><span class="type-signature">&lt;inner> </span>getCrlPem( [mountName])</h4>
     
     
 </dt>
@@ -5056,7 +5059,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~getCrlRotate"><span class="type-signature">&lt;inner> </span>getCrlRotate(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~getCrlRotate"><span class="type-signature">&lt;inner> </span>getCrlRotate( [mountName])</h4>
     
     
 </dt>
@@ -5262,7 +5265,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~issueCertCredentials"><span class="type-signature">&lt;inner> </span>issueCertCredentials(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~issueCertCredentials"><span class="type-signature">&lt;inner> </span>issueCertCredentials( [mountName])</h4>
     
     
 </dt>
@@ -5658,7 +5661,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~revokeCertCredentials"><span class="type-signature">&lt;inner> </span>revokeCertCredentials(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~revokeCertCredentials"><span class="type-signature">&lt;inner> </span>revokeCertCredentials( [mountName])</h4>
     
     
 </dt>
@@ -5900,7 +5903,7 @@ the common name in the CSR will be used instead of taken from the JSON data</p><
             
 <hr>
 <dt>
-    <h4 class="name" id="~setConfigCa"><span class="type-signature">&lt;inner> </span>setConfigCa(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~setConfigCa"><span class="type-signature">&lt;inner> </span>setConfigCa( [mountName])</h4>
     
     
 </dt>
@@ -6143,7 +6146,7 @@ CA certificate and its private key, concatenated</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="~setConfigCrl"><span class="type-signature">&lt;inner> </span>setConfigCrl(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~setConfigCrl"><span class="type-signature">&lt;inner> </span>setConfigCrl( [mountName])</h4>
     
     
 </dt>
@@ -6385,7 +6388,7 @@ CA certificate and its private key, concatenated</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="~setConfigUrls"><span class="type-signature">&lt;inner> </span>setConfigUrls(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~setConfigUrls"><span class="type-signature">&lt;inner> </span>setConfigUrls( [mountName])</h4>
     
     
 </dt>
@@ -6705,7 +6708,7 @@ CA certificate and its private key, concatenated</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="~setSignedIntermediates"><span class="type-signature">&lt;inner> </span>setSignedIntermediates(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~setSignedIntermediates"><span class="type-signature">&lt;inner> </span>setSignedIntermediates( [mountName])</h4>
     
     
 </dt>
@@ -6947,7 +6950,7 @@ CA certificate and its private key, concatenated</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="~signCertificate"><span class="type-signature">&lt;inner> </span>signCertificate(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~signCertificate"><span class="type-signature">&lt;inner> </span>signCertificate( [mountName])</h4>
     
     
 </dt>
@@ -7415,7 +7418,7 @@ CA certificate and its private key, concatenated</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="~signCertificateVerbatim"><span class="type-signature">&lt;inner> </span>signCertificateVerbatim(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~signCertificateVerbatim"><span class="type-signature">&lt;inner> </span>signCertificateVerbatim( [mountName])</h4>
     
     
 </dt>
@@ -7735,7 +7738,7 @@ CA certificate and its private key, concatenated</p>
             
 <hr>
 <dt>
-    <h4 class="name" id="~signIntermediateWithRoot"><span class="type-signature">&lt;inner> </span>signIntermediateWithRoot(<span class="optional">mountName</span>)</h4>
+    <h4 class="name" id="~signIntermediateWithRoot"><span class="type-signature">&lt;inner> </span>signIntermediateWithRoot( [mountName])</h4>
     
     
 </dt>
@@ -8273,28 +8276,30 @@ set of key usages used for CA certs signed by this path;
 </div>
 </div>
 
-<div class="modal fade" id="searchResults">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Search results</h4>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div>
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
 
 <footer>
 
 
 <span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a>
 	
-		on January 28th 2016, 11:34:03 pm
+		on October 5th 2016, 8:31:57 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -8302,7 +8307,9 @@ set of key usages used for CA certs signed by this path;
 
 <script src="scripts/docstrap.lib.js"></script>
 <script src="scripts/toc.js"></script>
-<script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
 
 <script>
 $( function () {
@@ -8312,7 +8319,7 @@ $( function () {
 		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
 	} );
 
-	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
 		var $this = $( this );
 
 		var example = $this.find( "code" );
@@ -8348,8 +8355,7 @@ $( function () {
 	} );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
-			var id = $( heading ).attr( "id" );
-			return id && id.replace(/\~/g, '-inner-').replace(/\./g, '-static-') || ( prefix + i );
+			return $( heading ).attr( "id" ) || ( prefix + i );
 		},
 		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
 		showAndHide : false,
@@ -8375,11 +8381,13 @@ $( function () {
 <!--Google Analytics-->
 
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		SearcherDisplay.init();
-	});
-</script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
 
 </body>
 </html>

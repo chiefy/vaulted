@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -6943,9 +6943,8 @@ footer {
   padding-top: 15px;
 }
 code {
-  background-color: none;
+  background-color: inherit;
   border: none;
-  color: orange;
 }
 .buffered-name {
   padding-top: 62px;

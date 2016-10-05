@@ -1175,7 +1175,7 @@ h6,
 .h6 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.2;
   color: #317EAC;
 }
 h1 small,
@@ -6724,7 +6724,7 @@ button.close {
     display: none !important;
   }
 }
-.navbar {
+.navbar-default {
   background-image: -webkit-linear-gradient(#54b4eb, #2FA4E7 60%, #1d9ce5);
   background-image: -o-linear-gradient(#54b4eb, #2FA4E7 60%, #1d9ce5);
   background-image: linear-gradient(#54b4eb, #2FA4E7 60%, #1d9ce5);
@@ -6916,9 +6916,8 @@ footer {
   padding-top: 15px;
 }
 code {
-  background-color: none;
+  background-color: inherit;
   border: none;
-  color: orange;
 }
 .buffered-name {
   padding-top: 62px;

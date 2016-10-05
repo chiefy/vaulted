@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Module: auth/token</title>
+	<title>Documentation Module: backend/transit</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,7 +72,7 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Module: auth/token</h1>
+	<h1 class="page-title">Module: backend/transit</h1>
 <section>
 
 <header>
@@ -84,7 +84,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Provides implementation for the Vault Auth Token backend APIs</p></div>
+            <div class="description"><p>Provides implementation for the Vault Transit APIs</p></div>
         
 
         
@@ -161,7 +161,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~createToken"><span class="type-signature">&lt;inner> </span>createToken( [mountName])</h4>
+    <h4 class="name" id="~decryptTransitCipherText"><span class="type-signature">&lt;inner> </span>decryptTransitCipherText( [mountName])</h4>
     
     
 </dt>
@@ -169,7 +169,7 @@
 
     
     <div class="description">
-        <p>Creates a token to use for authenticating with the Vault.</p>
+        <p>Decrypts the provided ciphertext using the named key.</p>
     </div>
     
 
@@ -208,7 +208,79 @@
 
         <tr>
             
-                <td class="name"><code>options.body.id</code></td>
+                <td class="name"><code>options.id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>unique identifier for the key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.ciphertext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The ciphertext to decrypt, provided as returned by encrypt.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.context</code></td>
             
 
             <td class="type">
@@ -239,166 +311,15 @@
                 </td>
             
 
-            <td class="description last"><p>ID of the client token</p></td>
+            <td class="description last"><p>The key derivation context, provided as base64 encoded.
+Must be provided if derivation is enabled.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options.body.policies</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>list of policies for the token</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.body.meta</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>map of string to string valued metadata</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.body.no_parent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>creates a token with no parent</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.body.no_default_profile</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>default profile will not be a part of this token's policy set</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.body.ttl</code></td>
+                <td class="name"><code>options.body.nonce</code></td>
             
 
             <td class="type">
@@ -429,14 +350,15 @@
                 </td>
             
 
-            <td class="description last"><p>TTL period of the token</p></td>
+            <td class="description last"><p>The nonce value, provided as base64 encoded. Must be
+provided if convergent encryption is enabled for this key.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options.body.display_name</code></td>
+                <td class="name"><code>options.token</code></td>
             
 
             <td class="type">
@@ -467,14 +389,900 @@
                 </td>
             
 
-            <td class="description last"><p>display name of the token</p></td>
+            <td class="description last"><p>the authentication token</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options.body.num_uses</code></td>
+                <td class="name"><code>mountName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    transit
+                
+                </td>
+            
+
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="~deleteTransitKey"><span class="type-signature">&lt;inner> </span>deleteTransitKey( [mountName])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Deletes a named encryption key. It will no longer be possible to decrypt
+any data encrypted with the named key. Because this is a potentially catastrophic
+operation, the deletion_allowed tunable must be set in the key's /config endpoint</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options.id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>unique identifier for the key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>the authentication token</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mountName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    transit
+                
+                </td>
+            
+
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="~encryptTransitPlainText"><span class="type-signature">&lt;inner> </span>encryptTransitPlainText( [mountName])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Encrypts the provided plaintext using the named key. This path supports the create and
+update policy capabilities as follows: if the user has the create capability for this endpoint
+in their policies, and the key does not exist, it will be upserted with default values
+(whether the key requires derivation depends on whether the context parameter is empty or
+not). If the user only has update capability and the key does not exist, an error will be returned.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options.id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>unique identifier for the key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.plaintext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The plaintext to encrypt, provided as base64 encoded</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.context</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The key derivation context, provided as base64 encoded.
+Must be provided if derivation is enabled.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.nonce</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The nonce value, provided as base64 encoded. Must be
+provided if convergent encryption is enabled for this key.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>the authentication token</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mountName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    transit
+                
+                </td>
+            
+
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="~generateTransitPlainTextDataKey"><span class="type-signature">&lt;inner> </span>generateTransitPlainTextDataKey( [mountName])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Generate a new high-entropy key, the value encrypted with the named key, and the plaintext of the key.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options.id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>unique identifier for the key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.context</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The key derivation context, provided as base64 encoded.
+Must be provided if derivation is enabled.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.nonce</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The nonce value, provided as base64 encoded. Must be provided
+if convergent encryption is enabled for this key.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>option.body.bits</code></td>
             
 
             <td class="type">
@@ -505,7 +1313,7 @@
                 </td>
             
 
-            <td class="description last"><p>maximum uses for the given token</p></td>
+            <td class="description last"><p>The number of bits in the desired key. Can be 128, 256, or 512.</p></td>
         </tr>
 
     
@@ -578,12 +1386,12 @@
             
                 <td class="default">
                 
-                    token
+                    transit
                 
                 </td>
             
 
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
         </tr>
 
     
@@ -671,7 +1479,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~lookupToken"><span class="type-signature">&lt;inner> </span>lookupToken( [mountName])</h4>
+    <h4 class="name" id="~generateTransitWrappedDataKey"><span class="type-signature">&lt;inner> </span>generateTransitWrappedDataKey( [mountName])</h4>
     
     
 </dt>
@@ -679,7 +1487,7 @@
 
     
     <div class="description">
-        <p>Retrieve information about the specified existing token.</p>
+        <p>Generate a new high-entropy key and the value encrypted with the named key.</p>
     </div>
     
 
@@ -747,14 +1555,14 @@
                 </td>
             
 
-            <td class="description last"><p>unique identifier for the token</p></td>
+            <td class="description last"><p>unique identifier for the key</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options.token</code></td>
+                <td class="name"><code>options.body.context</code></td>
             
 
             <td class="type">
@@ -785,182 +1593,15 @@
                 </td>
             
 
-            <td class="description last"><p>the authentication token</p></td>
+            <td class="description last"><p>The key derivation context, provided as base64 encoded.
+Must be provided if derivation is enabled.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>mountName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    token
-                
-                </td>
-            
-
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~lookupTokenSelf"><span class="type-signature">&lt;inner> </span>lookupTokenSelf( [mountName])</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Retrieve information about the current client token.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options.token</code></td>
+                <td class="name"><code>options.body.nonce</code></td>
             
 
             <td class="type">
@@ -991,218 +1632,15 @@
                 </td>
             
 
-            <td class="description last"><p>the authentication token</p></td>
+            <td class="description last"><p>The nonce value, provided as base64 encoded. Must be provided
+if convergent encryption is enabled for this key.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>mountName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    token
-                
-                </td>
-            
-
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~renewToken"><span class="type-signature">&lt;inner> </span>renewToken( [mountName])</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Renew an existing token to use for authenticating with the Vault.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options.id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>unique identifier for the token</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options.body.increment</code></td>
+                <td class="name"><code>option.body.bits</code></td>
             
 
             <td class="type">
@@ -1233,7 +1671,7 @@
                 </td>
             
 
-            <td class="description last"><p>lease increment</p></td>
+            <td class="description last"><p>The number of bits in the desired key. Can be 128, 256, or 512.</p></td>
         </tr>
 
     
@@ -1306,12 +1744,12 @@
             
                 <td class="default">
                 
-                    token
+                    transit
                 
                 </td>
             
 
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
         </tr>
 
     
@@ -1399,7 +1837,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~revokeToken"><span class="type-signature">&lt;inner> </span>revokeToken( [mountName])</h4>
+    <h4 class="name" id="~getTransitKey"><span class="type-signature">&lt;inner> </span>getTransitKey( [mountName])</h4>
     
     
 </dt>
@@ -1407,7 +1845,9 @@
 
     
     <div class="description">
-        <p>Revokes the specified existing token and all child tokens.</p>
+        <p>Returns information about a named encryption key.
+The keys object shows the creation time of each key version; the values
+are not the keys themselves.</p>
     </div>
     
 
@@ -1475,7 +1915,7 @@
                 </td>
             
 
-            <td class="description last"><p>unique identifier for the token</p></td>
+            <td class="description last"><p>unique identifier for the key</p></td>
         </tr>
 
     
@@ -1548,12 +1988,12 @@
             
                 <td class="default">
                 
-                    token
+                    transit
                 
                 </td>
             
 
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
         </tr>
 
     
@@ -1641,7 +2081,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~revokeTokenOrphan"><span class="type-signature">&lt;inner> </span>revokeTokenOrphan( [mountName])</h4>
+    <h4 class="name" id="~rewrapTransitCipherText"><span class="type-signature">&lt;inner> </span>rewrapTransitCipherText( [mountName])</h4>
     
     
 </dt>
@@ -1649,7 +2089,7 @@
 
     
     <div class="description">
-        <p>Revokes the specified existing token but not the child tokens.</p>
+        <p>Rewrap the provided ciphertext using the latest version of the named key.</p>
     </div>
     
 
@@ -1717,7 +2157,121 @@
                 </td>
             
 
-            <td class="description last"><p>unique identifier for the token</p></td>
+            <td class="description last"><p>unique identifier for the key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.ciphertext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The ciphertext to decrypt, provided as returned by encrypt.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.context</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The key derivation context, provided as base64 encoded.
+Must be provided if derivation is enabled.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.nonce</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The nonce value, provided as base64 encoded. Must be
+provided if convergent encryption is enabled for this key.</p></td>
         </tr>
 
     
@@ -1790,12 +2344,12 @@
             
                 <td class="default">
                 
-                    token
+                    transit
                 
                 </td>
             
 
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
         </tr>
 
     
@@ -1883,7 +2437,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~revokeTokenPrefix"><span class="type-signature">&lt;inner> </span>revokeTokenPrefix( [mountName])</h4>
+    <h4 class="name" id="~rotateTransitKey"><span class="type-signature">&lt;inner> </span>rotateTransitKey( [mountName])</h4>
     
     
 </dt>
@@ -1891,7 +2445,9 @@
 
     
     <div class="description">
-        <p>Revokes all tokens generated at a given prefix including children and secrets.</p>
+        <p>Rotates the version of the named key. After rotation, new plaintext requests will
+be encrypted with the new version of the key. To upgrade ciphertext to be encrypted
+with the latest version of the key, use the rewrap endpoint.</p>
     </div>
     
 
@@ -1959,7 +2515,7 @@
                 </td>
             
 
-            <td class="description last"><p>token prefix</p></td>
+            <td class="description last"><p>unique identifier for the key</p></td>
         </tr>
 
     
@@ -2032,12 +2588,12 @@
             
                 <td class="default">
                 
-                    token
+                    transit
                 
                 </td>
             
 
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
         </tr>
 
     
@@ -2125,7 +2681,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~revokeTokenSelf"><span class="type-signature">&lt;inner> </span>revokeTokenSelf( [mountName])</h4>
+    <h4 class="name" id="~setTransitKey"><span class="type-signature">&lt;inner> </span>setTransitKey( [mountName])</h4>
     
     
 </dt>
@@ -2133,7 +2689,7 @@
 
     
     <div class="description">
-        <p>Revokes the current client token and all child tokens.</p>
+        <p>Creates a new named encryption key. The values set here cannot be changed after key creation.</p>
     </div>
     
 
@@ -2168,6 +2724,119 @@
     </thead>
 
     <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options.id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>unique identifier for the key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.derived</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Boolean flag indicating if key derivation MUST be used.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.convergent_encryption</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>If set, the key will support convergent
+encryption, where the same plaintext creates the same ciphertext.</p></td>
+        </tr>
+
     
 
         <tr>
@@ -2238,12 +2907,331 @@
             
                 <td class="default">
                 
-                    token
+                    transit
                 
                 </td>
             
 
-            <td class="description last"><p>path name the token auth backend is mounted on</p></td>
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="~setTransitKeyConfig"><span class="type-signature">&lt;inner> </span>setTransitKeyConfig( [mountName])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Allows tuning configuration values for a given key. (These values are returned
+during a read operation on the named key.)</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options.id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>unique identifier for the key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.min_decryption_version</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The minimum version of ciphertext allowed to be decrypted.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.body.deletion_allowed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>When set, the key is allowed to be deleted.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>the authentication token</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mountName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    transit
+                
+                </td>
+            
+
+            <td class="description last"><p>path name the transit secret backend is mounted on</p></td>
         </tr>
 
     
