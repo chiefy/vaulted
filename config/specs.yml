@@ -56,6 +56,13 @@ v1:
           - name: "increment"
             type: "number"
             required: false
+    "auth/%s/renew-self":
+      post:
+        id: false
+        params:
+          - name: "increment"
+            type: "number"
+            required: false
   app-id:
     "auth/%s/map/app-id/:id":
       post:

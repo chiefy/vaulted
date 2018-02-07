@@ -155,6 +155,85 @@ describe('auth/tokens', function () {
 
   });
 
+  describe('#renewTokenSelf', function () {
+    var myRootToken;
+    var myToken;
+
+    beforeEach(function () {
+      return myVault.createToken().then(function (token) {
+        myRootToken = _.clone(myVault.token);
+        myToken = token.auth.client_token;
+        myVault.setToken(myToken);
+      });
+    });
+
+    it('should reject with an Error if not initialized or unsealed', function () {
+      return newVault.renewTokenSelf({
+        id: 'abcxyz'
+      }).should.be.rejectedWith(/Vault has not been initialized/);
+    });
+
+    it('should be resolved with a renewed token', function () {
+      return myVault.createToken({
+        body: {
+          ttl: '1h'
+        }
+      }).then(function (token) {
+        debuglog('token: ', token);
+        myVault.setToken(token.auth.client_token);
+        return myVault.renewTokenSelf({
+        }).then(function (renewed) {
+          debuglog('renewed: ', renewed);
+          expect(renewed).to.not.be.undefined;
+          renewed.should.have.property('auth');
+          renewed.auth.should.have.property('client_token');
+          renewed.auth.client_token.should.be.ok;
+          renewed.auth.should.have.property('policies');
+          renewed.auth.policies.should.be.ok;
+          renewed.auth.should.have.property('metadata');
+          renewed.auth.should.have.property('lease_duration');
+          renewed.auth.should.have.property('renewable');
+          renewed.auth.renewable.should.be.true;
+        });
+      });
+    });
+
+    it('should be resolved with a renewed token - with optional body', function () {
+      return myVault.createToken({
+        body: {
+          ttl: '1h'
+        }
+      }).then(function (token) {
+        debuglog('token: ', token);
+        myVault.setToken(token.auth.client_token);
+
+        return myVault.renewTokenSelf({
+          body: {
+            increment: 7200,
+          }
+        }).then(function (renewed) {
+          debuglog('renewed: ', renewed);
+          expect(renewed).to.not.be.undefined;
+          renewed.should.have.property('auth');
+          renewed.auth.should.have.property('client_token');
+          renewed.auth.client_token.should.be.ok;
+          renewed.auth.should.have.property('policies');
+          renewed.auth.policies.should.be.ok;
+          renewed.auth.should.have.property('metadata');
+          renewed.auth.should.have.property('lease_duration');
+          renewed.auth.should.have.property('renewable');
+          renewed.auth.renewable.should.be.true;
+
+          renewed.auth.lease_duration.should.be.above(4000);
+        });
+      });
+    });
+
+    afterEach(function () {
+      myVault.setToken(myRootToken);
+    });
+  });
+
   describe('#lookupToken', function () {
 
     it('should reject with an Error if not initialized or unsealed', function () {
