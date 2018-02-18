@@ -1,6 +1,10 @@
 # Vaulted
 
-[![Build Status](https://travis-ci.org/chiefy/vaulted.svg)](https://travis-ci.org/chiefy/vaulted) [![Code Climate](https://codeclimate.com/github/chiefy/vaulted/badges/gpa.svg)](https://codeclimate.com/github/chiefy/vaulted) [![Test Coverage](https://codeclimate.com/github/chiefy/vaulted/badges/coverage.svg)](https://codeclimate.com/github/chiefy/vaulted/coverage) [![Package Quality](http://npm.packagequality.com/shield/vaulted.svg)](http://packagequality.com/#?package=vaulted) [![Join the chat at https://gitter.im/chiefy/vaulted](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/chiefy/vaulted?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+**No Longer Being Maintained**
+
+Use [node-vault](https://github.com/kr1sp1n/node-vault) for future support of Vault features!
+
+----
 
 [Vaulted](http://chiefy.github.io/vaulted/) is a nodejs-based wrapper for the [Vault](https://vaultproject.io) HTTP API.
 
